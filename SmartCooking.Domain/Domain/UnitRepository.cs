@@ -1,36 +1,65 @@
-﻿using SmartCooking.Data.Repository;
+﻿using Microsoft.EntityFrameworkCore;
+using SmartCooking.Data.Context;
+using SmartCooking.Data.Repository;
 using SmartCooking.Infastructure.Products;
-using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace SmartCooking.Data.Domain
 {
     public class UnitRepository : IUnitRepository
     {
-        public bool DeleteUnit(Unit unit)
+        private readonly MyDbContext context;
+
+        public UnitRepository(MyDbContext context)
         {
-            throw new NotImplementedException();
+            this.context = context;
         }
 
-        public Unit GetUnit(int Id)
+        public async Task<bool> DeleteUnit(Unit unit)
         {
-            throw new NotImplementedException();
+            context.SC_Unit.Remove(unit);
+
+            if(await context.SaveChangesAsync() <= 0)
+            {
+                return false;
+            }
+
+            return true;
         }
 
-        public List<Unit> GetUnits()
+        public async Task<Unit> GetUnit(int Id)
         {
-            throw new NotImplementedException();
+            return await context.SC_Unit.FirstOrDefaultAsync(x => x.Id == Id);
         }
 
-        public bool InsertUnit(Unit unit)
+        public async Task<List<Unit>> GetUnits()
         {
-            throw new NotImplementedException();
+            return await context.SC_Unit.ToListAsync();
         }
 
-        public bool UpdateUnit(Unit unit)
+        public async Task<bool> InsertUnit(Unit unit)
         {
-            throw new NotImplementedException();
+            context.SC_Unit.Add(unit);
+
+            if(await context.SaveChangesAsync() <= 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public async Task<bool> UpdateUnit(Unit unit)
+        {
+            context.SC_Unit.Update(unit);
+
+            if(await context.SaveChangesAsync() <= 0)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

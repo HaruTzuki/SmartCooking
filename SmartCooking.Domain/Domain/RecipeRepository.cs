@@ -1,66 +1,117 @@
-﻿using SmartCooking.Data.Repository;
+﻿using Microsoft.EntityFrameworkCore;
+using SmartCooking.Data.Context;
+using SmartCooking.Data.Repository;
 using SmartCooking.Infastructure.Recipes;
-using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SmartCooking.Data.Domain
 {
     public class RecipeRepository : IRecipeRepository
     {
-        public bool DeleteRecipeDetail(RecipeDetail recipeDetail)
+        private readonly MyDbContext context;
+
+        public RecipeRepository(MyDbContext context)
         {
-            throw new NotImplementedException();
+            this.context = context;
         }
 
-        public bool DeleteRecipeHeader(RecipeHeader recipeHeader)
+        public async Task<bool> DeleteRecipeDetail(RecipeDetail recipeDetail)
         {
-            throw new NotImplementedException();
+            context.SC_RecipeDetail.Remove(recipeDetail);
+
+            if(await context.SaveChangesAsync() <= 0)
+            {
+                return false;
+            }
+
+            return true;
         }
 
-        public RecipeDetail GetRecipeDetail(int Id)
+        public async Task<bool> DeleteRecipeHeader(RecipeHeader recipeHeader)
         {
-            throw new NotImplementedException();
+            context.SC_RecipeHeader.Remove(recipeHeader);
+
+            if(await context.SaveChangesAsync() <= 0)
+            {
+                return false;
+            }
+
+            return true;
         }
 
-        public List<RecipeDetail> GetRecipeDetails()
+        public async Task<RecipeDetail> GetRecipeDetail(int Id)
         {
-            throw new NotImplementedException();
+            return await context.SC_RecipeDetail.FirstOrDefaultAsync(x => x.Id == Id);
         }
 
-        public List<RecipeDetail> GetRecipeDetails(int RecipeHeaderId)
+        public async Task<List<RecipeDetail>> GetRecipeDetails()
         {
-            throw new NotImplementedException();
+            return await context.SC_RecipeDetail.ToListAsync();
         }
 
-        public RecipeHeader GetRecipeHeader(int Id)
+        public async Task<List<RecipeDetail>> GetRecipeDetails(int RecipeHeaderId)
         {
-            throw new NotImplementedException();
+            return await context.SC_RecipeDetail.Where(x=>x.RecipeHeaderId == RecipeHeaderId).ToListAsync();
         }
 
-        public List<RecipeHeader> GetRecipeHeaders()
+        public async Task<RecipeHeader> GetRecipeHeader(int Id)
         {
-            throw new NotImplementedException();
+            return await context.SC_RecipeHeader.FirstOrDefaultAsync(x => x.Id == Id);
         }
 
-        public bool InsertRecipeDetail(RecipeDetail recipeDetail)
+        public async Task<List<RecipeHeader>> GetRecipeHeaders()
         {
-            throw new NotImplementedException();
+            return await context.SC_RecipeHeader.ToListAsync();
         }
 
-        public bool InsertRecipeHeader(RecipeHeader recipeHeader)
+        public async Task<bool> InsertRecipeDetail(RecipeDetail recipeDetail)
         {
-            throw new NotImplementedException();
+            context.SC_RecipeDetail.Add(recipeDetail);
+
+            if(await context.SaveChangesAsync() <= 0)
+            {
+                return false;
+            }
+
+            return true;
         }
 
-        public bool UpdateRecipeDetail(RecipeDetail recipeDetail)
+        public async Task<bool> InsertRecipeHeader(RecipeHeader recipeHeader)
         {
-            throw new NotImplementedException();
+            context.SC_RecipeHeader.Add(recipeHeader);
+
+            if(await context.SaveChangesAsync() <= 0)
+            {
+                return false;
+            }
+
+            return true;
         }
 
-        public bool UpdateRecipeHeader(RecipeHeader recipeHeader)
+        public async Task<bool> UpdateRecipeDetail(RecipeDetail recipeDetail)
         {
-            throw new NotImplementedException();
+            context.SC_RecipeDetail.Update(recipeDetail);
+
+            if(await context.SaveChangesAsync() <= 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public async Task<bool> UpdateRecipeHeader(RecipeHeader recipeHeader)
+        {
+            context.SC_RecipeHeader.Update(recipeHeader);
+
+            if(await context.SaveChangesAsync() <= 0)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

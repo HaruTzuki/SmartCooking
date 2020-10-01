@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SmartCooking.Data.Context;
 using SmartCooking.Data.Domain;
 using SmartCooking.Data.Repository;
 
@@ -30,6 +31,9 @@ namespace SmartCooking.Web
             services.AddTransient<IRecipeRepository, RecipeRepository>();
             services.AddTransient<IItemRepository, ItemRepository>();
             services.AddTransient<IItemCategoryRepository, ItemCategoryRepository>();
+
+            services.AddDbContext<MyDbContext>();
+
 
             services.AddRazorPages();
         }

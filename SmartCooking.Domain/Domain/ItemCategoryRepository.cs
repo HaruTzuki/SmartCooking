@@ -1,36 +1,66 @@
-﻿using SmartCooking.Data.Repository;
+﻿using Microsoft.EntityFrameworkCore;
+using SmartCooking.Data.Context;
+using SmartCooking.Data.Repository;
 using SmartCooking.Infastructure.Products;
-using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace SmartCooking.Data.Domain
 {
     public class ItemCategoryRepository : IItemCategoryRepository
     {
-        public bool DeleteItemCategory(ItemCategory itemCategory)
+        private readonly MyDbContext context;
+
+        public ItemCategoryRepository(MyDbContext context)
         {
-            throw new NotImplementedException();
+            this.context = context;
         }
 
-        public List<ItemCategory> GetItemCategories()
+
+        public async Task<bool> DeleteItemCategory(ItemCategory itemCategory)
         {
-            throw new NotImplementedException();
+            context.SC_ItemCategory.Remove(itemCategory);
+
+            if(await context.SaveChangesAsync() <= 0)
+            {
+                return false;
+            }
+
+            return true;
         }
 
-        public ItemCategory GetItemCategory(int Id)
+        public async Task<List<ItemCategory>> GetItemCategories()
         {
-            throw new NotImplementedException();
+            return await context.SC_ItemCategory.ToListAsync();
         }
 
-        public bool InsertItemCategory(ItemCategory itemCategory)
+        public async Task<ItemCategory> GetItemCategory(int Id)
         {
-            throw new NotImplementedException();
+            return await context.SC_ItemCategory.FirstOrDefaultAsync(x => x.Id == Id);
         }
 
-        public bool UpdateItemCategory(ItemCategory itemCategory)
+        public async Task<bool> InsertItemCategory(ItemCategory itemCategory)
         {
-            throw new NotImplementedException();
+            context.SC_ItemCategory.Add(itemCategory);
+
+            if(await context.SaveChangesAsync() <= 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public async Task<bool> UpdateItemCategory(ItemCategory itemCategory)
+        {
+            context.SC_ItemCategory.Update(itemCategory);
+
+            if(await context.SaveChangesAsync() <= 0)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

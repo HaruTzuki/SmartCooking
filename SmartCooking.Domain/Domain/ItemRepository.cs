@@ -1,36 +1,62 @@
-﻿using SmartCooking.Data.Repository;
+﻿using Microsoft.EntityFrameworkCore;
+using SmartCooking.Data.Context;
+using SmartCooking.Data.Repository;
 using SmartCooking.Infastructure.Products;
-using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace SmartCooking.Data.Domain
 {
     public class ItemRepository : IItemRepository
     {
-        public bool DeleteItem(Item item)
+        private readonly MyDbContext context;
+        public ItemRepository(MyDbContext context)
         {
-            throw new NotImplementedException();
+            this.context = context;
         }
 
-        public Item GetItem(int Id)
+        public async Task<bool> DeleteItem(Item item)
         {
-            throw new NotImplementedException();
+            context.SC_Item.Remove(item);
+
+            if (await context.SaveChangesAsync() <= 0)
+                return false;
+
+            return true;
         }
 
-        public List<Item> GetItems()
+        public async Task<Item> GetItem(int Id)
         {
-            throw new NotImplementedException();
+            return await context.SC_Item.FirstOrDefaultAsync(x => x.Id == Id);
         }
 
-        public bool InsertItem(Item item)
+        public async Task<List<Item>> GetItems()
         {
-            throw new NotImplementedException();
+            return await context.SC_Item.ToListAsync();
         }
 
-        public bool UpdateItem(Item item)
+        public async Task<bool> InsertItem(Item item)
         {
-            throw new NotImplementedException();
+            context.SC_Item.Add(item);
+
+            if(await context.SaveChangesAsync() <= 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public async Task<bool> UpdateItem(Item item)
+        {
+            context.SC_Item.Update(item);
+
+            if(await context.SaveChangesAsync() <= 0)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

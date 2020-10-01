@@ -1,17 +1,16 @@
 ﻿using SmartCooking.Infastructure.Security;
-using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace SmartCooking.Data.Repository
 {
     public interface IUserRepository
     {
-        User GetUser(int Id);
-        List<User> GetUsers();
-        bool InsertUser(User user);
-        bool UpdateUser(User user);
-        bool DeleteUser(User user);
+        Task<User> GetUser(int Id);
+        Task<List<User>> GetUsers();
+        Task<bool> InsertUser(User user);
+        Task<bool> UpdateUser(User user);
+        Task<bool> DeleteUser(User user);
 
     }
 }

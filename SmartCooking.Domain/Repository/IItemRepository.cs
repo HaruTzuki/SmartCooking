@@ -1,16 +1,15 @@
 ﻿using SmartCooking.Infastructure.Products;
-using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace SmartCooking.Data.Repository
 {
     public interface IItemRepository
     {
-        Item GetItem(int Id);
-        List<Item> GetItems();
-        bool InsertItem(Item item);
-        bool UpdateItem(Item item);
-        bool DeleteItem(Item item);
+        Task<Item> GetItem(int Id);
+        Task<List<Item>> GetItems();
+        Task<bool> InsertItem(Item item);
+        Task<bool> UpdateItem(Item item);
+        Task<bool> DeleteItem(Item item);
     }
 }

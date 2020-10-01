@@ -1,36 +1,66 @@
-﻿using SmartCooking.Data.Repository;
+﻿using Microsoft.EntityFrameworkCore;
+using SmartCooking.Data.Context;
+using SmartCooking.Data.Repository;
 using SmartCooking.Infastructure.Security;
-using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace SmartCooking.Data.Domain
 {
+
     public class UserRepository : IUserRepository
     {
-        public bool DeleteUser(User user)
+        private readonly MyDbContext context;
+
+        public UserRepository(MyDbContext context)
         {
-            throw new NotImplementedException();
+            this.context = context;
         }
 
-        public User GetUser(int Id)
+        public async Task<bool> DeleteUser(User user)
         {
-            throw new NotImplementedException();
+            context.SC_User.Remove(user);
+
+            if(await context.SaveChangesAsync() <= 0)
+            {
+                return false;
+            }
+
+            return true;
         }
 
-        public List<User> GetUsers()
+        public async Task<User> GetUser(int Id)
         {
-            throw new NotImplementedException();
+            return await context.SC_User.FirstOrDefaultAsync(x => x.Id == Id);
         }
 
-        public bool InsertUser(User user)
+        public async Task<List<User>> GetUsers()
         {
-            throw new NotImplementedException();
+            return await context.SC_User.ToListAsync();
         }
 
-        public bool UpdateUser(User user)
+        public async Task<bool> InsertUser(User user)
         {
-            throw new NotImplementedException();
+            context.SC_User.Add(user);
+
+            if(await context.SaveChangesAsync() <= 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public async Task<bool> UpdateUser(User user)
+        {
+            context.SC_User.Update(user);
+
+            if(await context.SaveChangesAsync() <= 0)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

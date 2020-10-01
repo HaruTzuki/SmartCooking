@@ -1,23 +1,22 @@
 ﻿using SmartCooking.Infastructure.Recipes;
-using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace SmartCooking.Data.Repository
 {
     public interface IRecipeRepository
     {
-        RecipeHeader GetRecipeHeader(int Id);
-        RecipeDetail GetRecipeDetail(int Id);
-        List<RecipeHeader> GetRecipeHeaders();
-        List<RecipeDetail> GetRecipeDetails();
-        List<RecipeDetail> GetRecipeDetails(int RecipeHeaderId);
-        bool InsertRecipeHeader(RecipeHeader recipeHeader);
-        bool InsertRecipeDetail(RecipeDetail recipeDetail);
-        bool UpdateRecipeHeader(RecipeHeader recipeHeader);
-        bool UpdateRecipeDetail(RecipeDetail recipeDetail);
-        bool DeleteRecipeHeader(RecipeHeader recipeHeader);
-        bool DeleteRecipeDetail(RecipeDetail recipeDetail);
+        Task<RecipeHeader> GetRecipeHeader(int Id);
+        Task<RecipeDetail> GetRecipeDetail(int Id);
+        Task<List<RecipeHeader>> GetRecipeHeaders();
+        Task<List<RecipeDetail>> GetRecipeDetails();
+        Task<List<RecipeDetail>> GetRecipeDetails(int RecipeHeaderId);
+        Task<bool> InsertRecipeHeader(RecipeHeader recipeHeader);
+        Task<bool> InsertRecipeDetail(RecipeDetail recipeDetail);
+        Task<bool> UpdateRecipeHeader(RecipeHeader recipeHeader);
+        Task<bool> UpdateRecipeDetail(RecipeDetail recipeDetail);
+        Task<bool> DeleteRecipeHeader(RecipeHeader recipeHeader);
+        Task<bool> DeleteRecipeDetail(RecipeDetail recipeDetail);
 
     }
 }
