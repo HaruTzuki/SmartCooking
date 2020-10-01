@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>SmartCooking.Data</AssemblyName>
+    <RootNamespace>SmartCooking.Data</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SmartCooking.Infastructure\SmartCooking.Infastructure.csproj" />
+  </ItemGroup>
+
+</Project>
