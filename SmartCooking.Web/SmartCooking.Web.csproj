@@ -6,6 +6,8 @@
 
   <ItemGroup>
     <Folder Include="Api\" />
+    <Folder Include="Pages\Re\" />
+    <Folder Include="wwwroot\theme\" />
   </ItemGroup>
 
   <ItemGroup>
