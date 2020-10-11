@@ -1,0 +1,14 @@
+﻿@page "{query}"
+@model SmartCooking.Web.Pages.Recipe.SearchResultModel
+@{
+	ViewData["Title"] = "Recipe Search Result";
+	Layout = "~/Theme/TasteIt/Page.cshtml";
+}
+
+
+@foreach(var item in Model.Items)
+{
+	<span>
+		@item.Name <br />
+	</span>
+}

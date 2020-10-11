@@ -1,94 +1,103 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
-    Layout = "~/Theme/TasteIt/Main.cshtml";
+	ViewData["Title"] = "Home page";
+	Layout = "~/Theme/TasteIt/Main.cshtml";
 }
 
 <section class="ftco-section ftco-wrap-about ftco-no-pb ftco-no-pt">
-    <div class="container">
-        <div class="row no-gutters">
-            <div class="col-sm-4 p-4 p-md-5 d-flex align-items-center justify-content-center bg-primary">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h2>Αναζήτη</h2>
-                    </div>
-                    <div id="ingredients_search" style="width: 100%">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <input type="text" class="form-control ingredient-value" placeholder="Υλικό">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <button class="btn btn-white py-3 px-4" id="add-ingredient">
-                                ΠΡΟΣΘΗΚΗ ΥΛΙΚΟΥ
-                            </button>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <button class="btn btn-white py-3 px-4" id="btnSearch">
-                                ΑΝΑΖΗΤΗΣΗ
-                            </button>
+	<div class="container">
+		<div class="row no-gutters">
+			<div class="col-sm-4 p-4 p-md-5 d-flex align-items-center justify-content-center bg-primary">
+				<form method="post" id="ingrdientsSearchForm">
+					<div class="row">
+						<div class="col-md-12">
+							<h2>Αναζήτη</h2>
+						</div>
+						<div id="ingredients_search" style="width: 100%">
+							<div class="col-md-12">
+								<div class="form-group">
+									<input type="text" class="form-control ingredient-value" placeholder="Υλικό">
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<button class="btn btn-white py-3 px-4" id="add-ingredient" onclick="return false;">
+									ΠΡΟΣΘΗΚΗ ΥΛΙΚΟΥ
+								</button>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<button class="btn btn-white py-3 px-4" id="btnSearch">
+									ΑΝΑΖΗΤΗΣΗ
+								</button>
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-8 wrap-about py-5 ftco-animate img" style="background-image: url(images/about.jpg);">
-                <div class="row pb-5 pb-md-0">
-                    <div class="col-md-12 col-lg-7">
-                        <div class="heading-section mt-5 mb-4">
-                            <div class="pl-lg-3 ml-md-5">
-                                <span class="subheading">About</span>
-                                <h2 class="mb-4">Welcome to Taste.it</h2>
-                            </div>
-                        </div>
-                        <div class="pl-lg-3 ml-md-5">
-                            <p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="col-sm-8 wrap-about py-5 ftco-animate img" style="background-image: url(images/about.jpg);">
+				<div class="row pb-5 pb-md-0">
+					<div class="col-md-12 col-lg-7">
+						<div class="heading-section mt-5 mb-4">
+							<div class="pl-lg-3 ml-md-5">
+								<span class="subheading">About</span>
+								<h2 class="mb-4">Welcome to Taste.it</h2>
+							</div>
+						</div>
+						<div class="pl-lg-3 ml-md-5">
+							<p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
 
 
 
 
 @section scripts{
-    <script>
-        // JQuery
-        $(document).ready(function () {
+	<script>
+		// JQuery
+		$(document).ready(function () {
 
-            $("#add-ingredient").click(function () {
-                var textBox = "";
-                textBox += '<div class="col-md-12">';
-                textBox += '<div class="form-group">';
-                textBox += '<input type="text" class="form-control ingredient-value" placeholder="Υλικό">';
-                textBox += '</div>';
-                textBox += '</div>';
+			$("#add-ingredient").click(function () {
+				var textBox = "";
+				textBox += '<div class="col-md-12">';
+				textBox += '<div class="form-group">';
+				textBox += '<input type="text" class="form-control ingredient-value" placeholder="Υλικό">';
+				textBox += '</div>';
+				textBox += '</div>';
 
-                $("#ingredients_search").append(textBox);
-            });
-
-
-            $("#btnSearch").click(function () {
-                var list = $("input[class*=ingredient-value]");
-
-                for (let i = 0; i < list.length; i++) {
-                    console.log($(list[i]).val());
-                }
+				$("#ingredients_search").append(textBox);
+			});
 
 
-            });
+			$("#btnSearch").click(function () {
+				var list = $("input[class*=ingredient-value]");
+				var ingrdientList = [];
+				var text = "";
+
+				for (let i = 0; i < list.length; i++) {
+					// ingrdientList.push($(list[i]).val());
+					text += $(list[i].val());
+				}
+
+				var formData = new FormData();
+				formData.append("ingrdientsSearchForm", ingrdientList);
+
+				$("#ingrdientsSearchForm").submit(formData);
+
+			});
 
 
-        });
-    </script>
+		});
+	</script>
 }
 
 

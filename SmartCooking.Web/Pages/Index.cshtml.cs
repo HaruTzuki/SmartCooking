@@ -24,16 +24,26 @@ namespace SmartCooking.Web.Pages
 
         public async Task<IActionResult> OnGetAsync()
         {
-            //Item item = new Item()
-            //{
-            //    Name = "Πιπέρι"
-            //};
-
-            //itemRepository.InsertItem(item);
-
-            var _item = await itemRepository.GetItem(1);
-
+            
             return Page();
         }
+
+        public async Task<IActionResult> OnPostAsync()
+		{
+            // var list = Request.Form["ingrdientsSearchForm"];
+
+            List<Item> items = new List<Item>();
+            var list = new List<string>()
+            {
+                "Πιπέρι", // Πιπέρι
+                "Κοτόπουλο", // Κοτόπουλο
+                "Chilli" // Chilli
+            };
+
+            var text = "Πιπέρι&Κοτόπουλο&Chilli";
+
+
+            return RedirectToPage("Recipe/SearchResult", new { query = text });
+		}
     }
 }

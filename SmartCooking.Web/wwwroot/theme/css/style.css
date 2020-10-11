@@ -9998,3 +9998,9 @@ textarea.form-control {
   100% {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -136px; } }
+
+
+
+.bg-5{
+    background-image: url("../images/bg_5.jpg");
+}

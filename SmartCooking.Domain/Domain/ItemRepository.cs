@@ -30,7 +30,12 @@ namespace SmartCooking.Data.Domain
             return await context.SC_Item.FirstOrDefaultAsync(x => x.Id == Id);
         }
 
-        public async Task<List<Item>> GetItems()
+		public async Task<Item> GetItem(string name)
+		{
+            return await context.SC_Item.FirstOrDefaultAsync(x => x.Name == name); 
+		}
+
+		public async Task<List<Item>> GetItems()
         {
             return await context.SC_Item.ToListAsync();
         }
