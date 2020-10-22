@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartCooking.Infastructure"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartCooking.Data", "SmartCooking.Domain\SmartCooking.Data.csproj", "{E59F60A0-58B1-4491-9B8A-74E4ACEE4DD9}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartCooking.Common", "SmartCooking.Common\SmartCooking.Common.csproj", "{9510C5BB-3EB6-413D-8DED-9E9D59CE324E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{E59F60A0-58B1-4491-9B8A-74E4ACEE4DD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E59F60A0-58B1-4491-9B8A-74E4ACEE4DD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E59F60A0-58B1-4491-9B8A-74E4ACEE4DD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9510C5BB-3EB6-413D-8DED-9E9D59CE324E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9510C5BB-3EB6-413D-8DED-9E9D59CE324E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9510C5BB-3EB6-413D-8DED-9E9D59CE324E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9510C5BB-3EB6-413D-8DED-9E9D59CE324E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
