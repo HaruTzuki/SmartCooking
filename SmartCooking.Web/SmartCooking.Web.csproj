@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SmartCooking.Common\SmartCooking.Common.csproj" />
     <ProjectReference Include="..\SmartCooking.Domain\SmartCooking.Data.csproj" />
     <ProjectReference Include="..\SmartCooking.Infastructure\SmartCooking.Infastructure.csproj" />
   </ItemGroup>

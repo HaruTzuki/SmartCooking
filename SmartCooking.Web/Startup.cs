@@ -41,6 +41,12 @@ namespace SmartCooking.Web
             #endif
 
             services.AddRazorPages();
+            services.AddSession();
+            services.AddMemoryCache();
+            services.AddMvc().AddRazorPagesOptions(opt =>
+            {
+                opt.Conventions.AddPageRoute("/Home/Index", "");
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,7 +65,7 @@ namespace SmartCooking.Web
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();

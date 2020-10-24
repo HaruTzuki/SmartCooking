@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
@@ -24,7 +25,9 @@ namespace SmartCooking.Web.Pages
 
         public async Task<IActionResult> OnGetAsync()
         {
-            
+            ViewData["IsLogged"] = HttpContext.Session.GetInt32("ISLOGIN");
+            ViewData["Username"] = HttpContext.Session.GetString("USERNAME");
+            ViewData["IsAdmin"] = HttpContext.Session.GetString("ISADMIN");
             return Page();
         }
 

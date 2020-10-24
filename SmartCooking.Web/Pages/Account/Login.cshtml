@@ -1,4 +1,44 @@
 ﻿@page
 @model SmartCooking.Web.Pages.Account.LoginModel
 @{
+	ViewData["Title"] = "Login";
+	Layout = "~/Theme/TasteIt/Page.cshtml";
+}
+
+<form method="post" id="loginForm">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="form-group">
+				<label class="lead">Όνομα Χρήστη</label>
+				<input type="text" class="form-control" asp-for="User.Username"/>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="form-group">
+				<label class="lead">Κωδικός Πρόσβασης</label>
+				<input type="password" class="form-control" asp-for="User.Password"/>
+			</div>
+		</div>
+	</div>
+
+	<div class="row text-right">
+		<div class="col-sm-12">
+			<button class="btn btn-success btn-lg" id="loginFormSubmit">
+				ΣΥΝΔΕΣΗ
+			</button>
+		</div>
+	</div>
+</form>
+
+@section scripts{ 
+	<script>
+		$("#loginFormSubmit").click(function (e) {
+			e.preventDefault();
+
+			$("#loginForm").submit();
+		});
+	</script>
 }

@@ -87,7 +87,7 @@ namespace SmartCooking.Common.Extensions
 			return defaultValue;
 		}
 
-		public static double ToDouble(this string s, NumberStyles numberStyles, IFormatProvider formatProvider double defaultValue = default(double))
+		public static double ToDouble(this string s, NumberStyles numberStyles, IFormatProvider formatProvider, double defaultValue = default(double))
 		{
 			if (string.IsNullOrWhiteSpace(s))
 			{
@@ -135,4 +135,5 @@ namespace SmartCooking.Common.Extensions
 		}
 		#endregion
 	}
+
 }

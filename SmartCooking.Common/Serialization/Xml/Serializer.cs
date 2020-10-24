@@ -14,6 +14,7 @@ namespace SmartCooking.Common.Serialization.Xml
 			}
 
 			System.Xml.Serialization.XmlSerializer xmlSerializer = new System.Xml.Serialization.XmlSerializer(o.GetType());
+			
 			using (var sw = new StringWriter())
 			{
 				using (XmlWriter writer = XmlWriter.Create(sw))
@@ -22,7 +23,6 @@ namespace SmartCooking.Common.Serialization.Xml
 					return sw.ToString();
 				}
 			}
-
 		}
 
 		public static T XmlDeserializer<T>(string? s)
@@ -35,7 +35,5 @@ namespace SmartCooking.Common.Serialization.Xml
 			StringReader stringReader = new StringReader(s);
 			return (T)xmlSerializer.Deserialize(stringReader);
 		}
-
-
 	}
 }
