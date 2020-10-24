@@ -9,8 +9,8 @@ namespace SmartCooking.Web.Helpers
 	{
 		public bool CheckPermissions()
 		{
-			if (HttpContext.Session.Keys.Contains("IsAdmin")){
-				if (HttpContext.Session.GetString("IsAdmin") != "1")
+			if (HttpContext.Session.Keys.Contains("ISADMIN")){
+				if (HttpContext.Session.GetString("ISADMIN") != "1")
 				{
 					return false;
 				}

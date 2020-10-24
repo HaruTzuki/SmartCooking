@@ -12,7 +12,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\theme\" />
+    <None Include="wwwroot\theme\admin\assets\demo\chart-area-demo.js" />
+    <None Include="wwwroot\theme\admin\assets\demo\chart-bar-demo.js" />
+    <None Include="wwwroot\theme\admin\assets\demo\chart-pie-demo.js" />
+    <None Include="wwwroot\theme\admin\assets\demo\datatables-demo.js" />
+    <None Include="wwwroot\theme\admin\assets\img\error-404-monochrome.svg" />
+    <None Include="wwwroot\theme\admin\js\scripts.js" />
   </ItemGroup>
 
   <ItemGroup>

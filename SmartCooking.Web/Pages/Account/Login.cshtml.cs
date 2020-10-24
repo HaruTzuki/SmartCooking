@@ -36,7 +36,7 @@ namespace SmartCooking.Web.Pages.Account
 			HttpContext.Session.SetInt32("ISLOGIN", 1);
 			HttpContext.Session.SetString("ISADMIN", dbUser.IsAdmin ? "1" : "0");
 
-			return RedirectToPage("/Index");
+			return RedirectToPage("/Home/Index");
 		}
 	}
 }
