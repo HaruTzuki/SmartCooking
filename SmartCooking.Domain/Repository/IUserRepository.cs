@@ -7,7 +7,7 @@ namespace SmartCooking.Data.Repository
     public interface IUserRepository
     {
         Task<User> GetUser(int Id);
-        Task<List<User>> GetUsers();
+        Task<IEnumerable<User>> GetUsers();
         Task<bool> InsertUser(User user);
         Task<bool> UpdateUser(User user);
         Task<bool> DeleteUser(User user);

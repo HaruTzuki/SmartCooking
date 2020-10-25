@@ -8,7 +8,7 @@ namespace SmartCooking.Data.Repository
     {
         Task<Item> GetItem(int Id);
         Task<Item> GetItem(string name);
-        Task<List<Item>> GetItems();
+        Task<IEnumerable<Item>> GetItems();
         Task<bool> InsertItem(Item item);
         Task<bool> UpdateItem(Item item);
         Task<bool> DeleteItem(Item item);

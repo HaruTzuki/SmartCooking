@@ -29,7 +29,7 @@ namespace SmartCooking.Data.Domain
             return true;
         }
 
-        public async Task<List<ItemCategory>> GetItemCategories()
+        public async Task<IEnumerable<ItemCategory>> GetItemCategories()
         {
             return await context.SC_ItemCategory.ToListAsync();
         }

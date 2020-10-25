@@ -34,7 +34,7 @@ namespace SmartCooking.Data.Domain
             return await context.SC_User.FirstOrDefaultAsync(x => x.Id == Id);
         }
 
-        public async Task<List<User>> GetUsers()
+        public async Task<IEnumerable<User>> GetUsers()
         {
             return await context.SC_User.ToListAsync();
         }

@@ -46,12 +46,12 @@ namespace SmartCooking.Data.Domain
             return await context.SC_RecipeDetail.FirstOrDefaultAsync(x => x.Id == Id);
         }
 
-        public async Task<List<RecipeDetail>> GetRecipeDetails()
+        public async Task<IEnumerable<RecipeDetail>> GetRecipeDetails()
         {
             return await context.SC_RecipeDetail.ToListAsync();
         }
 
-        public async Task<List<RecipeDetail>> GetRecipeDetails(int RecipeHeaderId)
+        public async Task<IEnumerable<RecipeDetail>> GetRecipeDetails(int RecipeHeaderId)
         {
             return await context.SC_RecipeDetail.Where(x=>x.RecipeHeaderId == RecipeHeaderId).ToListAsync();
         }
@@ -61,7 +61,7 @@ namespace SmartCooking.Data.Domain
             return await context.SC_RecipeHeader.FirstOrDefaultAsync(x => x.Id == Id);
         }
 
-        public async Task<List<RecipeHeader>> GetRecipeHeaders()
+        public async Task<IEnumerable<RecipeHeader>> GetRecipeHeaders()
         {
             return await context.SC_RecipeHeader.ToListAsync();
         }

@@ -47,6 +47,10 @@
 							<div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
 							Dashboard
 						</a>
+						<a class="nav-link" href="@Url.Content("~/Admin/ItemCategoryList")">
+							<div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+							Κατηγορία Ειδών
+						</a>
 						<a class="nav-link" href="@Url.Content("~/Admin/ItemList")">
 							<div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
 							Λίστα Ειδών
@@ -118,9 +122,9 @@
 					<ol class="breadcrumb mb-4">
 						<li class="breadcrumb-item active">Dashboard</li>
 					</ol>
-					
+
 					@RenderBody()
-					
+
 				</div>
 			</main>
 			<footer class="py-4 bg-light mt-auto">
@@ -138,10 +142,13 @@
 		</div>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 	<script src="~/theme/admin/js/scripts.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
 	<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
 	<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+	@RenderSection("scripts", required: false)
 </body>
 </html>
