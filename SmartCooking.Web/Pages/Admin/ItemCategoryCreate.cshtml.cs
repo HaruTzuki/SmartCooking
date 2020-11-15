@@ -47,7 +47,7 @@ namespace SmartCooking.Web.Pages.Admin
 			}
 
 			IsErrorInRegister = true;
-			ViewData["Error"] = "Κάτι πήγε στραβά και δεν μπορεί να αποθηκευτεί ή εγγραφή";
+			ViewData["Error"] = "Κάτι πήγε στραβά και δεν μπορεί να αποθηκευτεί η εγγραφή.";
 			return Page();
 		}
     }

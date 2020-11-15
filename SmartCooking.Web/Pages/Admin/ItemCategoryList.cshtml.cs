@@ -16,7 +16,7 @@ namespace SmartCooking.Web.Pages.Admin
     {
 		private readonly IItemCategoryRepository itemCategoryRepository;
         [BindProperty] public IEnumerable<ItemCategory> ItemCategories { get; set; }
-		public bool HasError { get; set; } = false;
+		
 
 		public ItemCategoryListModel(IItemCategoryRepository itemCategoryRepository)
 		{

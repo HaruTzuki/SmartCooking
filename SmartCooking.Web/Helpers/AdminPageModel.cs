@@ -7,6 +7,7 @@ namespace SmartCooking.Web.Helpers
 {
 	public class AdminPageModel : PageModel
 	{
+		public bool HasError { get; set; }
 		public bool CheckPermissions()
 		{
 			if (HttpContext.Session.Keys.Contains("ISADMIN")){
