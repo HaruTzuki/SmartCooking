@@ -1,0 +1,54 @@
+﻿@page "{itemCategoryId:int}"
+@model SmartCooking.Web.Pages.Admin.UnitEditModel
+@{
+	Layout = "~/Theme/SBAdmin/Main.cshtml";
+}
+
+<div class="card mb-5">
+	<div class="card-content">
+		<div class="card-body">
+			<button class="btn btn-success btn-lg" id="unitSubmit">
+				ΑΠΟΘΗΚΕΥΣΗ
+			</button>
+		</div>
+	</div>
+</div>
+
+@if (Model.HasError)
+{
+	<div class="alert alert-danger alert-dismissible fade show mb-5" role="alert">
+		<strong>@ViewData["Error"]</strong>
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+}
+
+
+<div class="card mb-5">
+	<div class="card-content">
+		<div class="card-body">
+			<form method="post" id="unitForm">
+				<div class="form-group">
+					<label class="lead">Περιγραφή</label>
+					<input type="text" asp-for="Unit.Name" class="form-control" />
+					<input type="hidden" asp-for="Unit.Id" />
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+@section scripts{
+	<script>
+		$(document).ready(function () {
+
+			$("#unitSubmit").click(function (e) {
+				e.preventDefault();
+
+				$("#unitForm").submit();
+			})
+		});
+	</script>
+}

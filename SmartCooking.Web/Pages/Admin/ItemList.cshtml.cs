@@ -41,5 +41,34 @@ namespace SmartCooking.Web.Pages.Admin
 
 			return Page();
         }
-    }
+		public async Task<IActionResult> OnPostDelete(int? itemId)
+		{
+			if (!itemId.HasValue)
+			{
+				HasError = true;
+				ViewData["Error"] = "Δεν μπορείτε να περάσετε κενό ID.";
+				return Page();
+			}
+
+			var dbItem = await itemRepository.GetItem(itemId.Value);
+
+			if (dbItem is null)
+			{
+				HasError = true;
+				ViewData["Error"] = "Δεν υπάρχει εγγραφή με το ID που δόθηκε.";
+				return Page();
+			}
+
+			if (!await itemRepository.DeleteItem(dbItem))
+			{
+				HasError = true;
+				ViewData["Error"] = "Δεν μπορέσαμε να σβήσουμε την εγγραφή σας.";
+				return Page();
+			}
+
+			TempData["SuccessMessage"] = "Η διαγραφή του στοιχείου έγινε με επιτυχία.";
+
+			return RedirectToPage(Url.Content("~/Admin/ItemList"));
+		}
+	}
 }

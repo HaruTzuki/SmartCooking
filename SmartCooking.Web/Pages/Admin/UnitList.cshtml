@@ -1,0 +1,114 @@
+﻿@page
+@model SmartCooking.Web.Pages.Admin.UnitListModel
+@{
+	Layout = "~/Theme/SBAdmin/Main.cshtml";
+}
+
+<div class="card mb-5">
+	<div class="card-content">
+		<div class="card-body">
+			<div class="row">
+				<div class="col-sm-12">
+					<a href="@Url.Content("~/Admin/UnitCreate")" class="btn btn-success">ΔΗΜΙΟΥΡΓΙΑ</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+@if (TempData.Keys.Contains("SuccessMessage"))
+{
+	<div class="alert alert-success alert-dismissible fade show mb-5" role="alert">
+		<strong>@TempData["SuccessMessage"]</strong>
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+}
+
+@if (Model.HasError)
+{
+	<div class="alert alert-danger alert-dismissible fade show mb-5" role="alert">
+		<strong>@ViewData["Error"]</strong>
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+}
+
+<div class="card mb-5">
+	<div class="card-content">
+		<div class="card-body">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>
+							ID
+						</th>
+						<th>
+							Περιγραφή
+						</th>
+						<th>
+							Ενέργειες
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					@Html.AntiForgeryToken()
+					@foreach (var unit in Model.Units)
+					{
+						<tr>
+							<td>
+								@unit.Id
+							</td>
+							<td>@unit.Name</td>
+							<td>
+								<div class="d-flex">
+									<a href="@Url.Content($"~/Admin/UnitEdit/{unit.Id}")" class="btn btn-link"><i class="far fa-edit" title="Επεξεργασία"></i></a>
+									<form method="post" asp-page-handler="delete" asp-route-itemCategoryId="@unit.Id">
+										<button class="btn btn-link">
+											<i class="far fa-trash-alt" title="Διαγραφή"></i>
+										</button>
+
+									</form>
+
+								</div>
+
+
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+
+@section scripts{
+	<script>
+	$(document).ready(function () {
+
+		@*$(document).on("click", "#btnDeleteItemCategory", function () {
+			console.log("fsdfds");
+			$.ajax({
+				url: '@Url.Content("~/Admin/ItemCategoryList?handler=Delete&itemCategoryId=")' + $(this).attr("data-category-id"),
+				type: 'post',
+				beforeSend: function (xhr) {
+					xhr.setRequestHeader("XSRF-TOKEN",
+						$('input:hidden[name="__RequestVerificationToken"]').val());
+				},
+				contentType: 'application/json; charset=utf-8',
+				dataType: "json",
+				success: function (response) {
+					console.log(response);
+				},
+				error: function (response) {
+					console.error(response);
+				}
+			});
+		});*@
+
+	});
+	</script>
+}
