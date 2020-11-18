@@ -6,10 +6,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<meta name="description" content="" />
 	<meta name="author" content="" />
-	<title>Dashboard - SB Admin</title>
-	<link href="~/theme/admin/css/styles.css" rel="stylesheet" />
+	<title>Dashboard - Smart Cooking</title>
 	<link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="~/theme/admin/css/jquery-ui.min.css"/>
+	<link href="~/theme/admin/css/styles.css" rel="stylesheet" />
+
 </head>
 <body class="sb-nav-fixed">
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -59,6 +61,11 @@
 							<div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
 							Λίστα Μονάδων Μέτρησης
 						</a>
+						<a class="nav-link" href="@Url.Content("~/Admin/RecipeList")">
+							<div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+							Συνταγές
+						</a>
+
 						<div class="sb-sidenav-menu-heading">Interface</div>
 						<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
 							<div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
@@ -145,7 +152,10 @@
 			</footer>
 		</div>
 	</div>
+
+	@RenderSection("modals", required: false);
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+	<script src="~/theme/admin/js/jquery-ui.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

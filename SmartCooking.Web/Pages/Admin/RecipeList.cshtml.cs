@@ -1,0 +1,87 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using SmartCooking.Common.Extensions;
+using SmartCooking.Data.Repository;
+using SmartCooking.Infastructure.Products;
+using SmartCooking.Infastructure.Recipes;
+using SmartCooking.Web.Helpers;
+
+namespace SmartCooking.Web.Pages.Admin
+{
+    public class RecipeListModel : AdminPageModel
+    {
+		private readonly IRecipeRepository recipeRepository;
+
+		[BindProperty] public IEnumerable<RecipeHeader> Recipes { get; set; }
+
+
+		public RecipeListModel(IRecipeRepository recipeRepository)
+		{
+			this.recipeRepository = recipeRepository;
+		}
+        public async Task<IActionResult> OnGetAsync()
+        {
+			if (!CheckPermissions())
+			{
+				return RedirectToPage(Url.Content("~/Home/Index"));
+			}
+
+			Recipes = await recipeRepository.GetRecipeHeaders();
+
+			if(Recipes is null)
+			{
+				return RedirectToPage(Url.Content("~/Admin/"));
+			}
+
+			return Page();
+        }
+		public async Task<IActionResult> OnPostDelete(int? recipeId)
+		{
+			if (!recipeId.HasValue)
+			{
+				HasError = true;
+				ViewData["Error"] = "Δεν μπορείτε να περάσετε κενό ID.";
+				return Page();
+			}
+
+			var dbRecipeHeader = await recipeRepository.GetRecipeHeader(recipeId.Value);
+
+			if (dbRecipeHeader is null)
+			{
+				HasError = true;
+				ViewData["Error"] = "Δεν υπάρχει εγγραφή με το ID που δόθηκε.";
+				return Page();
+			}
+
+			var dbRecipeDetails = await recipeRepository.GetRecipeDetails(dbRecipeHeader.Id);
+
+			foreach(var recipeDetail in dbRecipeDetails)
+			{
+				if (!await recipeRepository.DeleteRecipeDetail(recipeDetail))
+				{
+					HasError = true;
+					ViewData["Error"] = "Δεν μπορέσαμε να σβήσουμε την εγγραφή σας.";
+					return Page();
+				}
+			}
+
+			if (!await recipeRepository.DeleteRecipeHeader(dbRecipeHeader))
+			{
+				HasError = true;
+				ViewData["Error"] = "Δεν μπορέσαμε να σβήσουμε την εγγραφή σας.";
+				return Page();
+			}
+
+			TempData["SuccessMessage"] = "Η διαγραφή του στοιχείου έγινε με επιτυχία.";
+
+			return RedirectToPage(Url.Content("~/Admin/RecipeList"));
+		}
+
+
+		
+	}
+}
