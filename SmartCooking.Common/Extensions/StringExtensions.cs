@@ -6,7 +6,7 @@ namespace SmartCooking.Common.Extensions
 	public static class StringExtensions
 	{
 		#region ToInt Region
-		public static int ToInt(this string s, int defaultValue = default(int))
+		public static int ToInt(this string s, int defaultValue = default)
 		{
 			if (string.IsNullOrWhiteSpace(s))
 			{
@@ -23,7 +23,7 @@ namespace SmartCooking.Common.Extensions
 		#endregion
 
 		#region ToLong Region
-		public static long ToLong(this string s, long defaultValue = default(long))
+		public static long ToLong(this string s, long defaultValue = default)
 		{
 			if (string.IsNullOrWhiteSpace(s))
 			{
@@ -40,7 +40,7 @@ namespace SmartCooking.Common.Extensions
 		#endregion
 
 		#region ToFloat Region
-		public static float ToFloat(this string s, float defaultValue = default(float))
+		public static float ToFloat(this string s, float defaultValue = default)
 		{
 			if (string.IsNullOrWhiteSpace(s))
 			{
@@ -55,7 +55,7 @@ namespace SmartCooking.Common.Extensions
 			return defaultValue;
 		}
 
-		public static float ToFloat(this string s, NumberStyles numberStyles, IFormatProvider formatProvider, float defaultValue = default(float))
+		public static float ToFloat(this string s, NumberStyles numberStyles, IFormatProvider formatProvider, float defaultValue = default)
 		{
 			if (string.IsNullOrWhiteSpace(s))
 			{
@@ -72,7 +72,7 @@ namespace SmartCooking.Common.Extensions
 		#endregion
 
 		#region ToDouble Region
-		public static double ToDouble(this string s, double defaultValue = default(double))
+		public static double ToDouble(this string s, double defaultValue = default)
 		{
 			if (string.IsNullOrWhiteSpace(s))
 			{
@@ -87,7 +87,7 @@ namespace SmartCooking.Common.Extensions
 			return defaultValue;
 		}
 
-		public static double ToDouble(this string s, NumberStyles numberStyles, IFormatProvider formatProvider, double defaultValue = default(double))
+		public static double ToDouble(this string s, NumberStyles numberStyles, IFormatProvider formatProvider, double defaultValue = default)
 		{
 			if (string.IsNullOrWhiteSpace(s))
 			{
@@ -104,7 +104,7 @@ namespace SmartCooking.Common.Extensions
 		#endregion
 
 		#region ToDecimal Region
-		public static decimal ToDecimal(this string s, decimal defaultValue = default(decimal))
+		public static decimal ToDecimal(this string s, decimal defaultValue = default)
 		{
 			if (string.IsNullOrWhiteSpace(s))
 			{
@@ -119,7 +119,7 @@ namespace SmartCooking.Common.Extensions
 			return defaultValue;
 		}
 
-		public static decimal ToDecimal(this string s, NumberStyles numberStyles, IFormatProvider formatProvider, decimal defaultValue = default(decimal))
+		public static decimal ToDecimal(this string s, NumberStyles numberStyles, IFormatProvider formatProvider, decimal defaultValue = default)
 		{
 			if (string.IsNullOrWhiteSpace(s))
 			{
