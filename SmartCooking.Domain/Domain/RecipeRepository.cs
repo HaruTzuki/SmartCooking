@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmartCooking.Data.Context;
 using SmartCooking.Data.Repository;
-using SmartCooking.Infastructure.Products;
 using SmartCooking.Infastructure.Recipes;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace SmartCooking.Data.Domain
 {
-    public class RecipeRepository : IRecipeRepository
-    {
-        private readonly MyDbContext context;
+	public class RecipeRepository : IRecipeRepository
+	{
+		private readonly MyDbContext context;
 
-        public RecipeRepository(MyDbContext context)
-        {
-            this.context = context;
-        }
+		public RecipeRepository(MyDbContext context)
+		{
+			this.context = context;
+		}
 
 		#region Recipe
 		public async Task<bool> DeleteRecipeDetail(RecipeDetail recipeDetail)
@@ -56,7 +55,8 @@ namespace SmartCooking.Data.Domain
 		public async Task<IEnumerable<RecipeDetail>> GetRecipeDetails(int recipeHeaderId)
 		{
 			var details = await context.SC_RecipeDetail.Where(x => x.RecipeHeaderId == recipeHeaderId).ToListAsync();
-			details.ToList().ForEach(x => {
+			details.ToList().ForEach(x =>
+			{
 				x.Item = context.SC_Item.FirstOrDefaultAsync(item => item.Id == x.ItemId).Result;
 				x.Unit = context.SC_Unit.FirstOrDefaultAsync(unit => unit.Id == x.UnitId).Result;
 			});

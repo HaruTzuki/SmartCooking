@@ -1,13 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SmartCooking.Common.Extensions;
 using SmartCooking.Data.Repository;
 using SmartCooking.Infastructure.Products;
 using SmartCooking.Infastructure.Recipes;
 using SmartCooking.Web.Helpers;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SmartCooking.Web.Pages.Admin
 {
@@ -37,7 +37,6 @@ namespace SmartCooking.Web.Pages.Admin
 				return RedirectToPage(Url.Content("~/Home/Index"));
 			}
 
-
 			if (draftHeaderId.HasValue)
 			{
 				RecipeHeader = await recipeRepository.GetRecipeHeader(draftHeaderId.Value);
@@ -45,7 +44,7 @@ namespace SmartCooking.Web.Pages.Admin
 				this.DraftRecipeHeaderId = draftHeaderId.Value;
 			}
 
-			if(RecipeHeader is null)
+			if (RecipeHeader is null)
 			{
 				RecipeHeader = new RecipeHeader
 				{
@@ -53,7 +52,7 @@ namespace SmartCooking.Web.Pages.Admin
 				};
 				await recipeRepository.InsertRecipeHeader(RecipeHeader);
 
-				return RedirectToPage("RecipeCreate", new { draftHeaderId = RecipeHeader.Id});
+				return RedirectToPage("RecipeCreate", new { draftHeaderId = RecipeHeader.Id });
 			}
 
 			await InitializeLists(GetOptions.All);

@@ -1,18 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SmartCooking.Data.Repository;
 using SmartCooking.Infastructure.Products;
 using SmartCooking.Web.Helpers;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SmartCooking.Web.Pages.Admin
 {
-    public class ItemEditModel : AdminPageModel
-    {
+	public class ItemEditModel : AdminPageModel
+	{
 		private readonly IItemRepository itemRepository;
 		private readonly IItemCategoryRepository itemCategoryRepository;
 
@@ -27,7 +25,7 @@ namespace SmartCooking.Web.Pages.Admin
 		}
 
 		public async Task<IActionResult> OnGetAsync(int? itemId)
-        {
+		{
 			if (!CheckPermissions())
 			{
 				return RedirectToPage(Url.Content("~/Home/Index"));
@@ -40,7 +38,7 @@ namespace SmartCooking.Web.Pages.Admin
 
 			Item = await itemRepository.GetItem(itemId.Value);
 
-			if(Item is null)
+			if (Item is null)
 			{
 				return RedirectToPage(Url.Content("~/Admin/ItemList"));
 			}
@@ -67,5 +65,5 @@ namespace SmartCooking.Web.Pages.Admin
 			ViewData["Error"] = "Κάτι πήγε στραβά και δεν μπορεί να αποθηκευτεί ή εγγραφή";
 			return Page();
 		}
-    }
+	}
 }

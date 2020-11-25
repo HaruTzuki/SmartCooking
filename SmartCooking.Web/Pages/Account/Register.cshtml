@@ -12,7 +12,7 @@
 	</button>
 </div>
 
-@if (Model.IsErrorInRegister)
+@if (Model.HasError)
 {
 	<div class="alert alert-danger alert-dismissible fade show" role="alert">
 		<strong>@ViewData["Error"]</strong>

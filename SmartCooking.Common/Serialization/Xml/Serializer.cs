@@ -8,13 +8,13 @@ namespace SmartCooking.Common.Serialization.Xml
 	{
 		public static string XmlSerializer(object? o)
 		{
-			if(o is null)
+			if (o is null)
 			{
 				return "";
 			}
 
 			System.Xml.Serialization.XmlSerializer xmlSerializer = new System.Xml.Serialization.XmlSerializer(o.GetType());
-			
+
 			using (var sw = new StringWriter())
 			{
 				using (XmlWriter writer = XmlWriter.Create(sw))

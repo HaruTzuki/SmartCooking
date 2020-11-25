@@ -1,15 +1,15 @@
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SmartCooking.Data.Repository;
 using SmartCooking.Infastructure.Recipes;
 using SmartCooking.Web.Helpers;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SmartCooking.Web.Pages.Admin
 {
 	public class RecipeListModel : AdminPageModel
-    {
+	{
 		private readonly IRecipeRepository recipeRepository;
 
 		[BindProperty] public IEnumerable<RecipeHeader> Recipes { get; set; }
@@ -19,8 +19,8 @@ namespace SmartCooking.Web.Pages.Admin
 		{
 			this.recipeRepository = recipeRepository;
 		}
-        public async Task<IActionResult> OnGetAsync()
-        {
+		public async Task<IActionResult> OnGetAsync()
+		{
 			if (!CheckPermissions())
 			{
 				return RedirectToPage(Url.Content("~/Home/Index"));
@@ -34,7 +34,7 @@ namespace SmartCooking.Web.Pages.Admin
 			}
 
 			return Page();
-        }
+		}
 		public async Task<IActionResult> OnPostDelete(int? recipeId)
 		{
 			if (!recipeId.HasValue)
@@ -55,7 +55,7 @@ namespace SmartCooking.Web.Pages.Admin
 
 			var dbRecipeDetails = await recipeRepository.GetRecipeDetails(dbRecipeHeader.Id);
 
-			foreach(var recipeDetail in dbRecipeDetails)
+			foreach (var recipeDetail in dbRecipeDetails)
 			{
 				if (!await recipeRepository.DeleteRecipeDetail(recipeDetail))
 				{
@@ -78,6 +78,6 @@ namespace SmartCooking.Web.Pages.Admin
 		}
 
 
-		
+
 	}
 }

@@ -8,13 +8,13 @@ namespace SmartCooking.Common.Cryptography
 	{
 		public static string ComputeMD5Hash(string input)
 		{
-			using(MD5 md5 = MD5.Create())
+			using (MD5 md5 = MD5.Create())
 			{
 				return ComputeHashAlgorithm(md5, input);
 			}
 		}
-		
-		public static string ComputeSha256Hash(string input) 
+
+		public static string ComputeSha256Hash(string input)
 		{
 			using (SHA256 sha256 = SHA256.Create())
 			{

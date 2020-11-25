@@ -1,27 +1,22 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using SmartCooking.Data.Repository;
 using SmartCooking.Infastructure.Products;
 using SmartCooking.Web.Helpers;
+using System.Threading.Tasks;
 
 namespace SmartCooking.Web.Pages.Admin
 {
-    public class UnitEditModel : AdminPageModel
-    {
+	public class UnitEditModel : AdminPageModel
+	{
 		private readonly IUnitRepository unitRepository;
-        [BindProperty] public Unit Unit { get; set; }
+		[BindProperty] public Unit Unit { get; set; }
 		public UnitEditModel(IUnitRepository unitRepository)
 		{
 			this.unitRepository = unitRepository;
 		}
 
-        public async Task<IActionResult> OnGetAsync(int? unitId)
-        {
+		public async Task<IActionResult> OnGetAsync(int? unitId)
+		{
 			if (!CheckPermissions())
 			{
 				return RedirectToPage(Url.Content("~/Home/Index"));
@@ -34,13 +29,13 @@ namespace SmartCooking.Web.Pages.Admin
 
 			Unit = await unitRepository.GetUnit(unitId.Value);
 
-			if(Unit == null)
+			if (Unit == null)
 			{
 				return RedirectToPage(Url.Content("~/Admin/UnitList"));
 			}
 
 			return Page();
-        }
+		}
 
 		public async Task<IActionResult> OnPostAsync()
 		{
@@ -55,5 +50,5 @@ namespace SmartCooking.Web.Pages.Admin
 			return Page();
 		}
 
-    }
+	}
 }

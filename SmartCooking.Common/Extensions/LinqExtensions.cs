@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SmartCooking.Common.Extensions
 {
@@ -13,9 +12,10 @@ namespace SmartCooking.Common.Extensions
 		}
 
 
-		public static void ForEach<T>(this IEnumerable<T> sequence, Func<T,IActionResult> action)
+		public static void ForEach<T>(this IEnumerable<T> sequence, Func<T, IActionResult> action)
 		{
-			foreach (var item in sequence) {
+			foreach (var item in sequence)
+			{
 				action(item);
 			}
 		}

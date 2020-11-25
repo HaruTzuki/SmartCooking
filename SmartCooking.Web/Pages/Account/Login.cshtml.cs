@@ -1,12 +1,12 @@
-using System.Linq;
-using System.Security.Cryptography;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SmartCooking.Common.Cryptography;
 using SmartCooking.Data.Repository;
 using SmartCooking.Infastructure.Security;
 using SmartCooking.Web.Helpers;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Threading.Tasks;
 
 namespace SmartCooking.Web.Pages.Account
 {

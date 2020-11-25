@@ -10,66 +10,66 @@ using SmartCooking.Data.Repository;
 namespace SmartCooking.Web
 {
 	public class Startup
-    {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+	{
+		public Startup(IConfiguration configuration)
+		{
+			Configuration = configuration;
+		}
 
-        public IConfiguration Configuration { get; }
+		public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IUnitRepository, UnitRepository>();
-            services.AddScoped<IRecipeRepository, RecipeRepository>();
-            services.AddScoped<IItemRepository, ItemRepository>();
-            services.AddScoped<IItemCategoryRepository, ItemCategoryRepository>();
+		// This method gets called by the runtime. Use this method to add services to the container.
+		public void ConfigureServices(IServiceCollection services)
+		{
+			services.AddScoped<IUserRepository, UserRepository>();
+			services.AddScoped<IUnitRepository, UnitRepository>();
+			services.AddScoped<IRecipeRepository, RecipeRepository>();
+			services.AddScoped<IItemRepository, ItemRepository>();
+			services.AddScoped<IItemCategoryRepository, ItemCategoryRepository>();
 
-            services.AddDbContext<MyDbContext>();
+			services.AddDbContext<MyDbContext>();
 
-            var mvc = services.AddControllersWithViews();
+			var mvc = services.AddControllersWithViews();
 
-            #if (DEBUG)
-                mvc.AddRazorRuntimeCompilation();
-            #endif
+#if (DEBUG)
+			mvc.AddRazorRuntimeCompilation();
+#endif
 
-            services.AddRazorPages();
-            services.AddSession();
-            services.AddMemoryCache();
-            services.AddMvc().AddRazorPagesOptions(opt =>
-            {
-                opt.Conventions.AddPageRoute("/Home/Index", "");
-            });
-            services.AddAntiforgery(o => o.HeaderName = "XSRF-TOKEN");
-        }
+			services.AddRazorPages();
+			services.AddSession();
+			services.AddMemoryCache();
+			services.AddMvc().AddRazorPagesOptions(opt =>
+			{
+				opt.Conventions.AddPageRoute("/Home/Index", "");
+			});
+			services.AddAntiforgery(o => o.HeaderName = "XSRF-TOKEN");
+		}
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
+		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+		{
+			if (env.IsDevelopment())
+			{
+				app.UseDeveloperExceptionPage();
+			}
+			else
+			{
+				app.UseExceptionHandler("/Error");
+				// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+				app.UseHsts();
+			}
 
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
-            app.UseSession();
-            app.UseRouting();
+			app.UseHttpsRedirection();
+			app.UseStaticFiles();
+			app.UseSession();
+			app.UseRouting();
 
-            app.UseAuthorization();
+			app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapRazorPages();
-            });
-        }
-    }
+			app.UseEndpoints(endpoints =>
+			{
+				endpoints.MapRazorPages();
+			});
+		}
+	}
 }

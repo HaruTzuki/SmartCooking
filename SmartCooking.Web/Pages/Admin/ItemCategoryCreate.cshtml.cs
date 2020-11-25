@@ -1,20 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using SmartCooking.Data.Repository;
 using SmartCooking.Infastructure.Products;
 using SmartCooking.Web.Helpers;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SmartCooking.Web.Pages.Admin
 {
-    public class ItemCategoryCreateModel : AdminPageModel
-    {
+	public class ItemCategoryCreateModel : AdminPageModel
+	{
 		private readonly IItemCategoryRepository itemCategoryRepository;
-        [BindProperty] public ItemCategory ItemCategory { get; set; }
-		public bool IsErrorInRegister { get; set; } = false;
+		[BindProperty] public ItemCategory ItemCategory { get; set; }
 
 		public ItemCategoryCreateModel(IItemCategoryRepository itemCategoryRepository)
 		{
@@ -33,22 +29,23 @@ namespace SmartCooking.Web.Pages.Admin
 
 		public async Task<IActionResult> OnPostAsync()
 		{
-			if((await itemCategoryRepository.GetItemCategories()).Any(x=>x.Name.ToLower() == ItemCategory.Name.ToLower()))
+			if ((await itemCategoryRepository.GetItemCategories()).Any(x => x.Name.ToLower() == ItemCategory.Name.ToLower()))
 			{
-				IsErrorInRegister = true;
+				HasError = true;
 				ViewData["Error"] = "Η κατηγορία υπάρχει ήδη. Παρακαλώ επιλέξτε κάποια άλλη περιγραφή";
 				return Page();
 			}
 
-			if(await itemCategoryRepository.InsertItemCategory(ItemCategory))
+			if (await itemCategoryRepository.InsertItemCategory(ItemCategory))
 			{
+				HasError = false;
 				TempData["SuccessMessage"] = "Η κατηγορία προστέθηκε με επιτυχία.";
 				return RedirectToPage(Url.Content("~/Admin/ItemCategoryList"));
 			}
 
-			IsErrorInRegister = true;
+			HasError = true;
 			ViewData["Error"] = "Κάτι πήγε στραβά και δεν μπορεί να αποθηκευτεί η εγγραφή.";
 			return Page();
 		}
-    }
+	}
 }

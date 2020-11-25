@@ -19,7 +19,7 @@ namespace SmartCooking.Common.Extensions
 			}
 
 			return defaultValue;
-		} 
+		}
 		#endregion
 
 		#region ToLong Region
@@ -36,7 +36,7 @@ namespace SmartCooking.Common.Extensions
 			}
 
 			return defaultValue;
-		} 
+		}
 		#endregion
 
 		#region ToFloat Region
@@ -79,7 +79,7 @@ namespace SmartCooking.Common.Extensions
 				return defaultValue;
 			}
 
-			if(double.TryParse(s, out double result))
+			if (double.TryParse(s, out double result))
 			{
 				return result;
 			}
@@ -94,7 +94,7 @@ namespace SmartCooking.Common.Extensions
 				return defaultValue;
 			}
 
-			if(double.TryParse(s, numberStyles, formatProvider, out double result))
+			if (double.TryParse(s, numberStyles, formatProvider, out double result))
 			{
 				return result;
 			}
@@ -111,7 +111,7 @@ namespace SmartCooking.Common.Extensions
 				return defaultValue;
 			}
 
-			if(decimal.TryParse(s, out decimal result))
+			if (decimal.TryParse(s, out decimal result))
 			{
 				return result;
 			}

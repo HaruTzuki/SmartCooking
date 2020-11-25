@@ -1,14 +1,14 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SmartCooking.Data.Repository;
 using SmartCooking.Infastructure.Security;
 using SmartCooking.Web.Helpers;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SmartCooking.Web.Pages.Admin
 {
 	public class UserListModel : AdminPageModel
-    {
+	{
 		private readonly IUserRepository userRepository;
 		[BindProperty] public IEnumerable<User> Users { get; set; }
 
@@ -16,8 +16,8 @@ namespace SmartCooking.Web.Pages.Admin
 		{
 			this.userRepository = userRepository;
 		}
-        public async Task<IActionResult> OnGetAsync()
-        {
+		public async Task<IActionResult> OnGetAsync()
+		{
 			if (!CheckPermissions())
 			{
 				return RedirectToPage(Url.Content("~/Home/Index"));
@@ -25,7 +25,7 @@ namespace SmartCooking.Web.Pages.Admin
 
 			Users = await userRepository.GetUsers();
 
-			if(Users is null)
+			if (Users is null)
 			{
 				return RedirectToPage(Url.Content("~/Admin/"));
 			}

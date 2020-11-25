@@ -14,7 +14,7 @@
 	</div>
 </div>
 
-@if (Model.IsErrorInRegister)
+@if (Model.HasError)
 {
 	<div class="alert alert-danger alert-dismissible fade show mb-5" role="alert">
 		<strong>@ViewData["Error"]</strong>

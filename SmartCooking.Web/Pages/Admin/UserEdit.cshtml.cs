@@ -1,13 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using SmartCooking.Common.Cryptography;
 using SmartCooking.Data.Repository;
 using SmartCooking.Infastructure.Security;
 using SmartCooking.Web.Helpers;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SmartCooking.Web.Pages.Admin
 {
@@ -61,7 +58,8 @@ namespace SmartCooking.Web.Pages.Admin
 				return Page();
 			}
 
-			if (string.IsNullOrEmpty(SUser.Password)){
+			if (string.IsNullOrEmpty(SUser.Password))
+			{
 				SUser.Password = dbUsers.FirstOrDefault(x => x.Id == SUser.Id).Password;
 			}
 			else

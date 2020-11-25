@@ -5,14 +5,14 @@ using SmartCooking.Web.Helpers;
 namespace SmartCooking.Web.Pages
 {
 	public class IndexModel : UserPageModel
-    {
-        public IActionResult OnGet()
-        {
-            ViewData["IsLogged"] = HttpContext.Session.GetInt32("ISLOGIN");
-            ViewData["Username"] = HttpContext.Session.GetString("USERNAME");
-            ViewData["IsAdmin"] = HttpContext.Session.GetString("ISADMIN");
+	{
+		public IActionResult OnGet()
+		{
+			ViewData["IsLogged"] = HttpContext.Session.GetInt32("ISLOGIN");
+			ViewData["Username"] = HttpContext.Session.GetString("USERNAME");
+			ViewData["IsAdmin"] = HttpContext.Session.GetString("ISADMIN");
 
-            return Page();
-        }
-    }
+			return Page();
+		}
+	}
 }

@@ -7,7 +7,7 @@ namespace SmartCooking.Common.Serialization.Json
 	{
 		public static string JsonSerializer(object? o)
 		{
-			if(o is null)
+			if (o is null)
 			{
 				return "{}";
 			}

@@ -1,17 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using SmartCooking.Data.Repository;
 using SmartCooking.Infastructure.Products;
 using SmartCooking.Web.Helpers;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SmartCooking.Web.Pages.Admin
 {
-    public class ItemListModel : AdminPageModel
-    {
+	public class ItemListModel : AdminPageModel
+	{
 		private readonly IItemRepository itemRepository;
 		private readonly IItemCategoryRepository itemCategoryRepository;
 
@@ -24,8 +21,8 @@ namespace SmartCooking.Web.Pages.Admin
 			this.itemRepository = itemRepository;
 			this.itemCategoryRepository = itemCategoryRepository;
 		}
-        public async Task<IActionResult> OnGetAsync()
-        {
+		public async Task<IActionResult> OnGetAsync()
+		{
 			if (!CheckPermissions())
 			{
 				return RedirectToPage(Url.Content("~/Home/Index"));
@@ -34,13 +31,13 @@ namespace SmartCooking.Web.Pages.Admin
 			Items = await itemRepository.GetItems();
 			ItemCategories = await itemCategoryRepository.GetItemCategories();
 
-			if(Items is null)
+			if (Items is null)
 			{
 				return RedirectToPage(Url.Content("~/Admin/"));
 			}
 
 			return Page();
-        }
+		}
 		public async Task<IActionResult> OnPostDelete(int? itemId)
 		{
 			if (!itemId.HasValue)

@@ -4,15 +4,15 @@ using SmartCooking.Web.Helpers;
 namespace SmartCooking.Web.Pages.Admin
 {
 	public class IndexModel : AdminPageModel
-    {
-        public IActionResult OnGet()
-        {
+	{
+		public IActionResult OnGet()
+		{
 			if (!CheckPermissions())
 			{
-                return RedirectToPage(Url.Content("~/Home/Index"));
+				return RedirectToPage(Url.Content("~/Home/Index"));
 			}
 
-            return Page();
-        }
-    }
+			return Page();
+		}
+	}
 }
