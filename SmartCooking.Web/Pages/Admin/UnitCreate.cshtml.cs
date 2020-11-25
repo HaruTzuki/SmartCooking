@@ -1,16 +1,13 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using SmartCooking.Data.Repository;
 using SmartCooking.Infastructure.Products;
 using SmartCooking.Web.Helpers;
 
 namespace SmartCooking.Web.Pages.Admin
 {
-    public class UnitCreateModel : AdminPageModel
+	public class UnitCreateModel : AdminPageModel
     {
 		private readonly IUnitRepository unitRepository;
         [BindProperty] public Unit Unit { get; set; }

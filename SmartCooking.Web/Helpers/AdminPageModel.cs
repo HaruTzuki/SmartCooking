@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System;
 using System.Linq;
 
 namespace SmartCooking.Web.Helpers

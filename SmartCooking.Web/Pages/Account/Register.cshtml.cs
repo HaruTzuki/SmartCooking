@@ -1,11 +1,8 @@
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore.Internal;
 using SmartCooking.Common.Cryptography;
-using SmartCooking.Common.Extensions;
 using SmartCooking.Data.Repository;
 using SmartCooking.Infastructure.Security;
 

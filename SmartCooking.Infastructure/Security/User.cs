@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 
 namespace SmartCooking.Infastructure.Security
 {
-    public class User
+	public class User
     {
         public int Id { get; set; }
         [Required, DisplayName("Όνομα Χρήστη")]

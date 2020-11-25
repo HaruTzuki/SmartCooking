@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -8,11 +6,10 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using SmartCooking.Data.Repository;
 using SmartCooking.Infastructure.Products;
-using SmartCooking.Infastructure.Security;
 
 namespace SmartCooking.Web.Pages
 {
-    public class IndexModel : PageModel
+	public class IndexModel : PageModel
     {
         private readonly IItemRepository itemRepository;
         private readonly ILogger<IndexModel> _logger;

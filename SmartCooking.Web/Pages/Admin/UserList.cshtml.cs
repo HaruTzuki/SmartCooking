@@ -1,16 +1,13 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using SmartCooking.Data.Repository;
 using SmartCooking.Infastructure.Security;
 using SmartCooking.Web.Helpers;
 
 namespace SmartCooking.Web.Pages.Admin
 {
-    public class UserListModel : AdminPageModel
+	public class UserListModel : AdminPageModel
     {
 		private readonly IUserRepository userRepository;
 		[BindProperty] public IEnumerable<User> Users { get; set; }
