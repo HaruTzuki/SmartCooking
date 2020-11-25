@@ -1,10 +1,10 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+using SmartCooking.Web.Helpers;
 
 namespace SmartCooking.Web.Pages.Account
 {
-	public class LogoutModel : PageModel
+	public class LogoutModel : UserPageModel
     {
         public IActionResult OnGet()
         {

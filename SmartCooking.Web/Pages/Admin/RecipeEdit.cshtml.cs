@@ -47,8 +47,10 @@ namespace SmartCooking.Web.Pages.Admin
 
 			if(RecipeHeader is null)
 			{
-				RecipeHeader = new RecipeHeader();
-				RecipeHeader.RecipeType = SmartCooking.Common.Enumeration.RecipeType.Draft;
+				RecipeHeader = new RecipeHeader
+				{
+					RecipeType = Common.Enumeration.RecipeType.Draft
+				};
 				await recipeRepository.InsertRecipeHeader(RecipeHeader);
 
 				return RedirectToPage("RecipeCreate", new { draftHeaderId = RecipeHeader.Id});
