@@ -14,7 +14,7 @@ using SmartCooking.Web.Helpers;
 
 namespace SmartCooking.Web.Pages.Admin
 {
-	public class RecipeCreateModel : AdminPageModel
+	public class RecipeEditModel : AdminPageModel
 	{
 		private readonly IRecipeRepository recipeRepository;
 		private readonly IItemRepository itemRepository;
@@ -26,7 +26,7 @@ namespace SmartCooking.Web.Pages.Admin
 		[BindProperty] public IEnumerable<Unit> UnitsList { get; set; }
 		[BindProperty] public IEnumerable<Item> ItemsList { get; set; }
 
-		public RecipeCreateModel(IRecipeRepository recipeRepository, IItemRepository itemRepository, IUnitRepository unitRepository)
+		public RecipeEditModel(IRecipeRepository recipeRepository, IItemRepository itemRepository, IUnitRepository unitRepository)
 		{
 			this.recipeRepository = recipeRepository;
 			this.itemRepository = itemRepository;
@@ -61,15 +61,16 @@ namespace SmartCooking.Web.Pages.Admin
 
 			return Page();
 		}
+
 		public async Task<IActionResult> OnPostAsync()
 		{
 			this.RecipeHeader.RecipeType = Common.Enumeration.RecipeType.Done;
 
-			if (await recipeRepository.UpdateRecipeHeader(this.RecipeHeader))
+			if(await recipeRepository.UpdateRecipeHeader(this.RecipeHeader))
 			{
-				foreach (var recipeDetail in RecipeDetails)
+				foreach(var recipeDetail in RecipeDetails)
 				{
-					if (!await recipeRepository.UpdateRecipeDetail(recipeDetail))
+					if(!await recipeRepository.UpdateRecipeDetail(recipeDetail))
 					{
 						HasError = true;
 						ViewData["Error"] = "Κάτι πήγε στράβα και δεν μπορεί να αποθηκευτεί η εγγραφή.";
@@ -77,7 +78,7 @@ namespace SmartCooking.Web.Pages.Admin
 					}
 				}
 
-				TempData["SuccessMessage"] = "Η συνταγή προστέθηκε με επιτυχία.";
+				TempData["SuccessMessage"] = "Η συνταγή ενημερώθηκε με επιτυχία.";
 				return RedirectToPage(Url.Content("~/Admin/RecipeList"));
 			}
 

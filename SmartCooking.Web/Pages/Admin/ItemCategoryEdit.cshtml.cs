@@ -15,7 +15,6 @@ namespace SmartCooking.Web.Pages.Admin
     {
 		private readonly IItemCategoryRepository itemCategoryRepository;
         [BindProperty] public ItemCategory ItemCategory { get; set; }
-		public bool HasError { get; set; } = false;
 		[BindProperty] public int ItemCategoryId { get; set; }
 		public ItemCategoryEditModel(IItemCategoryRepository itemCategoryRepository)
 		{
@@ -54,7 +53,7 @@ namespace SmartCooking.Web.Pages.Admin
 			}
 
 			HasError = true;
-			ViewData["Error"] = "Κάτι πήγε στραβά και δεν μπορεί να αποθηκευτεί ή εγγραφή";
+			ViewData["Error"] = "Κάτι πήγε στραβά και δεν μπορεί να αποθηκευτεί η εγγραφή.";
 			return Page();
 		}
 

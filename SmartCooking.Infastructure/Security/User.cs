@@ -11,7 +11,7 @@ namespace SmartCooking.Infastructure.Security
         public int Id { get; set; }
         [Required, DisplayName("Όνομα Χρήστη")]
         public string Username { get; set; }
-        [Required, DisplayName("Κωδικός Πρόσβασης")]
+        [DisplayName("Κωδικός Πρόσβασης")]
         public string Password { get; set; }
         [Required, DisplayName("Ηλ. Ταχυδρομείο")]
         public string Email { get; set; }

@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmartCooking.Data.Context;
 
 namespace SmartCooking.Data.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201124115125_DraftRecipe")]
+    partial class DraftRecipe
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -63,6 +65,52 @@ namespace SmartCooking.Data.Migrations
                     b.ToTable("SC_Unit");
                 });
 
+            modelBuilder.Entity("SmartCooking.Infastructure.Recipes.DraftRecipeDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("ItemId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<float>("Quantity")
+                        .HasColumnType("REAL");
+
+                    b.Property<int?>("RecipeHeaderId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("UnitId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SC_DraftRecipeDetail");
+                });
+
+            modelBuilder.Entity("SmartCooking.Infastructure.Recipes.DraftRecipeHeader", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Code")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Tags")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SC_DraftRecipeHeader");
+                });
+
             modelBuilder.Entity("SmartCooking.Infastructure.Recipes.RecipeDetail", b =>
                 {
                     b.Property<int>("Id")
@@ -101,9 +149,6 @@ namespace SmartCooking.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("RecipeType")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Tags")
                         .HasColumnType("TEXT");
 
@@ -129,6 +174,7 @@ namespace SmartCooking.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Password")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Username")

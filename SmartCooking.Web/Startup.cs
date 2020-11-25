@@ -26,11 +26,11 @@ namespace SmartCooking.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IUserRepository, UserRepository>();
-            services.AddTransient<IUnitRepository, UnitRepository>();
-            services.AddTransient<IRecipeRepository, RecipeRepository>();
-            services.AddTransient<IItemRepository, ItemRepository>();
-            services.AddTransient<IItemCategoryRepository, ItemCategoryRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUnitRepository, UnitRepository>();
+            services.AddScoped<IRecipeRepository, RecipeRepository>();
+            services.AddScoped<IItemRepository, ItemRepository>();
+            services.AddScoped<IItemCategoryRepository, ItemCategoryRepository>();
 
             services.AddDbContext<MyDbContext>();
 

@@ -21,7 +21,16 @@ namespace SmartCooking.Web.Helpers
 				return false;
 			}
 
+			BindSessions();
+
 			return true;
+		}
+
+		private void BindSessions()
+		{
+			ViewData["IsLogged"] = HttpContext.Session.GetInt32("ISLOGIN");
+			ViewData["Username"] = HttpContext.Session.GetString("USERNAME");
+			ViewData["IsAdmin"] = HttpContext.Session.GetString("ISADMIN");
 		}
 	}
 }

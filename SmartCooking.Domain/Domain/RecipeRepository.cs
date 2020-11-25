@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmartCooking.Data.Context;
 using SmartCooking.Data.Repository;
+using SmartCooking.Infastructure.Products;
 using SmartCooking.Infastructure.Recipes;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,101 +18,109 @@ namespace SmartCooking.Data.Domain
             this.context = context;
         }
 
-        public async Task<bool> DeleteRecipeDetail(RecipeDetail recipeDetail)
-        {
-            context.SC_RecipeDetail.Remove(recipeDetail);
+		#region Recipe
+		public async Task<bool> DeleteRecipeDetail(RecipeDetail recipeDetail)
+		{
+			context.SC_RecipeDetail.Remove(recipeDetail);
 
-            if(await context.SaveChangesAsync() <= 0)
-            {
-                return false;
-            }
+			if (await context.SaveChangesAsync() <= 0)
+			{
+				return false;
+			}
 
-            return true;
-        }
+			return true;
+		}
 
-        public async Task<bool> DeleteRecipeHeader(RecipeHeader recipeHeader)
-        {
-            context.SC_RecipeHeader.Remove(recipeHeader);
+		public async Task<bool> DeleteRecipeHeader(RecipeHeader recipeHeader)
+		{
+			context.SC_RecipeHeader.Remove(recipeHeader);
 
-            if(await context.SaveChangesAsync() <= 0)
-            {
-                return false;
-            }
+			if (await context.SaveChangesAsync() <= 0)
+			{
+				return false;
+			}
 
-            return true;
-        }
+			return true;
+		}
 
-        public async Task<RecipeDetail> GetRecipeDetail(int Id)
-        {
-            return await context.SC_RecipeDetail.FirstOrDefaultAsync(x => x.Id == Id);
-        }
+		public async Task<RecipeDetail> GetRecipeDetail(int id)
+		{
+			return await context.SC_RecipeDetail.FirstOrDefaultAsync(x => x.Id == id);
+		}
 
-        public async Task<IEnumerable<RecipeDetail>> GetRecipeDetails()
-        {
-            return await context.SC_RecipeDetail.ToListAsync();
-        }
+		public async Task<IEnumerable<RecipeDetail>> GetRecipeDetails()
+		{
+			return await context.SC_RecipeDetail.ToListAsync();
+		}
 
-        public async Task<IEnumerable<RecipeDetail>> GetRecipeDetails(int RecipeHeaderId)
-        {
-            return await context.SC_RecipeDetail.Where(x=>x.RecipeHeaderId == RecipeHeaderId).ToListAsync();
-        }
+		public async Task<IEnumerable<RecipeDetail>> GetRecipeDetails(int recipeHeaderId)
+		{
+			var details = await context.SC_RecipeDetail.Where(x => x.RecipeHeaderId == recipeHeaderId).ToListAsync();
+			details.ToList().ForEach(x => {
+				x.Item = context.SC_Item.FirstOrDefaultAsync(item => item.Id == x.ItemId).Result;
+				x.Unit = context.SC_Unit.FirstOrDefaultAsync(unit => unit.Id == x.UnitId).Result;
+			});
 
-        public async Task<RecipeHeader> GetRecipeHeader(int Id)
-        {
-            return await context.SC_RecipeHeader.FirstOrDefaultAsync(x => x.Id == Id);
-        }
+			return details;
+		}
 
-        public async Task<IEnumerable<RecipeHeader>> GetRecipeHeaders()
-        {
-            return await context.SC_RecipeHeader.ToListAsync();
-        }
+		public async Task<RecipeHeader> GetRecipeHeader(int id)
+		{
+			return await context.SC_RecipeHeader.FirstOrDefaultAsync(x => x.Id == id);
+		}
 
-        public async Task<bool> InsertRecipeDetail(RecipeDetail recipeDetail)
-        {
-            context.SC_RecipeDetail.Add(recipeDetail);
+		public async Task<IEnumerable<RecipeHeader>> GetRecipeHeaders()
+		{
+			return await context.SC_RecipeHeader.ToListAsync();
+		}
 
-            if(await context.SaveChangesAsync() <= 0)
-            {
-                return false;
-            }
+		public async Task<bool> InsertRecipeDetail(RecipeDetail recipeDetail)
+		{
+			context.SC_RecipeDetail.Add(recipeDetail);
 
-            return true;
-        }
+			if (await context.SaveChangesAsync() <= 0)
+			{
+				return false;
+			}
 
-        public async Task<bool> InsertRecipeHeader(RecipeHeader recipeHeader)
-        {
-            context.SC_RecipeHeader.Add(recipeHeader);
+			return true;
+		}
 
-            if(await context.SaveChangesAsync() <= 0)
-            {
-                return false;
-            }
+		public async Task<bool> InsertRecipeHeader(RecipeHeader recipeHeader)
+		{
+			context.SC_RecipeHeader.Add(recipeHeader);
 
-            return true;
-        }
+			if (await context.SaveChangesAsync() <= 0)
+			{
+				return false;
+			}
 
-        public async Task<bool> UpdateRecipeDetail(RecipeDetail recipeDetail)
-        {
-            context.SC_RecipeDetail.Update(recipeDetail);
+			return true;
+		}
 
-            if(await context.SaveChangesAsync() <= 0)
-            {
-                return false;
-            }
+		public async Task<bool> UpdateRecipeDetail(RecipeDetail recipeDetail)
+		{
+			context.SC_RecipeDetail.Update(recipeDetail);
 
-            return true;
-        }
+			if (await context.SaveChangesAsync() <= 0)
+			{
+				return false;
+			}
 
-        public async Task<bool> UpdateRecipeHeader(RecipeHeader recipeHeader)
-        {
-            context.SC_RecipeHeader.Update(recipeHeader);
+			return true;
+		}
 
-            if(await context.SaveChangesAsync() <= 0)
-            {
-                return false;
-            }
+		public async Task<bool> UpdateRecipeHeader(RecipeHeader recipeHeader)
+		{
+			context.SC_RecipeHeader.Update(recipeHeader);
 
-            return true;
-        }
-    }
+			if (await context.SaveChangesAsync() <= 0)
+			{
+				return false;
+			}
+
+			return true;
+		}
+		#endregion
+	}
 }

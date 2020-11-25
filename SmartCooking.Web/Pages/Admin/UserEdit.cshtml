@@ -1,0 +1,113 @@
+﻿@page "{userId:int?}"
+@model SmartCooking.Web.Pages.Admin.UserEditModel
+@{
+	Layout = "~/Theme/SBAdmin/Main.cshtml";
+}
+
+
+<div class="card mb-5">
+	<div class="card-content">
+		<div class="card-body">
+			<button class="btn btn-success btn-lg" id="userSubmit">
+				ΑΠΟΘΗΚΕΥΣΗ
+			</button>
+		</div>
+	</div>
+</div>
+
+@if (Model.HasError)
+{
+	<div class="alert alert-danger alert-dismissible fade show mb-5" role="alert">
+		<strong>@ViewData["Error"]</strong>
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+}
+
+
+<form method="post" id="userForm">
+	<div class="card">
+		<div class="card-content">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label class="lead">
+								Όνομα Χρήστη (Username)
+							</label>
+							<input type="text" class="form-control" autocomplete="off" asp-for="SUser.Username" />
+							<input type="hidden" asp-for="SUser.Id" />
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label class="lead">
+								E-Mail
+							</label>
+							<input type="email" class="form-control" autocomplete="off" asp-for="SUser.Email" />
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label class="lead">Κωδικός Πρόσβασης</label>
+							<input type="password" class="form-control" autocomplete="off" asp-for="SUser.Password" />
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label class="lead">Επιβεβαίωση Κωδικού Πρόσβασης</label>
+							<input type="password" class="form-control" id="retypedPassword" />
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label class="lead">Ονομετεπώνυμο</label>
+							<input type="text" asp-for="SUser.FamilyName" class="form-control" />
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label class="lead">Διαχειριστής</label>
+							<input asp-for="SUser.IsAdmin" class="form-control" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+
+@section scripts{
+
+	<script>
+		$(document).ready(function () {
+			$("#userSubmit").click(function (e) {
+				e.preventDefault();
+
+				var password = $("#User_Password").val();
+				var retypedPassword = $("#retypedPassword").val();
+
+				if (password != "" && retypedPassword != "") {
+					if (password != retypedPassword) {
+						Swal.fire({
+							title: "Υπήρξε λάθος",
+							text: "Οι κωδικοί δεν ταιριάζουν μεταξύ τους!",
+							icon: 'error'
+						});
+						return;
+					}
+				}
+
+				$("#userForm").submit();
+			});
+		});
+	</script>
+
+}

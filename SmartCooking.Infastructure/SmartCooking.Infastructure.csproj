@@ -12,4 +12,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SmartCooking.Common\SmartCooking.Common.csproj" />
+  </ItemGroup>
+
 </Project>

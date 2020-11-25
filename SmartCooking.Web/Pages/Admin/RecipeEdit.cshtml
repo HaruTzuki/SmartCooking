@@ -1,5 +1,5 @@
 ﻿@page "{draftHeaderId:int?}"
-@model SmartCooking.Web.Pages.Admin.RecipeCreateModel
+@model SmartCooking.Web.Pages.Admin.RecipeEditModel
 @{
 	Layout = "~/Theme/SBAdmin/Main.cshtml";
 }
@@ -27,38 +27,38 @@
 
 <form id="recipeForm" method="post">
 	<div class="card mb-2">
-	<div class="card-content">
-		<div class="card-body">
-			<div class="row">
-				<div class="col-sm-6">
-					<div class="form-group">
-						<label class="lead">Περιγραφή Συνταγής</label>
-						<input type="text" asp-for="RecipeHeader.Name" class="form-control" />
-						<input type="hidden" asp-for="RecipeHeader.Id"/>
+		<div class="card-content">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label class="lead">Περιγραφή Συνταγής</label>
+							<input type="text" asp-for="RecipeHeader.Name" class="form-control" />
+							<input type="hidden" asp-for="RecipeHeader.Id"/>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label class="lead">Κωδικός Συνταγής</label>
+							<input type="text" class="form-control" asp-for="RecipeHeader.Code" />
+						</div>
 					</div>
 				</div>
-				<div class="col-sm-6">
-					<div class="form-group">
-						<label class="lead">Κωδικός Συνταγής</label>
-						<input type="text" class="form-control" asp-for="RecipeHeader.Code" />
+				<div class="row">
+					<div class="col-sm-12">
+						<label class="lead">Σύντομη Περιγραφή Συνταγής</label>
+						<textarea rows="5" class="form-control" asp-for="RecipeHeader.Description"></textarea>
 					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-12">
-					<label class="lead">Σύντομη Περιγραφή Συνταγής</label>
-					<textarea rows="5" class="form-control" asp-for="RecipeHeader.Description"></textarea>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-12">
-					<label class="lead">Ετικέτες</label>
-					<input type="text" class="form-control" asp-for="RecipeHeader.Tags"/>
+				<div class="row">
+					<div class="col-sm-12">
+						<label class="lead">Ετικέτες</label>
+						<input type="text" class="form-control" asp-for="RecipeHeader.Tags" />
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
 </form>
 
 
@@ -104,7 +104,7 @@
 							<td>@recipeDetail.Quantity</td>
 							<td></td>
 						</tr>
-						{aa += 1;}
+						{ aa += 1; }
 					}
 				</tbody>
 			</table>
@@ -113,7 +113,7 @@
 </div>
 
 
-@section modals{ 
+@section modals{
 	<div class="modal fade" id="AddRecipeItemModal" tabindex="-1" role="dialog" aria-labelledby="AddRecipeItemModal" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
@@ -128,7 +128,7 @@
 						<div class="col-sm-12">
 							<div class="form-group">
 								<label class="lead">Είδος</label>
-								<input type="text" class="form-control" id="itemsList"/>
+								<input type="text" class="form-control" id="itemsList" />
 							</div>
 						</div>
 					</div>
@@ -160,9 +160,13 @@
 }
 
 
-@section scripts{ 
+@section scripts{
 	<script>
 		$(document).ready(function () {
+			$("#recipeSubmit").click(function (e) {
+				$("#recipeForm").submit();
+			})
+
 			$("#btnRecipeItemAdd").click(function (e) {
 				e.preventDefault();
 				$("#AddRecipeItemModal").modal('show');
@@ -175,11 +179,6 @@
 			$("#unitList").autocomplete({
 				source: '@Url.Page("RecipeCreate", "SearchUnit")'
 			});
-
-			$("#recipeSubmit").click(function (e) {
-				e.preventDefault();
-				$("#recipeForm").submit();
-			})
 
 			$("#add-item-to-recipe").click(function (e) {
 				e.preventDefault();

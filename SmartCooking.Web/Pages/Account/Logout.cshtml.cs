@@ -9,24 +9,22 @@ namespace SmartCooking.Web.Pages.Account
     {
         public IActionResult OnGet()
         {
-            if(HttpContext.Session.Keys.Contains("Username"))
+            if(HttpContext.Session.Keys.Contains("USERNAME"))
 			{
-                HttpContext.Session.Remove("Username");
+                HttpContext.Session.Remove("USERNAME");
 			}
 
-			if (HttpContext.Session.Keys.Contains("IsAdmin"))
+			if (HttpContext.Session.Keys.Contains("ISADMIN"))
 			{
-                HttpContext.Session.Remove("IsAdmin");
+                HttpContext.Session.Remove("ISADMIN");
 			}
 
-			if (HttpContext.Session.Keys.Contains("IsLogged"))
+			if (HttpContext.Session.Keys.Contains("ISLOGIN"))
 			{
                 HttpContext.Session.Remove("ISLOGIN");
 			}
 
-            HttpContext.Session.Clear();
-
-            return RedirectToPage("/Index");
+            return RedirectToPage(Url.Content("~/Home/Index"));
         }
     }
 }

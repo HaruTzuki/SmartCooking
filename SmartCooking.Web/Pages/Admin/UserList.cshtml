@@ -1,15 +1,16 @@
 ﻿@page
-@model SmartCooking.Web.Pages.Admin.RecipeListModel
+@model SmartCooking.Web.Pages.Admin.UserListModel
 @{
 	Layout = "~/Theme/SBAdmin/Main.cshtml";
 }
+
 
 <div class="card mb-5">
 	<div class="card-content">
 		<div class="card-body">
 			<div class="row">
 				<div class="col-sm-12">
-					<a href="@Url.Content("~/Admin/RecipeCreate")" class="btn btn-success">ΔΗΜΙΟΥΡΓΙΑ</a>
+					<a href="@Url.Content("~/Admin/UserCreate")" class="btn btn-success">ΔΗΜΙΟΥΡΓΙΑ</a>
 				</div>
 			</div>
 		</div>
@@ -36,28 +37,34 @@
 	</div>
 }
 
-<div class="card mb-5">
+<div class="card">
 	<div class="card-content">
 		<div class="card-body">
-			<table class="table">
+			<table class="table text-center">
 				<thead>
 					<tr>
 						<th>ID</th>
-						<th>Περιγραφή</th>
+						<th>Username</th>
+						<th>E-Mail</th>
+						<th>Ονοματεπώνυνο</th>
+						<th>Διαχειριστής</th>
 						<th>Ενέργειες</th>
 					</tr>
 				</thead>
 				<tbody>
 					@Html.AntiForgeryToken()
-					@foreach (var recipe in Model.Recipes)
+					@foreach (var user in Model.Users)
 					{
 						<tr>
-							<td>@recipe.Id</td>
-							<td>@recipe.Name</td>
+							<td>@user.Id</td>
+							<td>@user.Username</td>
+							<td>@user.Email</td>
+							<td>@user.FamilyName</td>
+							<td>@(user.IsAdmin ? Html.Raw("Ναι") : Html.Raw("Όχι"))</td>
 							<td>
-								<div class="d-flex">
-									<a href="@Url.Content($"~/Admin/RecipeEdit/{recipe.Id}")" class="btn btn-link"><i class="far fa-edit" title="Επεξεργασία"></i></a>
-									<form method="post" asp-page-handler="delete" asp-route-recipeId="@recipe.Id">
+								<div class="d-flex justify-content-center">
+									<a href="@Url.Content($"~/Admin/UserEdit/{user.Id}")" class="btn btn-link"><i class="far fa-edit" title="Επεξεργασία"></i></a>
+									<form method="post" asp-page-handler="delete" asp-route-userId="@user.Id">
 										<button class="btn btn-link">
 											<i class="far fa-trash-alt" title="Διαγραφή"></i>
 										</button>

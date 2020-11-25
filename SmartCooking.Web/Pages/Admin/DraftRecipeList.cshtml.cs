@@ -12,14 +12,13 @@ using SmartCooking.Web.Helpers;
 
 namespace SmartCooking.Web.Pages.Admin
 {
-    public class RecipeListModel : AdminPageModel
+    public class DraftRecipeListModel : AdminPageModel
     {
 		private readonly IRecipeRepository recipeRepository;
 
 		[BindProperty] public IEnumerable<RecipeHeader> Recipes { get; set; }
 
-
-		public RecipeListModel(IRecipeRepository recipeRepository)
+		public DraftRecipeListModel(IRecipeRepository recipeRepository)
 		{
 			this.recipeRepository = recipeRepository;
 		}
@@ -30,9 +29,9 @@ namespace SmartCooking.Web.Pages.Admin
 				return RedirectToPage(Url.Content("~/Home/Index"));
 			}
 
-			Recipes = (await recipeRepository.GetRecipeHeaders()).Where(x => x.RecipeType == Common.Enumeration.RecipeType.Done);
+			Recipes = (await recipeRepository.GetRecipeHeaders()).Where(x=>x.RecipeType == Common.Enumeration.RecipeType.Draft);
 
-			if (Recipes is null)
+			if(Recipes is null)
 			{
 				return RedirectToPage(Url.Content("~/Admin/"));
 			}
