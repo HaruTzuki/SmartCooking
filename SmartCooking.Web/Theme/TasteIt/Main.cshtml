@@ -1,12 +1,13 @@
 ﻿<!DOCTYPE html>
 <html lang="el">
 <head>
-	<title>Taste.it - Free Bootstrap 4 Template by Colorlib</title>
+	<title>Smart Cooking</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&display=swap" rel="stylesheet">
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -53,12 +54,16 @@
 					}
 					else
 					{
-						<a href="@Url.Content("~/Account/Logout")" class="d-flex align-items-center justify-content-center mr-2"><span style="color: white;">Έξοδος</span></a>
-
-						if(Convert.ToInt32(ViewData["IsAdmin"]) == 1)
+						if (Convert.ToInt32(ViewData["IsAdmin"]) == 1)
 						{
-						<a href="@Url.Content("~/Admin/Index")" class="d-flex align-items-center justify-content-center mr-2"><span style="color: white;">Control Panel</span></a>
+							<a href="@Url.Content("~/Admin/Index")" class="d-flex align-items-center justify-content-center mr-2"><span style="color: white;">Πίνακας Ελέγχου</span></a>
 						}
+						else
+						{
+							<a href="@Url.Content("~/Account/Edit")" class="d-flex align-items-center justify-content-center mr-2"><span style="color: white;">Ρυθμίσεις</span></a>
+						}
+
+						<a href="@Url.Content("~/Account/Logout")" class="d-flex align-items-center justify-content-center mr-2"><span style="color: white;">Έξοδος</span></a>
 					}
 				</div>
 
@@ -76,13 +81,10 @@
 
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-					@if (Convert.ToInt32(ViewData["IsLogged"]) == 1 && Convert.ToInt32(ViewData["IsAdmin"]) == 1)
-					{
-						<li class="nav-item">
-							<a href="about.html" class="nav-link">Control Panel</a>
-						</li>
-					}
+					<li class="nav-item active"><a href="@Url.Content("~/Home/Index")" class="nav-link">Αρχική Σελίδα</a></li>
+					<li class="nav-item">
+						<a href="@Url.Content("~/Home/RecipeList")" class="nav-link">Κατάλογος Συνταγών</a>
+					</li>
 					@*<li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
 						<li class="nav-item"><a href="chef.html" class="nav-link">Chef</a></li>
 						<li class="nav-item"><a href="menu.html" class="nav-link">Menu</a></li>
@@ -98,30 +100,28 @@
 
 	<section class="hero-wrap">
 		<div class="home-slider owl-carousel js-fullheight">
-			<div class="slider-item js-fullheight" style="background-image:url(~/theme/images/bg_1.jpg);">
+			<div class="slider-item js-fullheight" style="background-image:url(@Url.Content("~/theme/images/bg_1.jpg"));">
 				<div class="overlay"></div>
 				<div class="container">
 					<div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
 						<div class="col-md-12 ftco-animate">
 							<div class="text w-100 mt-5 text-center">
-								<span class="subheading">Taste.it Restaurant</h2></span>
-								<h1>Cooking Since</h1>
-								<span class="subheading-2">1958</span>
+								<span class="subheading">Smart Cooking</span>
+								<h1>Ο έξυπνος τρόπος για να τρως</h1>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<div class="slider-item js-fullheight" style="background-image: url(~/theme/images/bg_2.jpg);">
+			<div class="slider-item js-fullheight" style="background-image: url(@Url.Content("~/theme/images/bg_2.jpg"));">
 				<div class="overlay"></div>
 				<div class="container">
 					<div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
 						<div class="col-md-12 ftco-animate">
 							<div class="text w-100 mt-5 text-center">
-								<span class="subheading">Taste.it Restaurant</h2></span>
-								<h1>Best Quality</h1>
-								<span class="subheading-2 sub">Food</span>
+								<span class="subheading">Smart Cooking</span>
+								<h1>Επιλεγμένες Συνταγές</h1>
 							</div>
 						</div>
 					</div>

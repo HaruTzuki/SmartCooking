@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="el">
 <head>
 	<title>Taste.it - Free Bootstrap 4 Template by Colorlib</title>
 	<meta charset="utf-8">
@@ -24,13 +24,16 @@
 	<div class="wrap">
 		<div class="container">
 			<div class="row justify-content-between">
-				<div class="col-12 col-md d-flex align-items-center">
-					<p class="mb-0 phone"><span class="mailus">Phone no:</span> <a href="#">+00 1234 567</a> or <span class="mailus">email us:</span> <a href="#">emailsample@email.com</a></p>
+				<div class="col-4 col-md d-flex align-items-center">
+					@if (Convert.ToInt32(ViewData["IsLogged"]) == 1)
+					{
+						<p class="mb-0 phone"><strong>Συνδεδεμένος Χρήστης:</strong> @ViewData["Username"]</p>
+
+					}
 				</div>
-				<div class="col-12 col-md d-flex justify-content-md-end">
-					<p class="mb-0">Mon - Fri / 9:00-21:00, Sat - Sun / 10:00-20:00</p>
+				<div class="col-4 col-md d-flex justify-content-md-center">
 					<div class="social-media">
-						<p class="mb-0 d-flex">
+						<p class="mb-0 d-flex align-items-center justify-content-center">
 							<a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-facebook"><i class="sr-only">Facebook</i></span></a>
 							<a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter"><i class="sr-only">Twitter</i></span></a>
 							<a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram"><i class="sr-only">Instagram</i></span></a>
@@ -38,6 +41,29 @@
 						</p>
 					</div>
 				</div>
+
+				<div class="col-4 col-md d-flex align-items-center justify-content-end">
+					@if (Convert.ToInt32(ViewData["IsLogged"]) != 1)
+					{
+						<a href="@Url.Content("~/Account/Login")" class="d-flex align-items-center justify-content-center mr-2"><span style="color: white;">Σύνδεση</span></a>
+						<a href="@Url.Content("~/Account/Register")" class="d-flex align-items-center justify-content-center mr-2"><span style="color: white;">Εγγραφή</span></a>
+					}
+					else
+					{
+						if (Convert.ToInt32(ViewData["IsAdmin"]) == 1)
+						{
+							<a href="@Url.Content("~/Admin/Index")" class="d-flex align-items-center justify-content-center mr-2"><span style="color: white;">Πίνακας Ελέγχου</span></a>
+						}
+						else
+						{
+							<a href="@Url.Content("~/Account/Edit")" class="d-flex align-items-center justify-content-center mr-2"><span style="color: white;">Ρυθμίσεις</span></a>
+						}
+
+						<a href="@Url.Content("~/Account/Logout")" class="d-flex align-items-center justify-content-center mr-2"><span style="color: white;">Έξοδος</span></a>
+					}
+				</div>
+
+
 			</div>
 		</div>
 	</div>
@@ -51,13 +77,16 @@
 
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+					<li class="nav-item active"><a href="@Url.Content("~/Home/Index")" class="nav-link">Αρχική Σελίδα</a></li>
+					<li class="nav-item">
+						<a href="@Url.Content("~/Home/RecipeList")" class="nav-link">Κατάλογος Συνταγών</a>
+					</li>
 					@*<li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-					<li class="nav-item"><a href="chef.html" class="nav-link">Chef</a></li>
-					<li class="nav-item"><a href="menu.html" class="nav-link">Menu</a></li>
-					<li class="nav-item"><a href="reservation.html" class="nav-link">Reservation</a></li>
-					<li class="nav-item active"><a href="blog.html" class="nav-link">Blog</a></li>
-					<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>*@
+		<li class="nav-item"><a href="chef.html" class="nav-link">Chef</a></li>
+		<li class="nav-item"><a href="menu.html" class="nav-link">Menu</a></li>
+		<li class="nav-item"><a href="reservation.html" class="nav-link">Reservation</a></li>
+		<li class="nav-item active"><a href="blog.html" class="nav-link">Blog</a></li>
+		<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>*@
 				</ul>
 			</div>
 		</div>
