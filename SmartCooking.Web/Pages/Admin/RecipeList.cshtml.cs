@@ -44,7 +44,7 @@ namespace SmartCooking.Web.Pages.Admin
 				return Page();
 			}
 
-			var dbRecipeHeader = await recipeRepository.GetRecipeHeader(recipeId.Value);
+			RecipeHeader dbRecipeHeader = await recipeRepository.GetRecipeHeader(recipeId.Value);
 
 			if (dbRecipeHeader is null)
 			{
@@ -53,9 +53,9 @@ namespace SmartCooking.Web.Pages.Admin
 				return Page();
 			}
 
-			var dbRecipeDetails = await recipeRepository.GetRecipeDetails(dbRecipeHeader.Id);
+			IEnumerable<RecipeDetail> dbRecipeDetails = await recipeRepository.GetRecipeDetails(dbRecipeHeader.Id);
 
-			foreach (var recipeDetail in dbRecipeDetails)
+			foreach (RecipeDetail recipeDetail in dbRecipeDetails)
 			{
 				if (!await recipeRepository.DeleteRecipeDetail(recipeDetail))
 				{

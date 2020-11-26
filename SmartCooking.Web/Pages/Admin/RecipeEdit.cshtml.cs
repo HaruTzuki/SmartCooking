@@ -42,7 +42,7 @@ namespace SmartCooking.Web.Pages.Admin
 			{
 				RecipeHeader = await recipeRepository.GetRecipeHeader(draftHeaderId.Value);
 				RecipeDetails = await recipeRepository.GetRecipeDetails(RecipeHeader.Id);
-				this.DraftRecipeHeaderId = draftHeaderId.Value;
+				DraftRecipeHeaderId = draftHeaderId.Value;
 			}
 
 			if (RecipeHeader is null)
@@ -63,11 +63,11 @@ namespace SmartCooking.Web.Pages.Admin
 
 		public async Task<IActionResult> OnPostAsync()
 		{
-			this.RecipeHeader.RecipeType = Common.Enumeration.RecipeType.Done;
+			RecipeHeader.RecipeType = Common.Enumeration.RecipeType.Done;
 
-			if (await recipeRepository.UpdateRecipeHeader(this.RecipeHeader))
+			if (await recipeRepository.UpdateRecipeHeader(RecipeHeader))
 			{
-				foreach (var recipeDetail in RecipeDetails)
+				foreach (RecipeDetail recipeDetail in RecipeDetails)
 				{
 					if (!await recipeRepository.UpdateRecipeDetail(recipeDetail))
 					{
@@ -103,14 +103,14 @@ namespace SmartCooking.Web.Pages.Admin
 		public async Task<IActionResult> OnGetSearchItem(string term)
 		{
 			await InitializeLists(GetOptions.Items);
-			var result = ItemsList.Where(x => x.Name.ToLower().Contains(term.ToLower())).Select(x => x.Name ?? "");
+			IEnumerable<string> result = ItemsList.Where(x => x.Name.ToLower().Contains(term.ToLower())).Select(x => x.Name ?? "");
 			return new JsonResult(result);
 		}
 
 		public async Task<IActionResult> OnGetSearchUnit(string term)
 		{
 			await InitializeLists(GetOptions.Units);
-			var result = UnitsList.Where(x => x.Name.ToLower().Contains(term.ToLower())).Select(x => x.Name ?? "");
+			IEnumerable<string> result = UnitsList.Where(x => x.Name.ToLower().Contains(term.ToLower())).Select(x => x.Name ?? "");
 			return new JsonResult(result);
 		}
 
@@ -118,11 +118,11 @@ namespace SmartCooking.Web.Pages.Admin
 		{
 			try
 			{
-				var itemObj = new Item();
-				var unitObj = new Unit();
+				Item itemObj = new Item();
+				Unit unitObj = new Unit();
 
-				var itemList = await itemRepository.GetItems();
-				var unitList = await unitRepository.GetUnits();
+				IEnumerable<Item> itemList = await itemRepository.GetItems();
+				IEnumerable<Unit> unitList = await unitRepository.GetUnits();
 
 
 				if (!itemList.Any(x => x.Name.ToLower().StartsWith(itemName.ToLower().Trim())))

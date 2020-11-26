@@ -20,7 +20,9 @@ namespace SmartCooking.Data.Domain
 			context.SC_Item.Remove(item);
 
 			if (await context.SaveChangesAsync() <= 0)
+			{
 				return false;
+			}
 
 			return true;
 		}

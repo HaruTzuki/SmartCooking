@@ -47,7 +47,7 @@ namespace SmartCooking.Web.Pages.Admin
 				return Page();
 			}
 
-			var dbItem = await itemRepository.GetItem(itemId.Value);
+			Item dbItem = await itemRepository.GetItem(itemId.Value);
 
 			if (dbItem is null)
 			{

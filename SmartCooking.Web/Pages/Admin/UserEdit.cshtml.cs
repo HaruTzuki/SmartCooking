@@ -42,7 +42,7 @@ namespace SmartCooking.Web.Pages.Admin
 
 		public async Task<IActionResult> OnPostAsync()
 		{
-			var dbUsers = await userRepository.GetUsers();
+			System.Collections.Generic.IEnumerable<User> dbUsers = await userRepository.GetUsers();
 
 			if (dbUsers.Any(x => x.Username.ToLower() == SUser.Username.ToLower().Trim() && x.Id != SUser.Id))
 			{
@@ -67,7 +67,7 @@ namespace SmartCooking.Web.Pages.Admin
 				SUser.Password = CrypterAlgorithm.ComputeSha256Hash(SUser.Password);
 			}
 
-			var dbUser = await userRepository.GetUser(SUser.Id);
+			User dbUser = await userRepository.GetUser(SUser.Id);
 
 			dbUser.Username = SUser.Username;
 			dbUser.Password = SUser.Password;

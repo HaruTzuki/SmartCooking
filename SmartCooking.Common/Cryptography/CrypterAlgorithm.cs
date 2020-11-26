@@ -33,7 +33,7 @@ namespace SmartCooking.Common.Cryptography
 		private static string ComputeHashAlgorithm(HashAlgorithm hashAlgorithm, string input)
 		{
 			byte[] data = hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(input));
-			var sBuilder = new StringBuilder();
+			StringBuilder sBuilder = new StringBuilder();
 
 			for (int i = 0; i < data.Length; i++)
 			{
@@ -44,7 +44,7 @@ namespace SmartCooking.Common.Cryptography
 
 		public static bool VerifyHash(HashAlgorithm hashAlgorithm, string input, string hash)
 		{
-			var hashOfInput = ComputeHashAlgorithm(hashAlgorithm, input);
+			string hashOfInput = ComputeHashAlgorithm(hashAlgorithm, input);
 
 			StringComparer comparer = StringComparer.OrdinalIgnoreCase;
 			return comparer.Compare(hashOfInput, hash) == 0;

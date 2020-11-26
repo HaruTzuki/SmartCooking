@@ -45,7 +45,7 @@ namespace SmartCooking.Web.Pages.Admin
 				return Page();
 			}
 
-			var dbUnit = await unitRepository.GetUnit(unitId.Value);
+			Unit dbUnit = await unitRepository.GetUnit(unitId.Value);
 
 			if (dbUnit is null)
 			{

@@ -23,7 +23,7 @@ namespace SmartCooking.Web.Pages.Account
 
 		public async Task<IActionResult> OnPostAsync()
 		{
-			var dbUser = (await userRepository.GetUsers()).FirstOrDefault(x => x.Username.ToLower() == User.Username.ToLower());
+			User dbUser = (await userRepository.GetUsers()).FirstOrDefault(x => x.Username.ToLower() == User.Username.ToLower());
 
 			if (!CrypterAlgorithm.VerifyHash(SHA256.Create(), User.Password, dbUser.Password))
 			{

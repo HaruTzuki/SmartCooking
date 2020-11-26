@@ -21,9 +21,9 @@ namespace SmartCooking.Web.Pages.Recipe
 
 		public async Task<IActionResult> OnGetAsync(string query)
 		{
-			var Splitted = query.Split("&");
+			string[] Splitted = query.Split("&");
 
-			foreach (var str in Splitted)
+			foreach (string str in Splitted)
 			{
 				Items.Add(await itemRepository.GetItem(str));
 			}

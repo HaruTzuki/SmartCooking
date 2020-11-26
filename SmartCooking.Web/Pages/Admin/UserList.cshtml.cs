@@ -42,7 +42,7 @@ namespace SmartCooking.Web.Pages.Admin
 				return Page();
 			}
 
-			var dbUser = await userRepository.GetUser(userId.Value);
+			User dbUser = await userRepository.GetUser(userId.Value);
 
 			if (dbUser is null)
 			{

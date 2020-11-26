@@ -29,7 +29,7 @@ namespace SmartCooking.Web
 
 			services.AddDbContext<MyDbContext>();
 
-			var mvc = services.AddControllersWithViews();
+			IMvcBuilder mvc = services.AddControllersWithViews();
 
 #if (DEBUG)
 			mvc.AddRazorRuntimeCompilation();

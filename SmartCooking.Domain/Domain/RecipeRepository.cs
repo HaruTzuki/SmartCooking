@@ -54,7 +54,7 @@ namespace SmartCooking.Data.Domain
 
 		public async Task<IEnumerable<RecipeDetail>> GetRecipeDetails(int recipeHeaderId)
 		{
-			var details = await context.SC_RecipeDetail.Where(x => x.RecipeHeaderId == recipeHeaderId).ToListAsync();
+			List<RecipeDetail> details = await context.SC_RecipeDetail.Where(x => x.RecipeHeaderId == recipeHeaderId).ToListAsync();
 			details.ToList().ForEach(x =>
 			{
 				x.Item = context.SC_Item.FirstOrDefaultAsync(item => item.Id == x.ItemId).Result;

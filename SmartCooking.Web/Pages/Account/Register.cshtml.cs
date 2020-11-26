@@ -20,7 +20,7 @@ namespace SmartCooking.Web.Pages.Account
 
 		public async Task<IActionResult> OnPostAsync()
 		{
-			var dbUser = await userRepository.GetUsers();
+			System.Collections.Generic.IEnumerable<User> dbUser = await userRepository.GetUsers();
 
 			if (dbUser.AsEnumerable().Any(x => x.Username.ToLower() == User.Username.ToLower()))
 			{

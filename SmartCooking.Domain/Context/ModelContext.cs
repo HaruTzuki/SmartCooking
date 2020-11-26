@@ -11,9 +11,9 @@ namespace SmartCooking.Data.Context
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
-			var connectionStringBuilder = new SqliteConnectionStringBuilder { DataSource = "SmartCooking.db" };
-			var connectionString = connectionStringBuilder.ToString();
-			var connection = new SqliteConnection(connectionString);
+			SqliteConnectionStringBuilder connectionStringBuilder = new SqliteConnectionStringBuilder { DataSource = "SmartCooking.db" };
+			string connectionString = connectionStringBuilder.ToString();
+			SqliteConnection connection = new SqliteConnection(connectionString);
 
 			optionsBuilder.UseSqlite(connection);
 		}
