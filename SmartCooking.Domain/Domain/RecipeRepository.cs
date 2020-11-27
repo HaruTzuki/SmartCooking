@@ -18,6 +18,7 @@ namespace SmartCooking.Data.Domain
 		}
 
 		#region Recipe
+
 		public async Task<bool> DeleteRecipeDetail(RecipeDetail recipeDetail)
 		{
 			context.SC_RecipeDetail.Remove(recipeDetail);
@@ -121,6 +122,7 @@ namespace SmartCooking.Data.Domain
 
 			return true;
 		}
-		#endregion
+
+		#endregion Recipe
 	}
 }

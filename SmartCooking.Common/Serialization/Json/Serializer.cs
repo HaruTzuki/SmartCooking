@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 
 #nullable enable
+
 namespace SmartCooking.Common.Serialization.Json
 {
 	public static class Serializer

@@ -12,7 +12,6 @@ namespace SmartCooking.Web.Pages.Admin
 		private readonly IUnitRepository unitRepository;
 		[BindProperty] public IEnumerable<Unit> Units { get; set; }
 
-
 		public UnitListModel(IUnitRepository unitRepository)
 		{
 			this.unitRepository = unitRepository;
@@ -34,7 +33,6 @@ namespace SmartCooking.Web.Pages.Admin
 
 			return Page();
 		}
-
 
 		public async Task<IActionResult> OnPostDelete(int? unitId)
 		{
@@ -65,6 +63,5 @@ namespace SmartCooking.Web.Pages.Admin
 
 			return RedirectToPage(Url.Content("~/Admin/UnitList"));
 		}
-
 	}
 }

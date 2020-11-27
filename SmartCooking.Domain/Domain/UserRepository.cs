@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace SmartCooking.Data.Domain
 {
-
 	public class UserRepository : IUserRepository
 	{
 		private readonly MyDbContext context;

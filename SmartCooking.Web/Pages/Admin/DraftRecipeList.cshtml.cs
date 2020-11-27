@@ -18,6 +18,7 @@ namespace SmartCooking.Web.Pages.Admin
 		{
 			this.recipeRepository = recipeRepository;
 		}
+
 		public async Task<IActionResult> OnGetAsync()
 		{
 			if (!CheckPermissions())
@@ -34,6 +35,7 @@ namespace SmartCooking.Web.Pages.Admin
 
 			return Page();
 		}
+
 		public async Task<IActionResult> OnPostDelete(int? recipeId)
 		{
 			if (!recipeId.HasValue)
@@ -75,8 +77,5 @@ namespace SmartCooking.Web.Pages.Admin
 
 			return RedirectToPage(Url.Content("~/Admin/RecipeList"));
 		}
-
-
-
 	}
 }

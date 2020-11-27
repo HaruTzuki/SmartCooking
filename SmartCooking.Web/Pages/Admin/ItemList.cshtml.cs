@@ -15,12 +15,12 @@ namespace SmartCooking.Web.Pages.Admin
 		[BindProperty] public IEnumerable<Item> Items { get; set; }
 		[BindProperty] public IEnumerable<ItemCategory> ItemCategories { get; set; }
 
-
 		public ItemListModel(IItemRepository itemRepository, IItemCategoryRepository itemCategoryRepository)
 		{
 			this.itemRepository = itemRepository;
 			this.itemCategoryRepository = itemCategoryRepository;
 		}
+
 		public async Task<IActionResult> OnGetAsync()
 		{
 			if (!CheckPermissions())
@@ -38,6 +38,7 @@ namespace SmartCooking.Web.Pages.Admin
 
 			return Page();
 		}
+
 		public async Task<IActionResult> OnPostDelete(int? itemId)
 		{
 			if (!itemId.HasValue)

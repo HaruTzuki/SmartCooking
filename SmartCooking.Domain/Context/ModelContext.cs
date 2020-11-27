@@ -8,7 +8,6 @@ namespace SmartCooking.Data.Context
 {
 	public class MyDbContext : DbContext
 	{
-
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
 			SqliteConnectionStringBuilder connectionStringBuilder = new SqliteConnectionStringBuilder { DataSource = "SmartCooking.db" };
@@ -24,6 +23,5 @@ namespace SmartCooking.Data.Context
 		public DbSet<RecipeHeader> SC_RecipeHeader { get; set; }
 		public DbSet<RecipeDetail> SC_RecipeDetail { get; set; }
 		public DbSet<User> SC_User { get; set; }
-
 	}
 }

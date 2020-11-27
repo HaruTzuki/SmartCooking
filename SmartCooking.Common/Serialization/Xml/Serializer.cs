@@ -2,6 +2,7 @@
 using System.Xml;
 
 #nullable enable
+
 namespace SmartCooking.Common.Serialization.Xml
 {
 	public static class Serializer

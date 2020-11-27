@@ -10,6 +10,7 @@ namespace SmartCooking.Web.Pages.Admin
 	{
 		private readonly IUnitRepository unitRepository;
 		[BindProperty] public Unit Unit { get; set; }
+
 		public UnitEditModel(IUnitRepository unitRepository)
 		{
 			this.unitRepository = unitRepository;
@@ -49,6 +50,5 @@ namespace SmartCooking.Web.Pages.Admin
 			ViewData["Error"] = "Κάτι πήγε στραβά και δεν μπορεί να αποθηκευτεί ή εγγραφή";
 			return Page();
 		}
-
 	}
 }

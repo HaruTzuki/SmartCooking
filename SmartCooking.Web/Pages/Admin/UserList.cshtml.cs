@@ -16,6 +16,7 @@ namespace SmartCooking.Web.Pages.Admin
 		{
 			this.userRepository = userRepository;
 		}
+
 		public async Task<IActionResult> OnGetAsync()
 		{
 			if (!CheckPermissions())

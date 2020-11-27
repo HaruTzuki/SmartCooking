@@ -11,6 +11,7 @@ namespace SmartCooking.Web.Pages.Admin
 		private readonly IItemCategoryRepository itemCategoryRepository;
 		[BindProperty] public ItemCategory ItemCategory { get; set; }
 		[BindProperty] public int ItemCategoryId { get; set; }
+
 		public ItemCategoryEditModel(IItemCategoryRepository itemCategoryRepository)
 		{
 			this.itemCategoryRepository = itemCategoryRepository;
@@ -51,6 +52,5 @@ namespace SmartCooking.Web.Pages.Admin
 			ViewData["Error"] = "Κάτι πήγε στραβά και δεν μπορεί να αποθηκευτεί η εγγραφή.";
 			return Page();
 		}
-
 	}
 }

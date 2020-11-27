@@ -12,7 +12,6 @@ namespace SmartCooking.Web.Pages.Admin
 		private readonly IItemCategoryRepository itemCategoryRepository;
 		[BindProperty] public IEnumerable<ItemCategory> ItemCategories { get; set; }
 
-
 		public ItemCategoryListModel(IItemCategoryRepository itemCategoryRepository)
 		{
 			this.itemCategoryRepository = itemCategoryRepository;
@@ -34,7 +33,6 @@ namespace SmartCooking.Web.Pages.Admin
 
 			return Page();
 		}
-
 
 		public async Task<IActionResult> OnPostDelete(int? itemCategoryId)
 		{
@@ -65,6 +63,5 @@ namespace SmartCooking.Web.Pages.Admin
 
 			return RedirectToPage(Url.Content("~/Admin/ItemCategoryList"));
 		}
-
 	}
 }

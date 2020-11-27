@@ -36,7 +36,6 @@ namespace SmartCooking.Web.Pages.Account
 				return Page();
 			}
 
-
 			User.Password = CrypterAlgorithm.ComputeSha256Hash(User.Password);
 
 			if (await userRepository.InsertUser(User))

@@ -24,7 +24,6 @@
 	</div>
 }
 
-
 <form method="post" id="userForm">
 	<div class="card">
 		<div class="card-content">
@@ -35,7 +34,7 @@
 							<label class="lead">
 								Όνομα Χρήστη (Username)
 							</label>
-							<input type="text" class="form-control" autocomplete="off" asp-for="User.Username"/>
+							<input type="text" class="form-control" autocomplete="off" asp-for="User.Username" />
 						</div>
 					</div>
 					<div class="col-sm-6">
@@ -52,13 +51,13 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label class="lead">Κωδικός Πρόσβασης</label>
-							<input type="password" class="form-control" autocomplete="off" asp-for="User.Password"/>
+							<input type="password" class="form-control" autocomplete="off" asp-for="User.Password" />
 						</div>
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label class="lead">Επιβεβαίωση Κωδικού Πρόσβασης</label>
-							<input type="password" class="form-control" id="retypedPassword"/>
+							<input type="password" class="form-control" id="retypedPassword" />
 						</div>
 					</div>
 				</div>
@@ -82,8 +81,8 @@
 	</div>
 </form>
 
-@section scripts{ 
-	
+@section scripts{
+
 	<script>
 		$(document).ready(function () {
 			$("#userSubmit").click(function (e) {
@@ -91,7 +90,6 @@
 
 				var password = $("#User_Password").val();
 				var retypedPassword = $("#retypedPassword").val();
-
 
 				if (password != retypedPassword) {
 					Swal.fire({

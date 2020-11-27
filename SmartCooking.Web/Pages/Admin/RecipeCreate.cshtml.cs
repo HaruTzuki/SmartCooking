@@ -59,6 +59,7 @@ namespace SmartCooking.Web.Pages.Admin
 
 			return Page();
 		}
+
 		public async Task<IActionResult> OnPostAsync()
 		{
 			RecipeHeader.RecipeType = Common.Enumeration.RecipeType.Done;
@@ -95,7 +96,6 @@ namespace SmartCooking.Web.Pages.Admin
 			{
 				UnitsList = await unitRepository.GetUnits();
 			}
-
 		}
 
 		public async Task<IActionResult> OnGetSearchItem(string term)
@@ -122,7 +122,6 @@ namespace SmartCooking.Web.Pages.Admin
 				IEnumerable<Item> itemList = await itemRepository.GetItems();
 				IEnumerable<Unit> unitList = await unitRepository.GetUnits();
 
-
 				if (!itemList.Any(x => x.Name.ToLower().StartsWith(itemName.ToLower().Trim())))
 				{
 					itemObj.Name = itemName.Trim();
@@ -132,7 +131,6 @@ namespace SmartCooking.Web.Pages.Admin
 				{
 					itemObj = itemList.FirstOrDefault(x => x.Name.ToLower().StartsWith(itemName.ToLower().Trim()));
 				}
-
 
 				if (!unitList.Any(x => x.Name.ToLower().StartsWith(unitName.ToLower().Trim())))
 				{
@@ -144,7 +142,6 @@ namespace SmartCooking.Web.Pages.Admin
 					unitObj = unitList.FirstOrDefault(x => x.Name.ToLower().StartsWith(unitName.ToLower().Trim()));
 				}
 
-
 				RecipeDetail recipeDetail = new RecipeDetail()
 				{
 					ItemId = itemObj.Id,
@@ -152,7 +149,6 @@ namespace SmartCooking.Web.Pages.Admin
 					Quantity = float.Parse(qty),
 					RecipeHeaderId = recipeId.ToInt()
 				};
-
 
 				await recipeRepository.InsertRecipeDetail(recipeDetail);
 

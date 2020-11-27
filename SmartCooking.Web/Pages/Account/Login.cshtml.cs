@@ -25,7 +25,7 @@ namespace SmartCooking.Web.Pages.Account
 		{
 			User dbUser = (await userRepository.GetUsers()).FirstOrDefault(x => x.Username.ToLower() == User.Username.ToLower());
 
-			if(dbUser is null)
+			if (dbUser is null)
 			{
 				HasError = true;
 				ViewData["Error"] = "Ο χρήστης δεν υπάρχει.";

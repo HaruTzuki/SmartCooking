@@ -1,5 +1,4 @@
-﻿
-using SmartCooking.Common.Enumeration;
+﻿using SmartCooking.Common.Enumeration;
 
 namespace SmartCooking.Infastructure.Recipes
 {
@@ -11,6 +10,5 @@ namespace SmartCooking.Infastructure.Recipes
 		public string Code { get; set; }
 		public string Tags { get; set; }
 		public RecipeType RecipeType { get; set; }
-
 	}
 }

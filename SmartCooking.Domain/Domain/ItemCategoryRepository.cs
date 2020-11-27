@@ -16,7 +16,6 @@ namespace SmartCooking.Data.Domain
 			this.context = context;
 		}
 
-
 		public async Task<bool> DeleteItemCategory(ItemCategory itemCategory)
 		{
 			context.SC_ItemCategory.Remove(itemCategory);

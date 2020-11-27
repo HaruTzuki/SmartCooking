@@ -10,7 +10,7 @@
 		<div class="col-sm-12">
 			<div class="form-group">
 				<label class="lead">Όνομα Χρήστη</label>
-				<input type="text" class="form-control" asp-for="User.Username"/>
+				<input type="text" class="form-control" asp-for="User.Username" />
 			</div>
 		</div>
 	</div>
@@ -19,7 +19,7 @@
 		<div class="col-sm-12">
 			<div class="form-group">
 				<label class="lead">Κωδικός Πρόσβασης</label>
-				<input type="password" class="form-control" asp-for="User.Password"/>
+				<input type="password" class="form-control" asp-for="User.Password" />
 			</div>
 		</div>
 	</div>
@@ -33,7 +33,7 @@
 	</div>
 </form>
 
-@section scripts{ 
+@section scripts{
 	<script>
 		$("#loginFormSubmit").click(function (e) {
 			e.preventDefault();

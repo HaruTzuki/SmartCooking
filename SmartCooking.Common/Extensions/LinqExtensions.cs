@@ -14,7 +14,6 @@ namespace SmartCooking.Common.Extensions
 			}
 		}
 
-
 		public static void ForEach<T>(this IEnumerable<T> sequence, Func<T, IActionResult> action)
 		{
 			foreach (T item in sequence)
@@ -22,6 +21,5 @@ namespace SmartCooking.Common.Extensions
 				action(item);
 			}
 		}
-
 	}
 }

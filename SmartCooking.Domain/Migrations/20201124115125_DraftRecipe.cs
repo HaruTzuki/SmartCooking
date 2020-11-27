@@ -46,7 +46,6 @@ namespace SmartCooking.Data.Migrations
 
 			migrationBuilder.DropTable(
 				name: "SC_DraftRecipeHeader");
-
 		}
 	}
 }

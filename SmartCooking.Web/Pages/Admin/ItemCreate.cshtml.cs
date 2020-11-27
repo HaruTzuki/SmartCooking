@@ -23,6 +23,7 @@ namespace SmartCooking.Web.Pages.Admin
 			this.itemRepository = itemRepository;
 			this.itemCategoryRepository = itemCategoryRepository;
 		}
+
 		public async Task<IActionResult> OnGet()
 		{
 			if (!CheckPermissions())
@@ -53,7 +54,6 @@ namespace SmartCooking.Web.Pages.Admin
 				TempData["SuccessMessage"] = "Το είδος προστέθηκε με επιτυχία.";
 				return RedirectToPage(Url.Content("~/Admin/ItemList"));
 			}
-
 
 			HasError = true;
 			ViewData["Error"] = "Κάτι πήγε στραβά και δεν μπορεί να αποθηκευτή η εγγραφή.";

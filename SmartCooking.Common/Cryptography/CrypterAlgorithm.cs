@@ -49,6 +49,5 @@ namespace SmartCooking.Common.Cryptography
 			StringComparer comparer = StringComparer.OrdinalIgnoreCase;
 			return comparer.Compare(hashOfInput, hash) == 0;
 		}
-
 	}
 }

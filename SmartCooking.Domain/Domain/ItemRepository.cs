@@ -10,6 +10,7 @@ namespace SmartCooking.Data.Domain
 	public class ItemRepository : IItemRepository
 	{
 		private readonly MyDbContext context;
+
 		public ItemRepository(MyDbContext context)
 		{
 			this.context = context;

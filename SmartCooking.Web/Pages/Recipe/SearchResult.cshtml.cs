@@ -28,11 +28,9 @@ namespace SmartCooking.Web.Pages.Recipe
 				Items.Add(await itemRepository.GetItem(str));
 			}
 
-
 			/*
-            Να βρούμε συνταγές που περιέχουν 1 ή περισσότερα είδη. 
+            Να βρούμε συνταγές που περιέχουν 1 ή περισσότερα είδη.
              */
-
 
 			return Page();
 		}
