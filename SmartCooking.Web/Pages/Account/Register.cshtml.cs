@@ -41,7 +41,7 @@ namespace SmartCooking.Web.Pages.Account
 
 			if (await userRepository.InsertUser(User))
 			{
-				return RedirectToPage("/Index");
+				return RedirectToPage(Url.Content("~/Home/Index"));
 			}
 
 			return Page();

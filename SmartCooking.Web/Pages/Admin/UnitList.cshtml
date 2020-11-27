@@ -65,7 +65,7 @@
 							<td>
 								<div class="d-flex">
 									<a href="@Url.Content($"~/Admin/UnitEdit/{unit.Id}")" class="btn btn-link"><i class="far fa-edit" title="Επεξεργασία"></i></a>
-									<form method="post" asp-page-handler="delete" asp-route-itemCategoryId="@unit.Id">
+									<form method="post" asp-page-handler="delete" asp-route-unitId="@unit.Id">
 										<button class="btn btn-link">
 											<i class="far fa-trash-alt" title="Διαγραφή"></i>
 										</button>
