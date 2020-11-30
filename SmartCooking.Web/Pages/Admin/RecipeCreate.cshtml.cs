@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using SmartCooking.Common.Enumeration;
 using SmartCooking.Common.Extensions;
 using SmartCooking.Data.Repository;
 using SmartCooking.Infastructure.Products;
@@ -55,7 +56,7 @@ namespace SmartCooking.Web.Pages.Admin
 				return RedirectToPage("RecipeCreate", new { draftHeaderId = RecipeHeader.Id });
 			}
 
-			await InitializeLists(GetOptions.All);
+			await InitializeLists(SearchRecipeGetOptions.All);
 
 			return Page();
 		}
@@ -85,14 +86,14 @@ namespace SmartCooking.Web.Pages.Admin
 			return Page();
 		}
 
-		private async Task InitializeLists(GetOptions getOptions)
+		private async Task InitializeLists(SearchRecipeGetOptions getOptions)
 		{
-			if (getOptions == GetOptions.All || getOptions == GetOptions.Items)
+			if (getOptions == SearchRecipeGetOptions.All || getOptions == SearchRecipeGetOptions.Items)
 			{
 				ItemsList = await itemRepository.GetItems();
 			}
 
-			if (getOptions == GetOptions.All || getOptions == GetOptions.Units)
+			if (getOptions == SearchRecipeGetOptions.All || getOptions == SearchRecipeGetOptions.Units)
 			{
 				UnitsList = await unitRepository.GetUnits();
 			}
@@ -100,14 +101,14 @@ namespace SmartCooking.Web.Pages.Admin
 
 		public async Task<IActionResult> OnGetSearchItem(string term)
 		{
-			await InitializeLists(GetOptions.Items);
+			await InitializeLists(SearchRecipeGetOptions.Items);
 			IEnumerable<string> result = ItemsList.Where(x => x.Name.ToLower().Contains(term.ToLower())).Select(x => x.Name ?? "");
 			return new JsonResult(result);
 		}
 
 		public async Task<IActionResult> OnGetSearchUnit(string term)
 		{
-			await InitializeLists(GetOptions.Units);
+			await InitializeLists(SearchRecipeGetOptions.Units);
 			IEnumerable<string> result = UnitsList.Where(x => x.Name.ToLower().Contains(term.ToLower())).Select(x => x.Name ?? "");
 			return new JsonResult(result);
 		}
@@ -160,11 +161,5 @@ namespace SmartCooking.Web.Pages.Admin
 			}
 		}
 
-		public enum GetOptions
-		{
-			All,
-			Items,
-			Units
-		}
 	}
 }

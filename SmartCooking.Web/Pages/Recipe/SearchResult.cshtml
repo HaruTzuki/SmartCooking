@@ -1,13 +1,14 @@
-﻿@page "{query}"
+﻿@page "{recipeId:int}"
 @model SmartCooking.Web.Pages.Recipe.SearchResultModel
 @{
-	ViewData["Title"] = "Recipe Search Result";
-	Layout = "~/Theme/TasteIt/Page.cshtml";
+	Console.WriteLine("adsds");
+
 }
 
-@foreach(var item in Model.Items)
+
+@if (Model.CalculateMethod())
 {
-	<span>
-		@item.Name <br />
-	</span>
+	<div>
+		it is true;
+	</div>
 }
