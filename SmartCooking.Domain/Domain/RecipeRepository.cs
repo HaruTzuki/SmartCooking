@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace SmartCooking.Data.Domain
 {
+	/// <summary>
+	/// Κλάση που είναι υπεύθυνση για τις κλήσεις στη βάση που αφορούν τα Recipe.
+	/// </summary>
 	public class RecipeRepository : IRecipeRepository
 	{
 		private readonly MyDbContext context;
@@ -19,6 +22,11 @@ namespace SmartCooking.Data.Domain
 
 		#region Recipe
 
+		/// <summary>
+		/// Διαγραφή Object
+		/// </summary>
+		/// <param name="recipeDetail"></param>
+		/// <returns></returns>
 		public async Task<bool> DeleteRecipeDetail(RecipeDetail recipeDetail)
 		{
 			context.SC_RecipeDetail.Remove(recipeDetail);
@@ -31,6 +39,11 @@ namespace SmartCooking.Data.Domain
 			return true;
 		}
 
+		/// <summary>
+		/// Διαγραφή του Object
+		/// </summary>
+		/// <param name="recipeHeader"></param>
+		/// <returns></returns>
 		public async Task<bool> DeleteRecipeHeader(RecipeHeader recipeHeader)
 		{
 			context.SC_RecipeHeader.Remove(recipeHeader);
@@ -43,16 +56,30 @@ namespace SmartCooking.Data.Domain
 			return true;
 		}
 
+		/// <summary>
+		/// Επιστροφή ενώς Object
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
 		public async Task<RecipeDetail> GetRecipeDetail(int id)
 		{
 			return await context.SC_RecipeDetail.FirstOrDefaultAsync(x => x.Id == id);
 		}
 
+		/// <summary>
+		/// Επιστροφή λίστα με Objects
+		/// </summary>
+		/// <returns></returns>
 		public async Task<IEnumerable<RecipeDetail>> GetRecipeDetails()
 		{
 			return await context.SC_RecipeDetail.ToListAsync();
 		}
 
+		/// <summary>
+		/// Επιστροφή λίστα με Objects
+		/// </summary>
+		/// <param name="recipeHeaderId"></param>
+		/// <returns></returns>
 		public async Task<IEnumerable<RecipeDetail>> GetRecipeDetails(int recipeHeaderId)
 		{
 			List<RecipeDetail> details = await context.SC_RecipeDetail.Where(x => x.RecipeHeaderId == recipeHeaderId).ToListAsync();
@@ -65,16 +92,30 @@ namespace SmartCooking.Data.Domain
 			return details;
 		}
 
+		/// <summary>
+		/// Επιστροφή ενώς Object
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
 		public async Task<RecipeHeader> GetRecipeHeader(int id)
 		{
 			return await context.SC_RecipeHeader.FirstOrDefaultAsync(x => x.Id == id);
 		}
 
+		/// <summary>
+		/// Επιστροφή λίστα με Objects.
+		/// </summary>
+		/// <returns></returns>
 		public async Task<IEnumerable<RecipeHeader>> GetRecipeHeaders()
 		{
 			return await context.SC_RecipeHeader.ToListAsync();
 		}
 
+		/// <summary>
+		/// Προσθήκη Object
+		/// </summary>
+		/// <param name="recipeDetail"></param>
+		/// <returns></returns>
 		public async Task<bool> InsertRecipeDetail(RecipeDetail recipeDetail)
 		{
 			context.SC_RecipeDetail.Add(recipeDetail);
@@ -87,6 +128,11 @@ namespace SmartCooking.Data.Domain
 			return true;
 		}
 
+		/// <summary>
+		/// Προσθήκη Object
+		/// </summary>
+		/// <param name="recipeHeader"></param>
+		/// <returns></returns>
 		public async Task<bool> InsertRecipeHeader(RecipeHeader recipeHeader)
 		{
 			context.SC_RecipeHeader.Add(recipeHeader);
@@ -99,6 +145,11 @@ namespace SmartCooking.Data.Domain
 			return true;
 		}
 
+		/// <summary>
+		/// Ενημέρωση Object
+		/// </summary>
+		/// <param name="recipeDetail"></param>
+		/// <returns></returns>
 		public async Task<bool> UpdateRecipeDetail(RecipeDetail recipeDetail)
 		{
 			context.SC_RecipeDetail.Update(recipeDetail);
@@ -111,6 +162,11 @@ namespace SmartCooking.Data.Domain
 			return true;
 		}
 
+		/// <summary>
+		/// Ενημέρωση Object
+		/// </summary>
+		/// <param name="recipeHeader"></param>
+		/// <returns></returns>
 		public async Task<bool> UpdateRecipeHeader(RecipeHeader recipeHeader)
 		{
 			context.SC_RecipeHeader.Update(recipeHeader);

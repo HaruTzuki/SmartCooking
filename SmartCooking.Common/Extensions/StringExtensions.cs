@@ -3,6 +3,9 @@ using System.Globalization;
 
 namespace SmartCooking.Common.Extensions
 {
+	/// <summary>
+	/// Επέκταση μεθόδων για την κλάση string.
+	/// </summary>
 	public static class StringExtensions
 	{
 		#region ToInt Region

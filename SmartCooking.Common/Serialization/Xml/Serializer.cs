@@ -5,8 +5,16 @@ using System.Xml;
 
 namespace SmartCooking.Common.Serialization.Xml
 {
+	/// <summary>
+	/// Κλαση κωδικοποίησης και αποκωδικοποίησης σε και από XML κείμενο.
+	/// </summary>
 	public static class Serializer
 	{
+		/// <summary>
+		/// Μετατρέπει ένα Object οποιοδήποτε τύπου σε XML κείμενο
+		/// </summary>
+		/// <param name="o"></param>
+		/// <returns></returns>
 		public static string XmlSerializer(object? o)
 		{
 			if (o is null)
@@ -26,6 +34,12 @@ namespace SmartCooking.Common.Serialization.Xml
 			}
 		}
 
+		/// <summary>
+		/// Μετατρέπει ένα κείμενο σε τύπο δεδομένων που του ορίζουμε.
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="s"></param>
+		/// <returns></returns>
 		public static T XmlDeserializer<T>(string? s)
 		{
 			if (string.IsNullOrEmpty(s))

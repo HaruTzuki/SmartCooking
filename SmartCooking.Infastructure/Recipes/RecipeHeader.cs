@@ -2,6 +2,9 @@
 
 namespace SmartCooking.Infastructure.Recipes
 {
+	/// <summary>
+	/// Μοντέλο για Recipe Header στη βάση δεδομένων
+	/// </summary>
 	public class RecipeHeader
 	{
 		public int Id { get; set; }

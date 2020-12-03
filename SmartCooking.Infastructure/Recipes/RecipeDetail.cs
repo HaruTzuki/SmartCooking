@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SmartCooking.Infastructure.Recipes
 {
+	/// <summary>
+	/// Μοντέλο για Recipe Detail στη βάση δεδομένων
+	/// </summary>
 	public class RecipeDetail
 	{
 		public int Id { get; set; }

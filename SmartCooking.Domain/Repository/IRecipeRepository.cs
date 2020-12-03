@@ -4,6 +4,9 @@ using System.Threading.Tasks;
 
 namespace SmartCooking.Data.Repository
 {
+	/// <summary>
+	/// Interface υπεύθυνο για το Dependecy Injection για Recipe
+	/// </summary>
 	public interface IRecipeRepository
 	{
 		Task<RecipeHeader> GetRecipeHeader(int id);

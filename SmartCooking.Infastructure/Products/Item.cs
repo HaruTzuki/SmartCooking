@@ -2,6 +2,9 @@
 
 namespace SmartCooking.Infastructure.Products
 {
+	/// <summary>
+	/// Μοντελό για Item στη βάση δεδομένων
+	/// </summary>
 	public class Item
 	{
 		public int Id { get; set; }
