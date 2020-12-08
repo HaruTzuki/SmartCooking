@@ -5,13 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Api\**" />
-    <Content Remove="Api\**" />
-    <EmbeddedResource Remove="Api\**" />
-    <None Remove="Api\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="wwwroot\theme\admin\assets\demo\chart-area-demo.js" />
     <None Include="wwwroot\theme\admin\assets\demo\chart-bar-demo.js" />
     <None Include="wwwroot\theme\admin\assets\demo\chart-pie-demo.js" />

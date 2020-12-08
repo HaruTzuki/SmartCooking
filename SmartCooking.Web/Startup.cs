@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using SmartCooking.Data.Context;
 using SmartCooking.Data.Domain;
 using SmartCooking.Data.Repository;
+using SmartCooking.Infastructure.Dto;
 
 namespace SmartCooking.Web
 {
@@ -42,6 +43,13 @@ namespace SmartCooking.Web
 			{
 				opt.Conventions.AddPageRoute("/Home/Index", "");
 			});
+
+			services.AddRouting(opt =>
+			{
+				opt.ConstraintMap["recipeCountViewModel"] = typeof(RecipeCountViewModel);
+				opt.LowercaseUrls = true;
+			});
+			services.AddControllersWithViews();
 			services.AddAntiforgery(o => o.HeaderName = "XSRF-TOKEN");
 		}
 
@@ -69,6 +77,10 @@ namespace SmartCooking.Web
 			app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapRazorPages();
+				endpoints.MapControllers();
+				endpoints.MapControllerRoute(
+				   name: "default",
+				   pattern: "{controller=Home}/{action=Index}/{id?}");
 			});
 		}
 	}

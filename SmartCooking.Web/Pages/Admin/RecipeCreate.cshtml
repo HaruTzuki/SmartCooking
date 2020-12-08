@@ -162,11 +162,11 @@
 			});
 
 			$("#itemsList").autocomplete({
-				source: '@Url.Page("RecipeCreate", "SearchItem")'
+				source: '@Url.Content("~/api/Item/SearchItemByName")'
 			});
 
 			$("#unitList").autocomplete({
-				source: '@Url.Page("RecipeCreate", "SearchUnit")'
+				source: '@Url.Content("~/api/Unit/SearchUnitByName")'
 			});
 
 			$("#recipeSubmit").click(function (e) {

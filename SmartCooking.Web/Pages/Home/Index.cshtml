@@ -9,7 +9,7 @@
 	<div class="container">
 		<div class="row no-gutters">
 			<div class="col-sm-4 p-4 p-md-5 d-flex align-items-center justify-content-center bg-primary">
-				<form method="post" id="ingrdientsSearchForm">
+				<form method="get" action="@Url.Content("~/api/Recipe/GetSearch")" id="ingrdientsSearchForm">
 					<div class="row">
 						<div class="col-md-12">
 							<h2>Αναζήτηση</h2>
@@ -23,6 +23,7 @@
 						</div>
 						<div class="col-md-12">
 							<div class="form-group">
+							<input type="text" name="ingredientsText" id="ingredients-text" />
 								<button class="btn btn-white py-3 px-4" id="add-ingredient" onclick="return false;">
 									ΠΡΟΣΘΗΚΗ ΥΛΙΚΟΥ
 								</button>
@@ -74,22 +75,34 @@
 				$("#ingredients_search").append(textBox);
 			});
 
-			$("#btnSearch").click(function () {
+			$("#btnSearch").click(function (e) {
+				e.preventDefault();
 				var list = $("input[class*=ingredient-value]");
 				var ingrdientList = [];
 				var text = "";
 
-				for (let i = 0; i < list.length; i++) {
-					// ingrdientList.push($(list[i]).val());
-					text += $(list[i].val());
-				}
+				console.log(list);
 
 				var formData = new FormData();
-				formData.append("ingrdientsSearchForm", ingrdientList);
+				for (let i = 0; i < list.length; i++) {
+					ingrdientList.push($(list[i]).val());
+					text += $(list[i]).val() + ",";
+				}
 
-				$("#ingrdientsSearchForm").submit(formData);
+				$("#ingredients-text").val(text);
+				$("#ingrdientsSearchForm").submit();
 
 			});
+
+
+
+			$(document).on("focus", ".ingredient-value", function (e) {
+				$(this).autocomplete({
+					source: '@Url.Content("~/api/Item/SearchItemByName")'
+				});
+			});
+
+
 
 		});
 	</script>

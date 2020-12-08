@@ -56,8 +56,6 @@ namespace SmartCooking.Web.Pages.Admin
 				return RedirectToPage("RecipeCreate", new { draftHeaderId = RecipeHeader.Id });
 			}
 
-			await InitializeLists(SearchRecipeGetOptions.All);
-
 			return Page();
 		}
 
@@ -84,33 +82,6 @@ namespace SmartCooking.Web.Pages.Admin
 			HasError = true;
 			ViewData["Error"] = "Κάτι πήγε στράβα και δεν μπορεί να αποθηκευτεί η εγγραφή.";
 			return Page();
-		}
-
-		private async Task InitializeLists(SearchRecipeGetOptions getOptions)
-		{
-			if (getOptions == SearchRecipeGetOptions.All || getOptions == SearchRecipeGetOptions.Items)
-			{
-				ItemsList = await itemRepository.GetItems();
-			}
-
-			if (getOptions == SearchRecipeGetOptions.All || getOptions == SearchRecipeGetOptions.Units)
-			{
-				UnitsList = await unitRepository.GetUnits();
-			}
-		}
-
-		public async Task<IActionResult> OnGetSearchItem(string term)
-		{
-			await InitializeLists(SearchRecipeGetOptions.Items);
-			IEnumerable<string> result = ItemsList.Where(x => x.Name.ToLower().Contains(term.ToLower())).Select(x => x.Name ?? "");
-			return new JsonResult(result);
-		}
-
-		public async Task<IActionResult> OnGetSearchUnit(string term)
-		{
-			await InitializeLists(SearchRecipeGetOptions.Units);
-			IEnumerable<string> result = UnitsList.Where(x => x.Name.ToLower().Contains(term.ToLower())).Select(x => x.Name ?? "");
-			return new JsonResult(result);
 		}
 
 		public async Task<IActionResult> OnGetAddToList(string itemName, string unitName, string qty, string recipeId)
