@@ -44,11 +44,11 @@ namespace SmartCooking.Web
 				opt.Conventions.AddPageRoute("/Home/Index", "");
 			});
 
-			services.AddRouting(opt =>
-			{
-				opt.ConstraintMap["recipeCountViewModel"] = typeof(RecipeCountViewModel);
-				opt.LowercaseUrls = true;
-			});
+			//services.AddRouting(opt =>
+			//{
+			//	opt.ConstraintMap["recipeCountViewModel"] = typeof(string);
+			//	opt.LowercaseUrls = true;
+			//});
 			services.AddControllersWithViews();
 			services.AddAntiforgery(o => o.HeaderName = "XSRF-TOKEN");
 		}
