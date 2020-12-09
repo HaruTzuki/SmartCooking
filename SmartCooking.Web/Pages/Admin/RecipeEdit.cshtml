@@ -98,7 +98,12 @@
 							<td>@recipeDetail.Item.Name</td>
 							<td>@recipeDetail.Unit.Name</td>
 							<td>@recipeDetail.Quantity</td>
-							<td></td>
+							<td>
+								<button class="btn btn-link edit-item-from-recipe" data-value-id="@recipeDetail.Id"><i class="fas fa-edit"></i></button>
+									<button class="btn btn-link delete-item-from-recipe" data-value-id="@recipeDetail.Id">
+										<i class="far fa-trash-alt" title="Διαγραφή"></i>
+									</button>
+							</td>
 						</tr>
 						{ aa += 1; }
 					}

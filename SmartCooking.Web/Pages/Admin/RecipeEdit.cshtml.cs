@@ -131,5 +131,37 @@ namespace SmartCooking.Web.Pages.Admin
 				return new JsonResult(new { result = false, message = ex.Message });
 			}
 		}
+
+		public async Task<IActionResult> OnPostDeleteItem(int? recipeDetailId)
+		{
+			if (!recipeDetailId.HasValue)
+			{
+				HasError = true;
+				ViewData["ErrorMessage"] = "Το ID του είδους είναι κενό.";
+				return Page();
+			}
+
+			var dbRecipeDetail = await recipeRepository.GetRecipeDetail(recipeDetailId.Value);
+
+			if(dbRecipeDetail is null)
+			{
+				HasError = true;
+				ViewData["ErrorMessage"] = "Το είδος που ζητήσατε να γίνει διαγραφή δεν υπάρχει στη λίστα.";
+				return Page();
+			}
+
+			var recipeHeaderId = dbRecipeDetail.RecipeHeaderId;
+
+			if (!await recipeRepository.DeleteRecipeDetail(dbRecipeDetail))
+			{
+				HasError = true;
+				ViewData["ErrorMessage"] = "Κάτι πήγε στραβά και δεν μπορέσαμε να διαγράψουμε την εγγραφή σας.";
+				return Page();
+			}
+
+			HasError = false;
+			TempData["SuccessMessage"] = "Η διαγραφή του είδους έγινε με επιτυχία.";
+			return Page();
+		}
 	}
 }

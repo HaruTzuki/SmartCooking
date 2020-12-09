@@ -98,7 +98,9 @@
 							<td>@recipeDetail.Item.Name</td>
 							<td>@recipeDetail.Unit.Name</td>
 							<td>@recipeDetail.Quantity</td>
-							<td></td>
+							<td>
+								<a class="edit-item-from-recipe" data-value-id="@recipeDetail.Id"><i class="fas fa-edit"></i></a>
+							</td>
 						</tr>
 						{aa += 1;}
 					}
