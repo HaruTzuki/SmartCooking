@@ -26,38 +26,38 @@
 
 <form id="recipeForm" method="post">
 	<div class="card mb-2">
-	<div class="card-content">
-		<div class="card-body">
-			<div class="row">
-				<div class="col-sm-6">
-					<div class="form-group">
-						<label class="lead">Περιγραφή Συνταγής</label>
-						<input type="text" asp-for="RecipeHeader.Name" class="form-control" />
-						<input type="hidden" asp-for="RecipeHeader.Id" />
+		<div class="card-content">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label class="lead">Περιγραφή Συνταγής</label>
+							<input type="text" asp-for="RecipeHeader.Name" class="form-control" />
+							<input type="hidden" asp-for="RecipeHeader.Id" />
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label class="lead">Κωδικός Συνταγής</label>
+							<input type="text" class="form-control" asp-for="RecipeHeader.Code" />
+						</div>
 					</div>
 				</div>
-				<div class="col-sm-6">
-					<div class="form-group">
-						<label class="lead">Κωδικός Συνταγής</label>
-						<input type="text" class="form-control" asp-for="RecipeHeader.Code" />
+				<div class="row">
+					<div class="col-sm-12">
+						<label class="lead">Σύντομη Περιγραφή Συνταγής</label>
+						<textarea rows="5" class="form-control" asp-for="RecipeHeader.Description"></textarea>
 					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-12">
-					<label class="lead">Σύντομη Περιγραφή Συνταγής</label>
-					<textarea rows="5" class="form-control" asp-for="RecipeHeader.Description"></textarea>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-12">
-					<label class="lead">Ετικέτες</label>
-					<input type="text" class="form-control" asp-for="RecipeHeader.Tags" />
+				<div class="row">
+					<div class="col-sm-12">
+						<label class="lead">Ετικέτες</label>
+						<input type="text" class="form-control" asp-for="RecipeHeader.Tags" />
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
 </form>
 
 <div class="card mb-2">
@@ -89,10 +89,11 @@
 				</thead>
 				<tbody>
 					@{
-						int aa = 1;
+						int aa = 0;
 					}
 					@foreach (var recipeDetail in Model.RecipeDetails)
 					{
+						{ aa += 1; }
 						<tr>
 							<td>@aa</td>
 							<td>@recipeDetail.Item.Name</td>
@@ -102,7 +103,6 @@
 								<a class="edit-item-from-recipe" data-value-id="@recipeDetail.Id"><i class="fas fa-edit"></i></a>
 							</td>
 						</tr>
-						{aa += 1;}
 					}
 				</tbody>
 			</table>
@@ -125,7 +125,7 @@
 						<div class="col-sm-12">
 							<div class="form-group">
 								<label class="lead">Είδος</label>
-								<input type="text" class="form-control" id="itemsList" />
+								<input type="text" class="form-control itemsList" id="addItem" />
 							</div>
 						</div>
 					</div>
@@ -133,7 +133,7 @@
 						<div class="col-sm-12">
 							<div class="form-group">
 								<label class="lead">Μονάδα Μέτρησης</label>
-								<input type="text" class="form-control" id="unitList" />
+								<input type="text" class="form-control unitList" id="addUnit" />
 							</div>
 						</div>
 					</div>
@@ -141,7 +141,7 @@
 						<div class="col-sm-12">
 							<div class="form-group">
 								<label class="lead">Ποσότητα</label>
-								<input type="text" class="form-control" id="item-qty" />
+								<input type="text" class="form-control item-qty" id="addQty" />
 							</div>
 						</div>
 					</div>
@@ -149,6 +149,50 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 					<button type="button" class="btn btn-primary" id="add-item-to-recipe">Προσθήκη</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="EditRecipeItemModal" tabindex="-1" role="dialog" aria-labelledby="AddRecipeItemModal" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5>Επεξεργασία Είδους</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="form-group">
+								<label class="lead">Είδος</label>
+								<input type="text" class="form-control itemsList" id="editItem" />
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="form-group">
+								<label class="lead">Μονάδα Μέτρησης</label>
+								<input type="text" class="form-control unitList" id="editUnit" />
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="form-group">
+								<label class="lead">Ποσότητα</label>
+								<input type="text" class="form-control item-qty" id="editQty" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary" id="edit-recipe-item">Αλλαγή</button>
+					<input type="hidden" id="editRecipeDetailId" />
 				</div>
 			</div>
 		</div>
@@ -163,11 +207,11 @@
 				$("#AddRecipeItemModal").modal('show');
 			});
 
-			$("#itemsList").autocomplete({
+			$(".itemsList").autocomplete({
 				source: '@Url.Content("~/api/Item/SearchItemByName")'
 			});
 
-			$("#unitList").autocomplete({
+			$(".unitList").autocomplete({
 				source: '@Url.Content("~/api/Unit/SearchUnitByName")'
 			});
 
@@ -179,9 +223,9 @@
 			$("#add-item-to-recipe").click(function (e) {
 				e.preventDefault();
 
-				var itemName = $("#itemsList").val();
-				var unitName = $("#unitList").val();
-				var qty = $("#item-qty").val();
+				var itemName = $("#addItem").val();
+				var unitName = $("#addUnit").val();
+				var qty = $("#addQty").val();
 
 				$.ajax({
 					url: '@Url.Page("RecipeCreate", "AddToList")&itemName=' + itemName + '&unitName=' + unitName + '&qty=' + qty + '&recipeId=@Model.DraftRecipeHeaderId',
@@ -217,6 +261,102 @@
 						console.error(err);
 					}
 				})
+			});
+
+			$("#edit-recipe-item").click(function (e) {
+				e.preventDefault
+
+				var itemName = $("#editItem").val();
+				var unitName = $("#editUnit").val();
+				var qty = $("#editQty").val();
+				var recipeDetailId = $("#editRecipeDetailId").val();
+
+				var sender = {
+					itemName: itemName,
+					unitName: unitName,
+					qty: qty,
+					recipeDetailId: recipeDetailId
+				}
+
+				$.ajax({
+					url: '@Url.Content("~/api/Recipe/EditRecipeItem")',
+					type: 'post',
+					contentType: 'application/json; charset=utf-8',
+					data: JSON.stringify(sender),
+					success: function (response) {
+						if (response.result) {
+							Swal.fire({
+								title: "Επιτυχία",
+								text: response.message,
+								icon: 'success'
+							}).then(function (response) {
+								location.reload();
+							});
+						}
+						else {
+							Swal.file({
+								title: "Σφάλμα",
+								text: response.message,
+								icon: 'error'
+							});
+						}
+
+					},
+					error: function (err) {
+						console.error(err);
+					}
+
+				});
+
+			});
+
+			$(document).on('click', '.delete-item-from-recipe', function () {
+
+				var recipeDetailId = $(this).attr("data-value-id");
+
+				$.ajax({
+					url: '@Url.Content("~/api/Recipe/DeleteDetailItem")',
+					type: 'POST',
+					contentType: 'application/json; charset=utf-8',
+					data: JSON.stringify(recipeDetailId),
+					success: function (response) {
+						if (response.result) {
+							Swal.fire({
+								title: "Επιτυχία!",
+								text: response.message,
+								icon: 'success'
+							}).then(function (response) {
+								if (response.value) {
+									location.reload();
+								}
+							});
+						}
+						else {
+							Swal.fire({
+								title: "Σφάλμα",
+								text: response.message,
+								icon: 'error'
+							});
+						}
+					},
+					error: function (err) {
+						console.error(err);
+					}
+				});
+			});
+
+			$(document).on('click', '.edit-item-from-recipe', function () {
+				var recipeDetailId = $(this).attr("data-value-id");
+				var itemName = $(".item-" + recipeDetailId).html();
+				var unitName = $(".unit-" + recipeDetailId).html();
+				var qty = $(".qty-" + recipeDetailId).html();
+
+				$("#editItem").val(itemName);
+				$("#editUnit").val(unitName);
+				$("#editQty").val(qty);
+				$("#editRecipeDetailId").val(recipeDetailId);
+
+				$("#EditRecipeItemModal").modal("show");
 			});
 		});
 	</script>

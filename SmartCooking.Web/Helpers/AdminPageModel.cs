@@ -7,6 +7,8 @@ namespace SmartCooking.Web.Helpers
 	public class AdminPageModel : PageModel
 	{
 		public bool HasError { get; set; }
+		public string ErrorMessage { get; set; }
+		public string SuccessMessage { get; set; }
 
 		public bool CheckPermissions()
 		{
