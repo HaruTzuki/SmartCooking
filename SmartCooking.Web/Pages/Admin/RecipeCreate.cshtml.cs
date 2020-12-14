@@ -124,7 +124,7 @@ namespace SmartCooking.Web.Pages.Admin
 
 				await recipeRepository.InsertRecipeDetail(recipeDetail);
 
-				return new JsonResult(new { result = true });
+				return new JsonResult(new { result = true, entityId = recipeDetail.Id });
 			}
 			catch (Exception ex)
 			{

@@ -244,9 +244,9 @@
 							var row = '';
 							row += '<tr>';
 							row += '<td>@(aa += 1)</td>';
-							row += '<td id="item-' + response.entityId + '">' + itemName + '</td>';
-							row += '<td id="unit-' + response.entityId + '">' + unitName + '</td>';
-							row += '<td id="qty-' + response.entityId + '">' + qty + '</td>';
+							row += '<td class="item-' + response.entityId + '">' + itemName + '</td>';
+							row += '<td class="unit-' + response.entityId + '">' + unitName + '</td>';
+							row += '<td class="qty-' + response.entityId + '">' + qty + '</td>';
 							row += '<td><button class="btn btn-link edit-item-from-recipe" data-value-id="' + response.entityId + '"><i class="fas fa-edit" title="Επεξεργασία"></i></button> <button class="btn btn-link delete-item-from-recipe" data-value-id="' + response.entityId + '"><i class="far fa-trash-alt" title="Διαγραφή"></i></button></td>';
 							row += '</tr>';
 							$("#recipe-detail-rows tbody").append(row);
@@ -357,6 +357,8 @@
 				$("#editUnit").val(unitName);
 				$("#editQty").val(qty);
 				$("#editRecipeDetailId").val(recipeDetailId);
+
+				
 
 				$("#EditRecipeItemModal").modal("show");
 			});
