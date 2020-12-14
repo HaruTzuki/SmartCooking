@@ -2,13 +2,18 @@
 @model SmartCooking.Web.Pages.Admin.UnitCreateModel
 @{
 	Layout = "~/Theme/SBAdmin/Main.cshtml";
+	ViewData["PageTitle"] = "Δημιουργία Μονάδας Μέτρησης";
+	ViewData["Breadcrumb"] = "Μονάδα Μέτρησης / Δημιουργία Μονάδας Μέτρησης";
 }
 
 <div class="card mb-5">
 	<div class="card-content">
 		<div class="card-body">
-			<button class="btn btn-success btn-lg" id="itemCategorySubmit">
-				ΑΠΟΘΗΚΕΥΣΗ
+			<button class="btn btn-warning">
+				<i class='bx bx-left-arrow-circle' id="unitBack"></i> ΠΙΣΩ
+			</button>
+			<button class="btn btn-success" id="itemCategorySubmit">
+				<i class="fas fa-save"></i> ΑΠΟΘΗΚΕΥΣΗ
 			</button>
 		</div>
 	</div>
@@ -45,7 +50,25 @@
 				e.preventDefault();
 
 				$("#itemCategoryForm").submit();
-			})
+			});
+
+			$("#unitBack").click(function (e) {
+				e.preventDefault();
+
+				Swal.fire({
+					title: 'Είσαι βέβαιος;',
+					text: 'Οι αλλαγές δεν θα αποθηκευτούν. Είσαι σύμφωνος με αυτό;',
+					icon: 'warning',
+					showCloseButton: true,
+					showCancelButton: true,
+					confirmButtonText: 'Επιβεβαίωση',
+					cancelButtonText: 'Ακύρωση'
+				}).then(result => {
+					if (result.isConfirmed) {
+						location.href = '@Url.Content($"~/Admin/UnitList")';
+					}
+				});
+			});
 		});
 	</script>
 }

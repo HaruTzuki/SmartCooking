@@ -6,15 +6,16 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<meta name="description" content="" />
 	<meta name="author" content="" />
-	<title>Dashboard - Smart Cooking</title>
+	<title>@ViewData["PageTitle"] - Smart Cooking</title>
 	<link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="~/theme/admin/css/jquery-ui.min.css" />
+	<link href="~/lib/boxicons-2.0.7/css/boxicons.css" rel="stylesheet"/>
 	<link href="~/theme/admin/css/styles.css" rel="stylesheet" />
 </head>
 <body class="sb-nav-fixed">
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-		<a class="navbar-brand" href="index.html">Start Bootstrap</a>
+		<a class="navbar-brand" href="index.html">Admin Panel</a>
 		<button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
 		<!-- Navbar Search-->
 		<form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
@@ -44,37 +45,37 @@
 				<div class="sb-sidenav-menu">
 					<div class="nav">
 						<div class="sb-sidenav-menu-heading">Core</div>
-						<a class="nav-link" href="index.html">
-							<div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+						<a class="nav-link" href="@Url.Content("~/Admin/Index")">
+							<div class="sb-nav-link-icon"><i class='bx bxs-dashboard'></i></div>
 							Dashboard
 						</a>
 						<a class="nav-link" href="@Url.Content("~/Admin/ItemCategoryList")">
-							<div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+							<div class="sb-nav-link-icon"><i class='bx bxs-category-alt'></i></div>
 							Κατηγορία Ειδών
 						</a>
 						<a class="nav-link" href="@Url.Content("~/Admin/ItemList")">
-							<div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+							<div class="sb-nav-link-icon"><i class='bx bxs-box'></i></div>
 							Λίστα Ειδών
 						</a>
 						<a class="nav-link" href="@Url.Content("~/Admin/UnitList")">
-							<div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+							<div class="sb-nav-link-icon"><i class='bx bxs-bookmark-alt'></i></div>
 							Λίστα Μονάδων Μέτρησης
 						</a>
 						<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-							<div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+							<div class="sb-nav-link-icon"><i class='bx bxs-file'></i></div>
 							Συνταγές
 							<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
 						</a>
 						<div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="@Url.Content("~/Admin/RecipeList")">Λίστα Συνταγών</a>
-								<a class="nav-link" href="@Url.Content("~/Admin/DraftRecipeList")">Λίστα Πρόχειρων Συνταγών</a>
+								<a class="nav-link" href="@Url.Content("~/Admin/RecipeList")"><i class='bx bx-right-arrow-circle mr-2'></i> Λίστα Συνταγών</a>
+								<a class="nav-link" href="@Url.Content("~/Admin/DraftRecipeList")"> <i class='bx bx-right-arrow-circle mr-2'></i> Λίστα Πρόχειρων Συνταγών</a>
 							</nav>
 						</div>
 
 						<div class="sb-sidenav-menu-heading">Ασφάλεια</div>
 						<a class="nav-link" href="@Url.Content("~/Admin/UserList")">
-							<div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+							<div class="sb-nav-link-icon"><i class='bx bx-user'></i></div>
 							Χρήστες
 						</a>
 					</div>
@@ -88,9 +89,9 @@
 		<div id="layoutSidenav_content">
 			<main>
 				<div class="container-fluid">
-					<h1 class="mt-4">Dashboard</h1>
+					<h1 class="mt-4">@ViewData["PageTitle"]</h1>
 					<ol class="breadcrumb mb-4">
-						<li class="breadcrumb-item active">Dashboard</li>
+						<li class="breadcrumb-item active">@ViewData["Breadcrumb"]</li>
 					</ol>
 
 					@RenderBody()
@@ -99,7 +100,7 @@
 			<footer class="py-4 bg-light mt-auto">
 				<div class="container-fluid">
 					<div class="d-flex align-items-center justify-content-between small">
-						<div class="text-muted">Copyright &copy; Your Website 2020</div>
+						<div class="text-muted">Copyright &copy; Smart Cooking 2020</div>
 						<div>
 							<a href="#">Privacy Policy</a>
 							&middot;

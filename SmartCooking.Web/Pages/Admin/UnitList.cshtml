@@ -2,6 +2,8 @@
 @model SmartCooking.Web.Pages.Admin.UnitListModel
 @{
 	Layout = "~/Theme/SBAdmin/Main.cshtml";
+	ViewData["PageTitle"] = "Μονάδες Μέτρησης";
+	ViewData["Breadcrumb"] = "Μονάδα Μέτρησης";
 }
 
 <div class="card mb-5">
@@ -9,7 +11,7 @@
 		<div class="card-body">
 			<div class="row">
 				<div class="col-sm-12">
-					<a href="@Url.Content("~/Admin/UnitCreate")" class="btn btn-success">ΔΗΜΙΟΥΡΓΙΑ</a>
+					<a href="@Url.Content("~/Admin/UnitCreate")" class="btn btn-info"><i class='bx bx-plus-circle'></i> ΔΗΜΙΟΥΡΓΙΑ</a>
 				</div>
 			</div>
 		</div>

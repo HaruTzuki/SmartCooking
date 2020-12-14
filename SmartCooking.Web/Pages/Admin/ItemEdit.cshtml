@@ -2,12 +2,17 @@
 @model SmartCooking.Web.Pages.Admin.ItemEditModel
 @{
 	Layout = "~/Theme/SBAdmin/Main.cshtml";
+	ViewData["PageTitle"] = "Επεξεργασία Είδους";
+	ViewData["Breadcrumb"] = "Είδος / Επεξεργασία Είδους";
 }
 <div class="card mb-5">
 	<div class="card-content">
 		<div class="card-body">
-			<button class="btn btn-success btn-lg" id="itemSubmit">
-				ΑΠΟΘΗΚΕΥΣΗ
+			<button class="btn btn-warning">
+				<i class='bx bx-left-arrow-circle' id="itemBack"></i> ΠΙΣΩ
+			</button>
+			<button class="btn btn-success" id="itemSubmit">
+				<i class="fas fa-save"></i> ΑΠΟΘΗΚΕΥΣΗ
 			</button>
 		</div>
 	</div>
@@ -48,7 +53,25 @@
 				e.preventDefault();
 
 				$("#itemForm").submit();
-			})
+			});
+
+			$("#itemBack").click(function (e) {
+				e.preventDefault();
+
+				Swal.fire({
+					title: 'Είσαι βέβαιος;',
+					text: 'Οι αλλαγές δεν θα αποθηκευτούν. Είσαι σύμφωνος με αυτό;',
+					icon: 'warning',
+					showCloseButton: true,
+					showCancelButton: true,
+					confirmButtonText: 'Επιβεβαίωση',
+					cancelButtonText: 'Ακύρωση'
+				}).then(result => {
+					if (result.isConfirmed) {
+						location.href = '@Url.Content($"~/Admin/ItemList")';
+					}
+				});
+			});
 		});
 	</script>
 }
