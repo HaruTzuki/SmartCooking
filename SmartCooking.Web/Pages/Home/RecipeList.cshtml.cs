@@ -12,16 +12,21 @@ namespace SmartCooking.Web.Pages.Home
     public class RecipeListModel : PageModel
     {
 		private readonly IRecipeRepository recipeRepository;
-        [BindProperty] public IEnumerable<RecipeHeader> RecipeHeaders { get; set; }
+		private readonly IRecipeImageRepository recipeImageRepository;
 
-		public RecipeListModel(IRecipeRepository recipeRepository)
+		[BindProperty] public IEnumerable<RecipeHeader> RecipeHeaders { get; set; }
+		[BindProperty] public IEnumerable<RecipeImage> RecipeImages { get; set; }
+
+		public RecipeListModel(IRecipeRepository recipeRepository, IRecipeImageRepository recipeImageRepository)
 		{
 			this.recipeRepository = recipeRepository;
+			this.recipeImageRepository = recipeImageRepository;
 		}
 
         public async Task<IActionResult> OnGetAsync()
         {
             RecipeHeaders = (await recipeRepository.GetRecipeHeaders()).Where(x=>x.RecipeType == Common.Enumeration.RecipeType.Done);
+			RecipeImages = (await recipeImageRepository.GetRecipeImages()).Where(x => x.ProfileImage);
 
             return Page();
         }

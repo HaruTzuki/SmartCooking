@@ -118,6 +118,44 @@
 	</div>
 </div>
 
+<div class="card mb-2">
+	<div class="card-content">
+		<div class="card-body">
+			<label class="lead">Ανέβασμα φωτογραφίων</label>
+			<hr />
+
+			<form action="@Url.Content($"~/api/Recipe/UploadRecipeImage")"
+				  class="dropzone"
+				  id="my-awesome-dropzone">
+				<input type="hidden" name="recipeId" asp-for="RecipeHeader.Id" />
+
+			</form>
+			<div class="row mt-5">
+				<div class="col-sm-3">
+					<h3>Εικόνα προφίλ</h3>
+					<hr />
+					<img src="@Html.Raw($"data:{Model.RecipeImages.FirstOrDefault(x=>x.ProfileImage).ContentType};charset=utf-8;base64,{Model.RecipeImages.FirstOrDefault(x=>x.ProfileImage).ContentValue}")" alt="@Model.RecipeImages.FirstOrDefault(x=>x.ProfileImage).FileName" style="width: 100%" />
+				</div>
+				<div class="col-sm-9">
+					<h3>Γκαλερή φωτογραφίων</h3>
+					<hr />
+					<div class="owl-carousel ">
+						@foreach (var image in Model.RecipeImages)
+						{
+							<div class="item">
+								<a class="item-modal" data-recipeId="@image.RecipeId" data-imgId="@image.Id">
+									<img src="@Html.Raw($"data:{image.ContentType};charset=utf-8;base64,{image.ContentValue}")" alt="@image.FileName" />
+								</a>
+							</div>
+						}
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
 @section modals{
 	<div class="modal fade" id="AddRecipeItemModal" tabindex="-1" role="dialog" aria-labelledby="AddRecipeItemModal" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
@@ -210,6 +248,68 @@
 @section scripts{
 	<script>
 		$(document).ready(function () {
+
+			$(".owl-carousel").owlCarousel({
+				loop: true,
+				center: false,
+				autoWidth: false,
+				stagePadding: 50,
+				margin: 10,
+				responsiveClass: true,
+				responsive: {
+					0: {
+						items: 1,
+						nav: true
+					},
+					600: {
+						items: 3,
+						nav: false
+					},
+					1000: {
+						items: 5,
+						nav: true,
+						loop: false
+					}
+				},
+				afterUpdate: function () {
+					updateSize();
+				},
+				afterInit: function () {
+					updateSize();
+				}
+			});
+
+			function updateSize() {
+				var minHeight = parseInt($('.owl-item').eq(0).css('height'));
+				$('.owl-item').each(function () {
+					var thisHeight = parseInt($(this).css('height'));
+					minHeight = (minHeight <= thisHeight ? minHeight : thisHeight);
+				});
+				$('.owl-wrapper-outer').css('height', minHeight + 'px');
+			}
+
+			$(".item-modal").click(function (e) {
+
+				Swal.fire({
+					title: '<strong>Ενέργειες</strong>',
+					icon: 'info',
+					html:
+						'<div class="row text-center">' +
+						'<div class="col-sm-12 text-center">' +
+						'<button class="btn btn-info mr-2 set-profile-image" data-recipeId="' + $(this).attr("data-recipeId") + '" data-imgId="' + $(this).attr("data-imgId") + '">Ορισμός ως Φωτογραφία προφίλ</button>' +
+						'<button class="btn btn-danger delete-recipe-image" data-imgId="' + $(this).attr("data-imgId") + '">Διαγραφή</button>' +
+						'</div>' +
+						'</div>',
+					showCloseButton: true,
+					showCancelButton: true,
+					showConfirmButton: false,
+					focusConfirm: false,
+					cancelButtonText:
+						'Ακύρωση',
+					cancelButtonAriaLabel: 'Ακύρωση'
+				})
+			});
+
 			$("#btnRecipeItemAdd").click(function (e) {
 				e.preventDefault();
 				$("#AddRecipeItemModal").modal('show');
@@ -386,6 +486,60 @@
 					}
 				});
 			});
+
+			$(document).on("click", ".set-profile-image", function (e) {
+				var recipeId = $(this).attr("data-recipeId");
+				var imgId = $(this).attr("data-imgId");
+
+				$.ajax({
+					url: '@Url.Content($"~/api/Recipe/UpdateImageProfile")',
+					type: 'post',
+					contentType: 'application/json; charset=utf-8',
+					data: JSON.stringify({ RecipeId: recipeId, ImageId: imgId }),
+					success: function (response) {
+						if (response.result) {
+							location.reload();
+						}
+						else {
+							Swal.fire({
+								title: 'Σφάλμα',
+								text: response.message,
+								icon: 'error'
+							});
+						}
+					},
+					error: function (err) {
+						console.error(err);
+					}
+				});
+			});
+
+			$(document).on("click", ".delete-recipe-image", function (e) {
+				var imgId = $(this).attr("data-imgId");
+
+				$.ajax({
+					url: '@Url.Content($"~/api/Recipe/DeleteRecipeImage")',
+					type: 'post',
+					contentType: 'application/json; charset=utf-8',
+					data: JSON.stringify(imgId),
+					success: function (response) {
+						if (response.result) {
+							location.reload();
+						}
+						else {
+							Swal.fire({
+								title: 'Σφάλμα',
+								text: response.message,
+								icon: 'error'
+							});
+						}
+					},
+					error: function (err) {
+						console.error(err);
+					}
+				});
+			});
+
 		});
 	</script>
 }

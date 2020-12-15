@@ -27,6 +27,7 @@ namespace SmartCooking.Web
 			services.AddScoped<IRecipeRepository, RecipeRepository>();
 			services.AddScoped<IItemRepository, ItemRepository>();
 			services.AddScoped<IItemCategoryRepository, ItemCategoryRepository>();
+			services.AddScoped<IRecipeImageRepository, RecipeImageRepository>();
 
 			services.AddDbContext<MyDbContext>();
 

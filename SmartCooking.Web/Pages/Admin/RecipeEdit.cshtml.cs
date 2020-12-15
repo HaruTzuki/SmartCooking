@@ -17,18 +17,21 @@ namespace SmartCooking.Web.Pages.Admin
 		private readonly IRecipeRepository recipeRepository;
 		private readonly IItemRepository itemRepository;
 		private readonly IUnitRepository unitRepository;
+		private readonly IRecipeImageRepository recipeImageRepository;
 
 		[BindProperty] public int DraftRecipeHeaderId { get; set; }
 		[BindProperty] public RecipeHeader RecipeHeader { get; set; }
 		[BindProperty] public IEnumerable<RecipeDetail> RecipeDetails { get; set; }
 		[BindProperty] public IEnumerable<Unit> UnitsList { get; set; }
 		[BindProperty] public IEnumerable<Item> ItemsList { get; set; }
+		[BindProperty] public IEnumerable<RecipeImage> RecipeImages { get; set; }
 
-		public RecipeEditModel(IRecipeRepository recipeRepository, IItemRepository itemRepository, IUnitRepository unitRepository)
+		public RecipeEditModel(IRecipeRepository recipeRepository, IItemRepository itemRepository, IUnitRepository unitRepository, IRecipeImageRepository recipeImageRepository)
 		{
 			this.recipeRepository = recipeRepository;
 			this.itemRepository = itemRepository;
 			this.unitRepository = unitRepository;
+			this.recipeImageRepository = recipeImageRepository;
 		}
 
 		public async Task<IActionResult> OnGetAsync(int? draftHeaderId)
@@ -55,6 +58,8 @@ namespace SmartCooking.Web.Pages.Admin
 
 				return RedirectToPage("RecipeCreate", new { draftHeaderId = RecipeHeader.Id });
 			}
+
+			RecipeImages = await recipeImageRepository.GetRecipeImages(draftHeaderId.Value);
 
 			return Page();
 		}

@@ -5,6 +5,14 @@
     {
       "library": "twitter-bootstrap@4.5.3",
       "destination": "wwwroot/lib/bootstrap/"
+    },
+    {
+      "library": "dropzone@5.7.2",
+      "destination": "wwwroot/lib/dropzone/"
+    },
+    {
+      "library": "OwlCarousel2@2.3.4",
+      "destination": "wwwroot/lib/OwlCarousel2/"
     }
   ]
 }
