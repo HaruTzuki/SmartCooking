@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmartCooking.Data.Context;
 
 namespace SmartCooking.Data.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201216091847_fixes1")]
+    partial class fixes1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,8 +32,6 @@ namespace SmartCooking.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ItemCategoryId");
 
                     b.ToTable("SC_Item");
                 });
@@ -86,8 +86,6 @@ namespace SmartCooking.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ItemId");
-
-                    b.HasIndex("UnitId");
 
                     b.ToTable("SC_RecipeDetail");
                 });
@@ -173,41 +171,16 @@ namespace SmartCooking.Data.Migrations
                     b.ToTable("SC_User");
                 });
 
-            modelBuilder.Entity("SmartCooking.Infastructure.Products.Item", b =>
-                {
-                    b.HasOne("SmartCooking.Infastructure.Products.ItemCategory", "ItemCategory")
-                        .WithMany("Items")
-                        .HasForeignKey("ItemCategoryId");
-
-                    b.Navigation("ItemCategory");
-                });
-
             modelBuilder.Entity("SmartCooking.Infastructure.Recipes.RecipeDetail", b =>
                 {
                     b.HasOne("SmartCooking.Infastructure.Products.Item", "Item")
                         .WithMany("RecipeDetails")
                         .HasForeignKey("ItemId");
 
-                    b.HasOne("SmartCooking.Infastructure.Products.Unit", "Unit")
-                        .WithMany("RecipeDetails")
-                        .HasForeignKey("UnitId");
-
                     b.Navigation("Item");
-
-                    b.Navigation("Unit");
                 });
 
             modelBuilder.Entity("SmartCooking.Infastructure.Products.Item", b =>
-                {
-                    b.Navigation("RecipeDetails");
-                });
-
-            modelBuilder.Entity("SmartCooking.Infastructure.Products.ItemCategory", b =>
-                {
-                    b.Navigation("Items");
-                });
-
-            modelBuilder.Entity("SmartCooking.Infastructure.Products.Unit", b =>
                 {
                     b.Navigation("RecipeDetails");
                 });

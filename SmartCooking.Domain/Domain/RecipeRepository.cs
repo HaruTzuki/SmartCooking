@@ -63,7 +63,10 @@ namespace SmartCooking.Data.Domain
 		/// <returns></returns>
 		public async Task<RecipeDetail> GetRecipeDetail(int id)
 		{
-			return await context.SC_RecipeDetail.FirstOrDefaultAsync(x => x.Id == id);
+			return await context.SC_RecipeDetail
+				.Include(itm=>itm.Item)
+				.Include(unt=>unt.Unit)
+				.FirstOrDefaultAsync(x => x.Id == id);
 		}
 
 		/// <summary>
@@ -82,14 +85,11 @@ namespace SmartCooking.Data.Domain
 		/// <returns></returns>
 		public async Task<IEnumerable<RecipeDetail>> GetRecipeDetails(int recipeHeaderId)
 		{
-			List<RecipeDetail> details = await context.SC_RecipeDetail.Where(x => x.RecipeHeaderId == recipeHeaderId).ToListAsync();
-			details.ToList().ForEach(x =>
-			{
-				x.Item = context.SC_Item.FirstOrDefaultAsync(item => item.Id == x.ItemId).Result;
-				x.Unit = context.SC_Unit.FirstOrDefaultAsync(unit => unit.Id == x.UnitId).Result;
-			});
-
-			return details;
+			return await context.SC_RecipeDetail
+				.Include(itm=>itm.Item)
+				.Include(unt=>unt.Unit)
+				.Where(x => x.RecipeHeaderId == recipeHeaderId)
+				.ToListAsync();
 		}
 
 		/// <summary>

@@ -43,7 +43,9 @@ namespace SmartCooking.Data.Domain
 		/// <returns></returns>
 		public async Task<Item> GetItem(int Id)
 		{
-			return await context.SC_Item.FirstOrDefaultAsync(x => x.Id == Id);
+			return await context.SC_Item
+				.Include(itmCat=>itmCat.ItemCategory)
+				.FirstOrDefaultAsync(x => x.Id == Id);
 		}
 
 		/// <summary>
@@ -53,7 +55,9 @@ namespace SmartCooking.Data.Domain
 		/// <returns></returns>
 		public async Task<Item> GetItem(string name)
 		{
-			return await context.SC_Item.FirstOrDefaultAsync(x => x.Name == name);
+			return await context.SC_Item
+				.Include(itmCat => itmCat.ItemCategory)
+				.FirstOrDefaultAsync(x => x.Name == name);
 		}
 
 		/// <summary>
@@ -62,7 +66,9 @@ namespace SmartCooking.Data.Domain
 		/// <returns></returns>
 		public async Task<IEnumerable<Item>> GetItems()
 		{
-			return await context.SC_Item.ToListAsync();
+			return await context.SC_Item
+				.Include(itmCat => itmCat.ItemCategory)
+				.ToListAsync();
 		}
 
 		/// <summary>

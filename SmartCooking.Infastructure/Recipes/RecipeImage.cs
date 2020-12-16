@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SmartCooking.Infastructure.Recipes
+﻿namespace SmartCooking.Infastructure.Recipes
 {
 	public class RecipeImage
 	{

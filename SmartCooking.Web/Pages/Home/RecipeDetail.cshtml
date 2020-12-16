@@ -1,0 +1,43 @@
+﻿@page "{recipeId:int?}"
+@model SmartCooking.Web.Pages.Home.RecipeDetailModel
+@{
+	//ViewData["Title"] = "";
+	Layout = "~/Theme/TasteIt/Page.cshtml";
+}
+
+<div class="row">
+	<div class="col-lg-12 col-sm-12">
+		@foreach (var image in Model.RecipeImages)
+		{
+			<div class="item">
+				<a href="@Html.ConvertImageToHtml(image)" alt="@image?.FileName"></a>
+			</div>
+		}
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-12 col-sm-12">
+		<div class="d-flex justify-content-start align-items-center">
+		<h1 class="mr-2">@Model.RecipeHeader.Name</h1>
+		@if (!string.IsNullOrEmpty(Model.RecipeHeader.Code))
+		{
+			<h4>(Κωδικός συνταγής: @Model.RecipeHeader.Code)</h4>
+		}
+
+		</div>
+		<hr />
+		<h2>Υλικά</h2>
+		<hr />
+		<ul>
+			@foreach (var detail in Model.RecipeDetails)
+			{
+				<li>@detail.Quantity @detail.Unit.Name - @detail.Item.Name</li>
+			}
+		</ul>
+
+		<h2>Τρόπος εκτέλεσης</h2>
+		<hr />
+			@Html.Raw(Markdig.Markdown.ToHtml(Model.RecipeHeader.Description))
+	</div>
+</div>

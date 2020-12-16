@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace SmartCooking.Infastructure.Products
 {
@@ -11,5 +12,6 @@ namespace SmartCooking.Infastructure.Products
 
 		[Required]
 		public string Name { get; set; }
+		public List<Item> Items { get; set; }
 	}
 }

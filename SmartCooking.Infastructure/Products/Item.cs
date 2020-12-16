@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SmartCooking.Infastructure.Recipes;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace SmartCooking.Infastructure.Products
 {
@@ -13,5 +15,7 @@ namespace SmartCooking.Infastructure.Products
 		public string Name { get; set; }
 
 		public int? ItemCategoryId { get; set; }
+		public ItemCategory ItemCategory { get; set; }
+		public List<RecipeDetail> RecipeDetails { get; set; }
 	}
 }

@@ -13,7 +13,7 @@
 				<img src="@Html.Raw($"data:{Model.RecipeImages.FirstOrDefault(x=>x.RecipeId == recipeHeader.Id)?.ContentType};charset=utf-8;base64,{Model.RecipeImages.FirstOrDefault(x=>x.RecipeId == recipeHeader.Id)?.ContentValue}")" alt="@recipeHeader.Name" style="width: 100%; height: 180px;"/>
 				<div class="card-body">
 					<div class="card-title">@recipeHeader.Name</div>
-					<a href="@Url.Content("~/Home/RecipeDetails")" class="btn btn-primary">Περισσότερες πληροφορίες</a>
+					<a href="@Url.Content($"~/Home/RecipeDetail/{recipeHeader.Id}")" class="btn btn-primary">Περισσότερες πληροφορίες</a>
 				</div>
 			</div>
 		</div>
