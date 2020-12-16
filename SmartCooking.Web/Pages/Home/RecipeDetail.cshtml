@@ -5,28 +5,25 @@
 	Layout = "~/Theme/TasteIt/Page.cshtml";
 }
 
-<div class="row">
-	<div class="col-lg-12 col-sm-12">
-		@foreach (var image in Model.RecipeImages)
-		{
-			<div class="item">
-				<a href="@Html.ConvertImageToHtml(image)" alt="@image?.FileName"></a>
-			</div>
-		}
-	</div>
+<div class="d-flex justify-content-start align-items-center">
+	<h1 class="mr-2">@Model.RecipeHeader.Name</h1>
+	@if (!string.IsNullOrEmpty(Model.RecipeHeader.Code))
+	{
+		<h4>(Κωδικός συνταγής: @Model.RecipeHeader.Code)</h4>
+	}
+</div>
+<hr />
+<div id="owl-demo" class="owl-carousel owl-theme">
+	@foreach (var image in Model.RecipeImages)
+	{
+		<div class="item">
+			<img src="@Html.ConvertImageToHtml(image)" alt="@image?.FileName" />
+		</div>
+	}
 </div>
 
 <div class="row">
-	<div class="col-lg-12 col-sm-12">
-		<div class="d-flex justify-content-start align-items-center">
-		<h1 class="mr-2">@Model.RecipeHeader.Name</h1>
-		@if (!string.IsNullOrEmpty(Model.RecipeHeader.Code))
-		{
-			<h4>(Κωδικός συνταγής: @Model.RecipeHeader.Code)</h4>
-		}
-
-		</div>
-		<hr />
+	<div class="col-lg col-sm">
 		<h2>Υλικά</h2>
 		<hr />
 		<ul>
@@ -38,6 +35,35 @@
 
 		<h2>Τρόπος εκτέλεσης</h2>
 		<hr />
-			@Html.Raw(Markdig.Markdown.ToHtml(Model.RecipeHeader.Description))
+		@Html.Raw(Markdig.Markdown.ToHtml(Model.RecipeHeader.Description))
 	</div>
 </div>
+
+
+@section scripts{
+	<script>
+
+
+		$(document).ready(function () {
+
+			$("#owl-demo").owlCarousel({
+
+				//navigation: true, // Show next and prev buttons
+
+				slideSpeed: 300,
+				paginationSpeed: 400,
+
+				items: 1,
+				itemsDesktop: false,
+				itemsDesktopSmall: false,
+				itemsTablet: false,
+				itemsMobile: false
+
+			});
+
+		});
+
+
+	</script>
+
+}

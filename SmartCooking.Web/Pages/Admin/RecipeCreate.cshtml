@@ -135,7 +135,7 @@
 				<div class="col-sm-3">
 					<h3>Εικόνα προφίλ</h3>
 					<hr />
-					<img src="@Html.Raw($"data:{Model.RecipeImages.FirstOrDefault(x=>x.ProfileImage).ContentType};charset=utf-8;base64,{Model.RecipeImages.FirstOrDefault(x=>x.ProfileImage).ContentValue}")" alt="@Model.RecipeImages.FirstOrDefault(x=>x.ProfileImage).FileName" style="width: 100%" />
+					<img src="@Html.ConvertImageToHtml(Model.RecipeImages.FirstOrDefault(x=>x.ProfileImage))" alt="@Model.RecipeImages.FirstOrDefault(x=>x.ProfileImage)?.FileName" style="width: 100%" />
 				</div>
 				<div class="col-sm-9">
 					<h3>Γκαλερή φωτογραφίων</h3>
