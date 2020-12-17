@@ -1,17 +1,20 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SmartCooking.Data.Repository;
 using SmartCooking.Web.Helpers;
 
 namespace SmartCooking.Web.Pages
 {
 	public class IndexModel : UserPageModel
 	{
+		public IndexModel(IUserRepository userRepository) : base (userRepository)
+		{
+
+		}
+
 		public IActionResult OnGet()
 		{
-			ViewData["IsLogged"] = HttpContext.Session.GetInt32("ISLOGIN");
-			ViewData["Username"] = HttpContext.Session.GetString("USERNAME");
-			ViewData["IsAdmin"] = HttpContext.Session.GetString("ISADMIN");
-
+			GetSessionValues();
 			return Page();
 		}
 	}

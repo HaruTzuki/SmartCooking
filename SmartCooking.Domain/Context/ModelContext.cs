@@ -28,6 +28,7 @@ namespace SmartCooking.Data.Context
 		public DbSet<RecipeHeader> SC_RecipeHeader { get; set; }
 		public DbSet<RecipeDetail> SC_RecipeDetail { get; set; }
 		public DbSet<RecipeImage> SC_RecipeImage { get; set; }
+		public DbSet<UserFavoriteRecipe> SC_UserFavoriteRecipe { get; set; }
 		public DbSet<User> SC_User { get; set; }
 	}
 }

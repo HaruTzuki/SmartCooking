@@ -1,4 +1,5 @@
 ﻿using SmartCooking.Common.Enumeration;
+using System.Collections.Generic;
 
 namespace SmartCooking.Infastructure.Recipes
 {
@@ -13,5 +14,7 @@ namespace SmartCooking.Infastructure.Recipes
 		public string Code { get; set; }
 		public string Tags { get; set; }
 		public RecipeType RecipeType { get; set; }
+		public bool RecipeOfTheDay { get; set; }
+		public List<UserFavoriteRecipe> UserFavoriteRecipe { get; set; }
 	}
 }

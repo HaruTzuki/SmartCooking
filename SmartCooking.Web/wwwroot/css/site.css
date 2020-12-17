@@ -82,3 +82,12 @@ body {
 .owl-carousel .item {
 	margin: 0px;
 }
+
+.favorite-heart {
+	position: absolute;
+	margin: 5px;
+	right: 0;
+	color: red;
+	cursor: pointer;
+	font-size: 1.5em;
+}

@@ -9,6 +9,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&display=swap" rel="stylesheet">
 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 	<link rel="stylesheet" href="~/theme/css/animate.css">
@@ -19,7 +20,6 @@
 
 	<link rel="stylesheet" href="~/theme/css/bootstrap-datepicker.css">
 	<link rel="stylesheet" href="~/theme/css/jquery.timepicker.css">
-
 	<link rel="stylesheet" href="~/theme/css/flaticon.css">
 	<link rel="stylesheet" href="~/theme/admin/css/jquery-ui.min.css" />
 	<link rel="stylesheet" href="~/theme/css/style.css">
@@ -38,9 +38,9 @@
 				<div class="col-4 col-md d-flex justify-content-md-center">
 					<div class="social-media">
 						<p class="mb-0 d-flex align-items-center justify-content-center">
-							<a href="https://www.facebook.com/SmartCooking-107055567925547" class="d-flex align-items-center justify-content-center"><span class="fa fa-facebook"><i class="sr-only">Facebook</i></span></a>
-							<a href="https://twitter.com/smartcooking7" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter"><i class="sr-only">Twitter</i></span></a>
-							<a href="https://www.instagram.com/smart_cooking26/" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram"><i class="sr-only">Instagram</i></span></a>
+							<a href="https://www.facebook.com/SmartCooking-107055567925547" class="d-flex align-items-center justify-content-center"><i class="fab fa-facebook"></i></a>
+							<a href="https://twitter.com/smartcooking7" class="d-flex align-items-center justify-content-center"><i class="fab fa-twitter"></i></a>
+							<a href="https://www.instagram.com/smart_cooking26/" class="d-flex align-items-center justify-content-center"><i class="fab fa-instagram"></i></a>
 						</p>
 					</div>
 				</div>
@@ -48,21 +48,18 @@
 				<div class="col-4 col-md d-flex align-items-center justify-content-end">
 					@if (Convert.ToInt32(ViewData["IsLogged"]) != 1)
 					{
-						<a href="@Url.Content("~/Account/Login")" class="d-flex align-items-center justify-content-center mr-2"><span style="color: white;">Σύνδεση</span></a>
-						<a href="@Url.Content("~/Account/Register")" class="d-flex align-items-center justify-content-center mr-2"><span style="color: white;">Εγγραφή</span></a>
+						<a href="@Url.Content("~/Account/Login")" class="d-flex align-items-center justify-content-center mr-2"><span style="color: white;"><i class="fas fa-sign-in-alt"></i> Σύνδεση</span></a>
+						<a href="@Url.Content("~/Account/Register")" class="d-flex align-items-center justify-content-center mr-2"><span style="color: white;"><i class="fas fa-edit"></i> Εγγραφή</span></a>
 					}
 					else
 					{
 						if (Convert.ToInt32(ViewData["IsAdmin"]) == 1)
 						{
-							<a href="@Url.Content("~/Admin/Index")" class="d-flex align-items-center justify-content-center mr-2"><span style="color: white;">Πίνακας Ελέγχου</span></a>
-						}
-						else
-						{
-							<a href="@Url.Content("~/Account/Edit")" class="d-flex align-items-center justify-content-center mr-2"><span style="color: white;">Ρυθμίσεις</span></a>
+							<a href="@Url.Content("~/Admin/Index")" class="d-flex align-items-center justify-content-center mr-2"><span style="color: white;"><i class="fas fa-tachometer-alt"></i> Πίνακας Ελέγχου</span></a>
 						}
 
-						<a href="@Url.Content("~/Account/Logout")" class="d-flex align-items-center justify-content-center mr-2"><span style="color: white;">Έξοδος</span></a>
+						<a href="@Url.Content("~/Account/Edit")" class="d-flex align-items-center justify-content-center mr-2"><span style="color: white;"><i class="fas fa-user-cog"></i> Ρυθμίσεις</span></a>
+						<a href="@Url.Content("~/Account/Logout")" class="d-flex align-items-center justify-content-center mr-2"><span style="color: white;"><i class="fas fa-sign-out-alt"></i> Έξοδος</span></a>
 					}
 				</div>
 			</div>
@@ -136,9 +133,9 @@
 						<h2 class="ftco-heading-2">Smart Cooking</h2>
 						<p>Δεν μπορεί κάποιος να σκεφτεί καλά, να αγαπήσει καλά, να κοιμηθεί καλά, αν δεν έχει φάει καλά.</p>
 						<ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-3">
-							<li class="ftco-animate"><a href="https://twitter.com/smartcooking7"><span class="fa fa-twitter"></span></a></li>
-							<li class="ftco-animate"><a href="https://www.facebook.com/SmartCooking-107055567925547"><span class="fa fa-facebook"></span></a></li>
-							<li class="ftco-animate"><a href="https://www.instagram.com/smart_cooking26/"><span class="fa fa-instagram"></span></a></li>
+							<li class="ftco-animate"><a href="https://twitter.com/smartcooking7"><i class="fab fa-twitter"></i></a></li>
+							<li class="ftco-animate"><a href="https://www.facebook.com/SmartCooking-107055567925547"><i class="fab fa-facebook"></i></a></li>
+							<li class="ftco-animate"><a href="https://www.instagram.com/smart_cooking26/"><i class="fab fa-instagram"></i></a></li>
 						</ul>
 					</div>
 				</div>

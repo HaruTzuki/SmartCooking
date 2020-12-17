@@ -22,12 +22,14 @@ namespace SmartCooking.Web
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
+			services.AddSession();
 			services.AddScoped<IUserRepository, UserRepository>();
 			services.AddScoped<IUnitRepository, UnitRepository>();
 			services.AddScoped<IRecipeRepository, RecipeRepository>();
 			services.AddScoped<IItemRepository, ItemRepository>();
 			services.AddScoped<IItemCategoryRepository, ItemCategoryRepository>();
 			services.AddScoped<IRecipeImageRepository, RecipeImageRepository>();
+			services.AddScoped<IUserFavoriteRecipeRepository, UserFavoriteRecipeRepository>();
 
 			services.AddDbContext<MyDbContext>();
 
@@ -38,7 +40,6 @@ namespace SmartCooking.Web
 #endif
 
 			services.AddRazorPages();
-			services.AddSession();
 			services.AddMemoryCache();
 			services.AddMvc().AddRazorPagesOptions(opt =>
 			{
@@ -68,9 +69,9 @@ namespace SmartCooking.Web
 				app.UseHsts();
 			}
 
+			app.UseSession();
 			app.UseHttpsRedirection();
 			app.UseStaticFiles();
-			app.UseSession();
 			app.UseRouting();
 
 			app.UseAuthorization();

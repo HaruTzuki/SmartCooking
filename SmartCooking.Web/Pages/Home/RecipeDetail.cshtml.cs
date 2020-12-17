@@ -6,10 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SmartCooking.Data.Repository;
 using SmartCooking.Infastructure.Recipes;
+using SmartCooking.Web.Helpers;
 
 namespace SmartCooking.Web.Pages.Home
 {
-    public class RecipeDetailModel : PageModel
+    public class RecipeDetailModel : UserPageModel
     {
 		private readonly IRecipeRepository recipeRepository;
 		private readonly IRecipeImageRepository recipeImageRepository;
@@ -18,7 +19,7 @@ namespace SmartCooking.Web.Pages.Home
 		public IEnumerable<RecipeDetail> RecipeDetails { get; set; }
 		public IEnumerable<RecipeImage> RecipeImages { get; set; }
 
-		public RecipeDetailModel(IRecipeRepository recipeRepository, IRecipeImageRepository recipeImageRepository)
+		public RecipeDetailModel(IRecipeRepository recipeRepository, IRecipeImageRepository recipeImageRepository, IUserRepository userRepository) : base(userRepository)
 		{
 			this.recipeRepository = recipeRepository;
 			this.recipeImageRepository = recipeImageRepository;
@@ -26,6 +27,7 @@ namespace SmartCooking.Web.Pages.Home
 
         public async Task<IActionResult> OnGetAsync(int? recipeId)
         {
+			GetSessionValues();
 			if (!recipeId.HasValue)
 			{
 				return RedirectToPage(Url.Content($"~/Home/Index"));

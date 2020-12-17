@@ -22,13 +22,15 @@ namespace SmartCooking.Web.Api
 		private readonly IItemRepository itemRepository;
 		private readonly IUnitRepository unitRepository;
 		private readonly IRecipeImageRepository recipeImageRepository;
+		private readonly IUserFavoriteRecipeRepository userFavoriteRecipeRepository;
 
-		public RecipeController(IRecipeRepository recipeRepository, IItemRepository itemRepository, IUnitRepository unitRepository, IRecipeImageRepository recipeImageRepository)
+		public RecipeController(IRecipeRepository recipeRepository, IItemRepository itemRepository, IUnitRepository unitRepository, IRecipeImageRepository recipeImageRepository, IUserFavoriteRecipeRepository userFavoriteRecipeRepository, IUserRepository userRepository) : base(userRepository)
 		{
 			this.recipeRepository = recipeRepository;
 			this.itemRepository = itemRepository;
 			this.unitRepository = unitRepository;
 			this.recipeImageRepository = recipeImageRepository;
+			this.userFavoriteRecipeRepository = userFavoriteRecipeRepository;
 		}
 
 		[HttpPost("DeleteDetailItem")]
@@ -162,15 +164,15 @@ namespace SmartCooking.Web.Api
 		public async Task<JsonResult> DeleteRecipeImage([FromBody] int imgId)
 		{
 			var dbImg = await recipeImageRepository.GetRecipeImage(imgId);
-			
-			if(dbImg is null)
+
+			if (dbImg is null)
 			{
 				HasError = true;
 				ErrorMessage = "Δεν υπάρχει η φωτογραφία που ζητήσατε";
 				return new JsonResult(new { result = true, message = ErrorMessage });
 			}
 
-			if(!await recipeImageRepository.DeleteRecipeImage(dbImg))
+			if (!await recipeImageRepository.DeleteRecipeImage(dbImg))
 			{
 				HasError = true;
 				ErrorMessage = "Κάτι πήγε στραβά και δεν μπορέσαμε να διαγράψουμε την φωτογραφία προφίλ.";
@@ -180,6 +182,64 @@ namespace SmartCooking.Web.Api
 			HasError = false;
 
 			return new JsonResult(new { result = true });
+		}
+
+		[HttpPost("AddToFavorite")]
+		public async Task<JsonResult> AddToFavorite([FromBody] int recipeHeaderId)
+		{
+			SetUser();
+			var dbRecipeHeader = await recipeRepository.GetRecipeHeader(recipeHeaderId);
+
+			if (dbRecipeHeader is null)
+			{
+				HasError = true;
+				ErrorMessage = "Η συνταγή που ζητήσατε δεν υπάρχει.";
+				return new JsonResult(new { result = false, message = ErrorMessage });
+			}
+
+			var userFavoriteRecipe = new UserFavoriteRecipe()
+			{
+				RecipeHeaderId = recipeHeaderId,
+				UserId = CurrentUser.Id
+			};
+
+			if (!await userFavoriteRecipeRepository.InsertUserFavoriteRecipe(userFavoriteRecipe))
+			{
+				HasError = true;
+				ErrorMessage = "Κάτι πήγε στραβά και δεν μπορέσαμε να εισάγουμε το αγαπημένο.";
+				return new JsonResult(new { result = false, message = ErrorMessage });
+			}
+
+			HasError = false;
+			SuccessMessage = $"Το αντικείμενο {dbRecipeHeader.Name} προστέθηκε στα αγαπημένα.";
+			return new JsonResult(new { result = true, message = SuccessMessage });
+		}
+
+		[HttpPost("RemoveFromFavorite")]
+		public async Task<JsonResult> RemoveFromFavorite([FromBody] int recipeHeaderId)
+		{
+			SetUser();
+			var dbUserFavoriteRecipes = await userFavoriteRecipeRepository.GetUserFavoriteRecipes(CurrentUser.Id);
+
+			var dbUserFavoriteRecipe = dbUserFavoriteRecipes.FirstOrDefault(x => x.RecipeHeaderId == recipeHeaderId);
+
+			if(dbUserFavoriteRecipe is null)
+			{
+				HasError = true;
+				ErrorMessage = "Δεν βρέθηκε συνταγή προς αφάιρεση.";
+				return new JsonResult(new { result = true, message = ErrorMessage });
+			}
+
+			if(!await userFavoriteRecipeRepository.DeleteUserFavoriteRecipe(dbUserFavoriteRecipe))
+			{
+				HasError = true;
+				ErrorMessage = "Κάτι πήγε στραβά και δεν μπορέσαμε να διαγράψουμε την εγγραγή.";
+				return new JsonResult(new { result = false, message = ErrorMessage });
+			}
+
+			HasError = false;
+			SuccessMessage = $"Το αντικείμενο {dbUserFavoriteRecipe.RecipeHeader.Name} αφαιρέθηκε από τα αγαπημένα.";
+			return new JsonResult(new { result = true, message = SuccessMessage });
 		}
 	}
 

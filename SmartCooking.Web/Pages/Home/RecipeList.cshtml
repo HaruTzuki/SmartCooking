@@ -6,11 +6,36 @@
 }
 
 <div class="row">
+	<form method="get" id="recipeOrderForm">
+		<label class="lead">Ταξινόμηση</label>
+		<select class="form-control" asp-for="UserRecipeOrderBy" id="recipeOrderSelect">
+			<option value="0">Αλφαβητικά Α έως το Ω</option>
+			<option value="1">Αλφαβητικά Ω έως το Α</option>
+			@if (Model.IsUserLogged())
+			{
+				<option value="2">Αγαπημένα</option>
+			}
+		</select>
+	</form>
+</div>
+
+<div class="row">
 	@foreach (var recipeHeader in Model.RecipeHeaders)
 	{
-		<div class="col-md-3">
+		<div class="col-md-3 mt-5">
 			<div class="card">
-				<img src="@Html.Raw($"data:{Model.RecipeImages.FirstOrDefault(x=>x.RecipeId == recipeHeader.Id)?.ContentType};charset=utf-8;base64,{Model.RecipeImages.FirstOrDefault(x=>x.RecipeId == recipeHeader.Id)?.ContentValue}")" alt="@recipeHeader.Name" style="width: 100%; height: 180px;"/>
+				@if (Model.IsUserLogged())
+				{
+					@if (Model.UserFavoriteRecipes.Any(x => x.RecipeHeaderId == recipeHeader.Id && x.UserId == Model.CurrentUser.Id))
+					{
+						<i class="fas fa-heart favorite-heart remove-from-favorite" data-value="@recipeHeader.Id" title="Αφαίρεση από τα αγαπημένα"></i>
+					}
+					else
+					{
+						<i class="far fa-heart favorite-heart add-to-favorite" data-value="@recipeHeader.Id" title="Προσθήκη στα αγαπημένα"></i>
+					}
+				}
+				<img src="@Html.Raw($"{Html.ConvertImageToHtml(Model.RecipeImages.FirstOrDefault(x=>x.RecipeId == recipeHeader.Id))}")" alt="@recipeHeader.Name" style="width: 100%; height: 180px;" />
 				<div class="card-body">
 					<div class="card-title">@recipeHeader.Name</div>
 					<a href="@Url.Content($"~/Home/RecipeDetail/{recipeHeader.Id}")" class="btn btn-primary">Περισσότερες πληροφορίες</a>
@@ -19,3 +44,100 @@
 		</div>
 	}
 </div>
+
+@section scripts{
+	<script>
+		$(document).ready(function () {
+
+			$(document).on("click", ".add-to-favorite", function (e) {
+				var recipeHeaderId = $(this).attr("data-value");
+				var parent = $(this).parent();
+				var object = $(this);
+
+				$.ajax({
+					url: "@Url.Content("~/api/Recipe/AddToFavorite")",
+					type: 'post',
+					contentType: 'application/json; chartset=utf-8',
+					dataType: "json",
+					data: JSON.stringify(recipeHeaderId),
+					success: function (response) {
+						if (response.result) {
+							$(object).remove();
+							$(parent).prepend('<i class="fas fa-heart favorite-heart remove-from-favorite" data-value="' + recipeHeaderId + '" title="Αφαίρεση από τα αγαπημένα"></i>');
+							Toastify({
+								text: response.message,
+								backgroundColor: "#008000",
+								className: "info",
+								duration: 3000,
+								gravity: "bottom", // `top` or `bottom`
+								position: "right", // `left`, `center` or `right`
+							}).showToast();
+						}
+						else {
+							Toastify({
+								text: response.message,
+								backgroundColor: "#ff0000",
+								className: "info",
+								duration: 3000,
+								gravity: "bottom", // `top` or `bottom`
+								position: "left", // `left`, `center` or `right`
+							}).showToast();
+						}
+					},
+					error: function (err) {
+						console.error(err);
+					}
+				});
+			});
+
+			$(document).on("click", ".remove-from-favorite", function (e) {
+				var recipeHeaderId = $(this).attr("data-value");
+				var parent = $(this).parent();
+				var object = $(this);
+
+				$.ajax({
+					url: "@Url.Content("~/api/Recipe/RemoveFromFavorite")",
+					type: 'post',
+					contentType: 'application/json; chartset=utf-8',
+					dataType: "json",
+					data: JSON.stringify(recipeHeaderId),
+					success: function (response) {
+						if (response.result) {
+							$(object).remove();
+							$(parent).prepend('<i class="far fa-heart favorite-heart add-to-favorite" data-value="' + recipeHeaderId + '" title="Προσθήκη στα αγαπημένα"></i>');
+							Toastify({
+								text: response.message,
+								backgroundColor: "#008000",
+								className: "info",
+								duration: 3000,
+								gravity: "bottom", // `top` or `bottom`
+								position: "right", // `left`, `center` or `right`
+							}).showToast();
+
+						}
+						else {
+							Toastify({
+								text: response.message,
+								backgroundColor: "#ff0000",
+								className: "info",
+								duration: 3000,
+								gravity: "bottom", // `top` or `bottom`
+								position: "left", // `left`, `center` or `right`
+							}).showToast();
+						}
+					},
+					error: function (err) {
+						console.error(err);
+					}
+				});
+			});
+
+			$("#recipeOrderSelect").change(function () {
+				
+				console.log($("#recipeOrderForm").submit());
+			});
+
+		});
+	</script>
+
+}

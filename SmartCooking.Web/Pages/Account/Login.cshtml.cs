@@ -16,7 +16,7 @@ namespace SmartCooking.Web.Pages.Account
 
 		private readonly IUserRepository userRepository;
 
-		public LoginModel(IUserRepository userRepository)
+		public LoginModel(IUserRepository userRepository): base (userRepository)
 		{
 			this.userRepository = userRepository;
 		}
@@ -42,6 +42,7 @@ namespace SmartCooking.Web.Pages.Account
 			HttpContext.Session.SetString("USERNAME", dbUser.Username);
 			HttpContext.Session.SetInt32("ISLOGIN", 1);
 			HttpContext.Session.SetString("ISADMIN", dbUser.IsAdmin ? "1" : "0");
+			HttpContext.Session.SetInt32("USERID", dbUser.Id);
 
 			return RedirectToPage(Url.Content("~/Home/Index"));
 		}

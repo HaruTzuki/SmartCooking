@@ -1,4 +1,7 @@
-﻿namespace SmartCooking.Infastructure.Security
+﻿using SmartCooking.Infastructure.Recipes;
+using System.Collections.Generic;
+
+namespace SmartCooking.Infastructure.Security
 {
 	/// <summary>
 	/// Μοντέλο για User στη βάση δεδομένων
@@ -11,5 +14,6 @@
 		public string Email { get; set; }
 		public string FamilyName { get; set; }
 		public bool IsAdmin { get; set; }
+		public List<UserFavoriteRecipe> UserFavoriteRecipe { get; set; }
 	}
 }

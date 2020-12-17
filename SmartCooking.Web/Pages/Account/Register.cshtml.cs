@@ -13,7 +13,7 @@ namespace SmartCooking.Web.Pages.Account
 		[BindProperty] public new User User { get; set; }
 		private readonly IUserRepository userRepository;
 
-		public RegisterModel(IUserRepository userRepository)
+		public RegisterModel(IUserRepository userRepository) : base(userRepository)
 		{
 			this.userRepository = userRepository;
 		}
