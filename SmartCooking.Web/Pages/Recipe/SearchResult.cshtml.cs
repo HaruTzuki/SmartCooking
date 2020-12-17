@@ -16,18 +16,23 @@ namespace SmartCooking.Web.Pages.Recipe
 	{
 		private readonly IItemRepository itemRepository;
 		private readonly IRecipeRepository recipeRepository;
+		private readonly IRecipeImageRepository recipeImageRepository;
 
 		public RecipeCountViewModel RecipeCountViewModel { get; set; }
+		public List<RecipeImage> RecipeImages { get; set; } 
+		[BindProperty(SupportsGet = true)] public string IngredientsText { get; set; }
 
-		public SearchResultModel(IItemRepository itemRepository, IRecipeRepository recipeRepository)
+
+		public SearchResultModel(IItemRepository itemRepository, IRecipeRepository recipeRepository, IRecipeImageRepository recipeImageRepository)
 		{
 			this.itemRepository = itemRepository;
 			this.recipeRepository = recipeRepository;
+			this.recipeImageRepository = recipeImageRepository;
 		}
 
-		public async Task<IActionResult> OnGetAsync(string ingredientsText)
+		public async Task<IActionResult> OnGetAsync()
 		{
-			List<string> ingredients = ingredientsText.Split("&", StringSplitOptions.RemoveEmptyEntries).ToList();
+			List<string> ingredients = IngredientsText.Split("-", StringSplitOptions.RemoveEmptyEntries).ToList();
 
 			var dbItems = await itemRepository.GetItems();
 
@@ -70,6 +75,21 @@ namespace SmartCooking.Web.Pages.Recipe
 													.Select(x => new RecipeHeaderCount() { Key = x.Key, Count = x.Count() });
 
 			RecipeCountViewModel = recipeCountViewModel;
+
+			foreach(var recipeHeader in RecipeCountViewModel.RecipeHeaders)
+			{
+				var img = (await recipeImageRepository.GetRecipeImages(recipeHeader.Id))?.FirstOrDefault(x => x.ProfileImage);
+				if (img != null)
+				{
+					if(RecipeImages is null)
+					{
+						RecipeImages = new List<RecipeImage>();
+					}
+
+					RecipeImages.Add(img);
+				}
+
+			}
 
 			return Page();
 		}

@@ -86,11 +86,11 @@
 				var formData = new FormData();
 				for (let i = 0; i < list.length; i++) {
 					ingrdientList.push($(list[i]).val());
-					text += $(list[i]).val() + "&";
+					text += $(list[i]).val() + '-';
 				}
 
 				$("#ingredients-text").val(text);
-				location.href = '@Url.Content("~/Recipe/SearchResult?ingredientsText=")' + text;
+				location.href = '@Url.Content("~/Recipe/SearchResult?IngredientsText=")' + $("#ingredients-text").val()
 
 			});
 
