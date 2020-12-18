@@ -1,0 +1,154 @@
+﻿@page
+@model SmartCooking.Web.Pages.Account.EditModel
+@{
+	ViewData["Title"] = "Διαχείριση λογαριασμού";
+	Layout = "~/Theme/TasteIt/Page.cshtml";
+}
+
+<div class="row">
+	<div class="col-lg-4 col-sm-12">
+		<div class="row h-100">
+			<div class="col-sm-12">
+				<img src="" alt="profile" style="width: 200px; height: 200px;" />
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12">
+				<button class="btn btn-primary">
+					Ανέβασμα φωτογραφίας
+				</button>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="col-lg-8 col-sm-12">
+		<ul class="nav nav-tabs" id="myTab" role="tablist">
+			<li class="nav-item" role="presentation">
+				<a class="nav-link active" id="profileInfoEdit-tab" data-toggle="tab" href="#profileInfoEdit" role="tab" aria-controls="profileInfoEdit" aria-selected="true">Επεξεργασία Πληροφοριών</a>
+			</li>
+			<li class="nav-item" role="presentation">
+				<a class="nav-link" id="favoriteRecipes-tab" data-toggle="tab" href="#favoriteRecipes" role="tab" aria-controls="favoriteRecipes" aria-selected="false">Αγαπημένες συνταγές</a>
+			</li>
+
+		</ul>
+		<div class="tab-content" id="myTabContent">
+			<div class="tab-pane fade show active" id="profileInfoEdit" role="tabpanel" aria-labelledby="profileInfoEdit-tab">
+				<div class="row">
+					<div class="col-lg-6 col-sm-6">
+						<div class="form-group">
+							<label class="lead">Όνομα Χρήστη</label>
+							<input type="text" class="form-control" readonly asp-for="CurrentUser.Username" />
+							<input type="hidden" asp-for="CurrentUser.Id" class="form-control" />
+						</div>
+					</div>
+					<div class="col-lg-6 col-sm-6">
+						<div class="form-group">
+							<label class="lead">E-Mail</label>
+							<input type="email" class="form-control" readonly asp-for="CurrentUser.Email" />
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-lg-12 col-sm-12">
+						<label class="lead">Ονοματεπώνυμο</label>
+						<input type="text" class="form-control" asp-for="CurrentUser.FamilyName" />
+					</div>
+				</div>
+
+				<div class="row mt-2">
+					<div class="col-lg-6 col-sm-6 text-left">
+						<button class="btn btn-primary btn-lg">
+							Αλλαγή Κωδικού Πρόσβασης
+						</button>
+					</div>
+					<div class="col-lg-6 col-sm-6 text-right">
+						<button class="btn btn-primary btn-lg">
+							Αποθήκευση
+						</button>
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane fade" id="favoriteRecipes" role="tabpanel" aria-labelledby="favoriteRecipes-tab">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th scope="col" class="text-center">Φωτογραφία</th>
+							<th scope="col" class="text-center">Περιγραφή</th>
+							<th scope="col" class="text-center">Ενέγειες</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var favoriteRecipe in Model.UserFavoriteRecipes.OrderBy(x => x.RecipeHeader.Name))
+						{
+							<tr>
+								<td class="text-center">
+									<img src="@Html.ConvertImageToHtml(Model.RecipeImages?.FirstOrDefault(x=>x.RecipeId == favoriteRecipe.RecipeHeaderId))" alt="@favoriteRecipe.RecipeHeader.Name" style="width: 100px;" />
+								</td>
+								<td class="text-center">
+									<a href="@Url.Content($"~/Home/RecipeDetail/{favoriteRecipe.RecipeHeader.Id}")">
+										@favoriteRecipe.RecipeHeader.Name
+									</a>
+								</td>
+								<td class="text-center">
+									<span class="remove-from-favorite" data-value="@favoriteRecipe.RecipeHeader.Id" style="cursor: pointer">➖</span>
+								</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section scripts {
+
+	<script>
+		$(document).ready(function () {
+
+			$(".remove-from-favorite").click(function () {
+				var object = $($(this).parent()).parent();
+				var recipeHeaderId = $(this).attr("data-value");
+
+				$.ajax({
+					url: "@Url.Content("~/api/Recipe/RemoveFromFavorite")",
+					type: 'post',
+					contentType: 'application/json; chartset=utf-8',
+					dataType: "json",
+					data: JSON.stringify(recipeHeaderId),
+					success: function (response) {
+						if (response.result) {
+							$(object).remove();
+							Toastify({
+								text: response.message,
+								backgroundColor: "#008000",
+								className: "info",
+								duration: 3000,
+								gravity: "bottom", // `top` or `bottom`
+								position: "right", // `left`, `center` or `right`
+							}).showToast();
+
+						}
+						else {
+							Toastify({
+								text: response.message,
+								backgroundColor: "#ff0000",
+								className: "info",
+								duration: 3000,
+								gravity: "bottom", // `top` or `bottom`
+								position: "left", // `left`, `center` or `right`
+							}).showToast();
+						}
+					},
+					error: function (err) {
+						console.error(err);
+					}
+				});
+			});
+		});
+	</script>
+
+}
